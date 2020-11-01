@@ -1,0 +1,24 @@
+{{ partial "default_head.html" . }}
+
+<div class="post">
+  <h1 class="post-title">Autores</h1>
+  <ul id="list">
+    {{ range .Pages }}
+    <h2>{{ .Params.name }}</h2>
+    <div itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="image" content="{{ .Params.photo }}">
+        <div class="author-image" style="background: url({{ .Params.photo }})"></div>
+
+    <h3>Articulos</h3>
+<ul>
+{{ range .Data.Pages }}
+    <li>{{ .Site.Params.DateForm | default  "2006-01-02" | .Date.Format }} -
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+{{ end }}
+</ul>
+
+    {{ end }}
+  </ul>
+</div>
+
+{{ partial "default_foot.html" . }}
