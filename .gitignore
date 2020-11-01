@@ -1,0 +1,12 @@
+# Custom folder for local images
+gcp-images/
+
+# Hugo folders to avoid
+/public/
+/resources/_gen/
+hugo_stats.json
+
+# Executable may be added to repository
+hugo.exe
+hugo.darwin
+hugo.linux

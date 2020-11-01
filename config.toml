@@ -1,0 +1,18 @@
+baseURL = "https://tangelov.me"
+languageCode = "es"
+DefaultContentLanguage = "es"
+title = "Estando en las nubes"
+uglyurls = true
+
+theme = "Lanyon"
+
+[languages]
+  [languages.es]
+    title = "Estando en las nubes"
+    languageName = "Español"
+    weight = 1
+
+[taxonomies]
+  author = "authors"
+  tag = "tags"
+  category = "categories"

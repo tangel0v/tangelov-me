@@ -1,0 +1,18 @@
+{{ partial "default_head.html" . }}
+
+<div class="post">
+  <h1 class="post-title">Archivo</h1>
+  {{ range .Pages.GroupByDate "2006" }}
+  <h3>{{ .Key }}</h3>
+    <ul id="list">
+      {{ range .Pages }}
+      <li>{{ .Site.Params.DateForm | default  "2006-01-02" | .Date.Format }} - <a href="{{ .Permalink }}">{{ .Title }}</a>
+      </li>
+          {{ end }}
+    </ul>
+  {{ end }}
+</div>
+
+<footer id="footer"><p>Bajo licencia Creative Commons <a rel="license" href="https://creativecommons.org/licenses/"><i class="fa fa-creative-commons" aria-hidden="true"></i></a> - Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a></p>
+        </footer>
+{{ partial "default_foot.html" . }}

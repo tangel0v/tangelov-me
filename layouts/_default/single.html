@@ -1,0 +1,54 @@
+{{ partial "default_head.html" . }}
+
+<div class="post">
+  <h1 class="post-title">{{ .Title }}</h1>
+  <span class="post-date">{{ .Site.Params.DateForm | default "2006-01-02 15:00" | .Date.Format }}</span>
+  {{ .Content }}
+  <aside class="sharing no-print">
+      <a href="#gotop" aria-label="Post beginning">
+          <i class="fa fa-2x fa-fw fa-arrow-circle-up" aria-hidden="true" title="Post beginning"></i>
+    </a>
+      <span class="post-sharing">
+          <a href="http://twitter.com/share?text={{ .Title }}%29&amp;url={{ .Permalink }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" aria-label="Share on Twitter">
+              <i class="fa fa-2x fa-fw fa-twitter-square" aria-hidden="true" title="Share on Twitter"></i>
+          </a>
+      </span>
+  </aside>
+  {{- range .Params.authors }}
+    {{- with $.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize .)) }}
+    <figure>
+	<div itemprop="author" itemscope itemtype="http://schema.org/Person">
+	<footer class="byline author author-bio vcard"><hr>
+	<meta itemprop="image" content="{{ .Params.photo }}">
+	<div class="author-image" style="background: url({{ .Params.photo }})"></div>
+	<h3 class="byline-name fn" itemprop="name">{{ .Params.name }}
+        <span class="post-sharing">
+	<a href="mailto:{{ .Params.email }}?subject={{ .Title }}" aria-label="Email author">
+            <i class="fa fa-2 fa-fw fa-envelope" aria-hidden="true" title="Correo electrónico">
+            </i></a>
+        </span>
+	<span class="post-sharing">
+	{{ range .Params.identity }}
+	<a href="{{ .url }}" target="_blank" arial-label="Go to {{ .name | title }}"> <i class="fa fa-fw fa-{{ .name }}" aria-hidden="true" title="{{ .name | title }}"></i></a>
+	{{ end }}
+        </span>
+     </h3>
+     <p class="bio">{{ .Params.bio }}</p>
+     <p><i class="fa fa-map-marker"></i> {{ .Params.location }}</p>
+     <footer id="footer"><p>Bajo licencia Creative Commons 
+<a rel="license" href="https://creativecommons.org/licenses/{{ .Params.license }}/4.0/">
+{{ .Params.license | upper }}</a> - Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a></p> 
+        </footer>
+</footer>
+	</div>
+      </figure>
+    {{ end }}
+  {{ end }}
+  {{- if .Site.DisqusShortname -}}
+  <hr>
+  <h2>Comments</h2>
+  {{ template "_internal/disqus.html" . }}
+  {{ end -}}
+</div>
+
+{{ partial "default_foot.html" . }}
