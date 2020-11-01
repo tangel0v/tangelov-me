@@ -1,7 +1,7 @@
 ## Tangelov-me
 
-![TravisCI status](https://travis-ci.org/tangel0v/go-tangelov-me.svg?branch=master)
-![Gitlab Pipelines status](https://gitlab.com/go-tangelov/tangelov-me/badges/master/pipeline.svg)
+[![Build Status](https://travis-ci.org/tangel0v/tangelov-me.svg?branch=master)](https://travis-ci.org/tangel0v/tangelov-me)
+![Gitlab Pipelines status](https://gitlab.com/tangelov/go-tangelov-me/badges/master/pipeline.svg)
 
 This repository will store all the code assets needed to recreate a blog like tangelov.me.
 
