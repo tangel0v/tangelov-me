@@ -1,5 +1,6 @@
 ---
 title: "Funciones y backups: notificaciones y automatismos"
+slug: funciones-y-backups
 authors:
   - tangelov
 date: 2020-03-23T22:00:00+02:00

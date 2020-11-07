@@ -1,5 +1,6 @@
 ---
 title: "Pulumi: programando infraestructura"
+slug: pulumi
 authors:
   - tangelov
 date: 2019-03-07T18:00:00+02:00

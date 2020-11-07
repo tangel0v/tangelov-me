@@ -1,5 +1,6 @@
 ---
 title: "Vault (I): introducción a la gestión de secretos"
+slug: vault-i
 date: 2020-10-14T08:00:00+02:00
 authors:
   - tangelov

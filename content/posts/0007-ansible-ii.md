@@ -1,5 +1,6 @@
 ---
 title: "Ansible (II): nuestro primer playbook"
+slug: "ansible-ii"
 authors:
   - tangelov
 date: 2018-02-28T18:00:00+02:00

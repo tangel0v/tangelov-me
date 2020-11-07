@@ -1,5 +1,6 @@
 ---
 title: "Mi nube privada: Nextcloud, ARM y un poco de Cloud"
+slug: mi-nube-privada
 authors:
   - tangelov
 date: 2019-01-03T23:00:00+02:00

@@ -1,5 +1,6 @@
 ---
 title: "Conectando Google Cloud Platform (GCP) con Linux"
+slug: conectar-gcp-con-linux
 authors:
   - tangelov
 date: 2018-02-18T10:00:00+02:00

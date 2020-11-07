@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes (I): qué es y primeros pasos"
+slug: kubernetes-i
 authors:
   - tangelov
 date: 2019-06-05T18:00:00+02:00

@@ -1,5 +1,6 @@
 ---
 title: "Como está montada esta web (I): fundamentos básicos"
+slug: como-montada-web-i
 authors:
   - tangelov
 date: 2018-02-20T22:00:00+02:00

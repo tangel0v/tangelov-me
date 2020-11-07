@@ -1,5 +1,6 @@
 ---
 title: "¿Una pausa? Certificaciones y más"
+slug: breve-pausa
 authors:
   - tangelov
 date: 2020-01-01T05:00:00+02:00

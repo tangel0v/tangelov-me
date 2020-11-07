@@ -1,5 +1,6 @@
 ---
 title: "Introducción a Jenkins: un clásico CI Open Source"
+slug: ic-jenkins
 authors:
   - tangelov
 date: 2018-10-06T05:00:00+02:00

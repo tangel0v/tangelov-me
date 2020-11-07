@@ -1,5 +1,6 @@
 ---
 title: "Como está montada esta web (II): Nikola y Google App Engine"
+slug: como-montada-web-ii
 authors:
   - tangelov
 date: 2018-02-20T23:00:00+02:00

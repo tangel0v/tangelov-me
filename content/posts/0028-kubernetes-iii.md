@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes (III): migrando una aplicación a Kubernetes"
+slug: kubernetes-iii
 authors:
   - tangelov
 date: 2020-03-18T20:00:00+02:00

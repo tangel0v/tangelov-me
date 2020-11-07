@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes (IV): autenticación y autorización"
+slug: kubernetes-iv
 authors:
   - tangelov
 date: 2020-04-28T10:00:00+02:00

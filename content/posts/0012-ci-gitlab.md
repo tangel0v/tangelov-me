@@ -1,5 +1,6 @@
 ---
 title: "Integración continua con Gitlab (I): primeros pasos"
+slug: ic-gitlab
 authors:
   - tangelov
 date: 2018-08-10T07:00:00+02:00

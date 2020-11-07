@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes (II): DaemonSets, StatefulSets, Ingress y almacenamiento"
+slug: kubernetes-ii
 authors:
   - tangelov
 date: 2020-02-01T18:00:00+02:00

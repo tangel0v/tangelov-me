@@ -1,5 +1,6 @@
 ---
 title: "Mejoras en tangelov.me"
+slug: mejoras-tangelov-nikola
 authors:
   - tangelov
 date: 2018-12-01T20:00:00+02:00

@@ -1,5 +1,6 @@
 ---
 title: "Una breve introducción"
+slug: una-breve-introduccion
 authors:
   - tangelov
 date: 2018-02-18T06:00:00+02:00

@@ -1,5 +1,6 @@
 ---
 title: "Ansible (III): roles y templates"
+slug: ansible-iii
 authors:
   - tangelov
 date: 2018-07-26T10:00:00+02:00
@@ -10,7 +11,7 @@ draft: false
 
 Tras una breve pausa derivada del hecho de que me he _casado_ :D, seguimos apuntando cosillas en el blog. En este artículo vamos a crear un pequeño rol que nos permita gestionar nuestros backups como debería ser.
 
-Ya comentamos en el post anterior, todo lo que hacía el [script](https://tangelov.me/http://tangelov.me/posts/ansible-ii.html) y ahora vamos a crear el rol
+Ya comentamos en el post anterior, todo lo que hacía el [script](https://tangelov.me/posts/ansible-ii.html) y ahora vamos a crear el rol
 
 <!--more-->
 
