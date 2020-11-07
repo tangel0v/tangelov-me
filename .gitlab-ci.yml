@@ -23,6 +23,7 @@ staging-test:
   script:
     - pip3 install -r requirements-test.txt
     - pytest tests/basic_tests.py
+    - pytest tests/content_tests.py
   except:
     - master
 
