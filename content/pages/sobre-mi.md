@@ -1,5 +1,6 @@
 ---
 title: "Sobre mi"
+slug: sobre-mi
 date: 2018-02-13T09:54:30+02:00
 sidebar: true
 tags: ["contacto"]
