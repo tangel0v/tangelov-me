@@ -7,7 +7,7 @@ uglyurls = true
 theme = "Lanyon"
 
 [permalinks]
-  posts = ":section/:year/:month/:slug/"
+  posts = ":section/:slug/"
 
 [languages]
   [languages.es]
