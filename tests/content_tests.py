@@ -9,6 +9,7 @@ CI is the origin branch in Gitlab
 import os
 import glob
 import yaml
+import requests
 
 # Getting information from host to docker
 PROJECT_ID = os.environ.get("PROJECT_ID")
@@ -17,6 +18,7 @@ CI = os.environ.get("CI_COMMIT_REF_NAME")
 
 # Preproduction information
 URL = ''.join(["https://", TMP_ROUTE, "-dot-", PROJECT_ID, ".appspot.com/"])
+
 
 def test_post_urls_not_change():
     """This tests will check if any post URL has changed to avoid broken links """
@@ -27,8 +29,7 @@ def test_post_urls_not_change():
             metadata = [next(post) for x in range(3)]
             url = yaml.load(metadata[2], Loader=yaml.FullLoader)
 
-            import requests
-            answer = requests.get(URL + 'posts/' + url["slug"] + '.html')
+            answer = requests.head(URL + 'posts/' + url["slug"] + '.html')
 
             assert answer.status_code == 200
 
@@ -42,7 +43,6 @@ def test_pages_urls_not_change():
             metadata = [next(page) for x in range(3)]
             url = yaml.load(metadata[2], Loader=yaml.FullLoader)
 
-            import requests
-            answer = requests.get(URL + 'pages/' + url["slug"] + '.html')
+            answer = requests.head(URL + 'pages/' + url["slug"] + '.html')
 
             assert answer.status_code == 200
