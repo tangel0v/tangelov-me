@@ -1,5 +1,6 @@
 ---
 title: "Tangelov.me en Hugo"
+slug: tangelov-en-hugo
 authors:
   - tangelov
 date: 2020-11-01T20:00:00+02:00

@@ -1,5 +1,6 @@
 ---
 title: "Platform9: Kubernetes as a Service en nuestro CPD"
+slug: platform9
 authors:
   - tangelov
 date: 2020-05-31T10:00:00+02:00

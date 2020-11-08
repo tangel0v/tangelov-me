@@ -1,5 +1,6 @@
 ---
 title: "Ansible (IV): mejorando nuestros roles"
+slug: ansible-iv
 authors:
   - tangelov
 date: 2018-08-01T07:00:00+02:00

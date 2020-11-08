@@ -1,5 +1,6 @@
 ---
 title: "Ansible (I): primeros pasos"
+slug: ansible-i
 authors:
   - tangelov
 date: 2018-02-24T18:00:00+02:00

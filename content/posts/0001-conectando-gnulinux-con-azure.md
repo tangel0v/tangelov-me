@@ -1,5 +1,6 @@
 ---
 title: "Conectando GNU/Linux con Azure"
+slug: conectando-gnulinux-con-azure
 authors:
   - tangelov
 date: 2018-02-18T09:30:00+02:00

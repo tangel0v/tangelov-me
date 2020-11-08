@@ -1,5 +1,6 @@
 ---
 title: "Ansible (V): testeando roles con Molecule"
+slug: ansible-v
 authors:
   - tangelov
 date: 2018-09-02T07:00:00+02:00

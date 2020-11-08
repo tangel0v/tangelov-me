@@ -1,5 +1,6 @@
 ---
 title: "Nextcloud como nube privada"
+slug: nube-privada-nextcloud
 authors:
   - tangelov
 date: 2018-04-24T05:00:00+02:00

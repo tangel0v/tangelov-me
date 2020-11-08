@@ -1,5 +1,6 @@
 ---
 title: "Ansible: el gran remedio a la pereza"
+slug: ansible-antidoto-pereza
 authors:
   - tangelov
 date: 2020-01-16T18:00:00+02:00

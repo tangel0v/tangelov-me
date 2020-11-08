@@ -1,5 +1,6 @@
 ---
 title: "Integración continua con Gitlab (II): refactorizando Tangelov.me"
+slug: ic-gitlab-ii
 authors:
   - tangelov
 date: 2019-06-15T18:00:00+02:00

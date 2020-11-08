@@ -1,5 +1,6 @@
 ---
 title: "Aplicaciones para DevOps (I)"
+slug: devops-apps
 authors:
   - tangelov
 date: 2018-10-14T07:00:00+02:00

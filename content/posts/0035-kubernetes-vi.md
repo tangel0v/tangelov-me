@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes (VI): asignando recursos y autoescalado"
+slug: kubernetes-vi
 date: 2020-08-31T10:00:00+02:00
 authors:
   - tangelov

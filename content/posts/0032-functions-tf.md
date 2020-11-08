@@ -1,5 +1,6 @@
 ---
 title: "Terraformando funciones en Google Cloud Platform"
+slug: functions-tf
 authors:
   - tangelov
 date: 2020-06-10T10:00:00+02:00

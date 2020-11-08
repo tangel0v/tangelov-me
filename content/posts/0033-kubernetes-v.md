@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes (V): networking y políticas de red"
+slug: kubernetes-v
 authors:
   - tangelov
 date: 2020-07-15T10:00:00+02:00

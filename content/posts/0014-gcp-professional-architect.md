@@ -1,5 +1,6 @@
 ---
 title: "Google Cloud Certficied Professional Cloud Architect"
+slug: gcp-professional-architect
 authors:
   - tangelov
 date: 2018-09-14T05:00:00+02:00

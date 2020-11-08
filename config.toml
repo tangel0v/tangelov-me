@@ -6,6 +6,9 @@ uglyurls = true
 
 theme = "Lanyon"
 
+[permalinks]
+  posts = ":section/:slug/"
+
 [languages]
   [languages.es]
     title = "Estando en las nubes"

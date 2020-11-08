@@ -1,5 +1,6 @@
 ---
 title: "AWS Certified Solutions Architect - Associate"
+slug: aws-certified-associate
 authors:
   - tangelov
 date: 2018-04-18T05:00:00+02:00

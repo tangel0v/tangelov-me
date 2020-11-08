@@ -1,5 +1,6 @@
 ---
 title: "Contraseñas y nube pública: una necesidad real"
+slug: seguridad-nube
 authors:
   - tangelov
 date: 2020-08-07T20:00:00+02:00

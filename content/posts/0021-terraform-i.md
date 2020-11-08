@@ -1,5 +1,6 @@
 ---
 title: "Terraform (I): introducción a la infraestructura como código"
+slug: terraform-i
 authors:
   - tangelov
 date: 2019-01-30T10:00:00+02:00

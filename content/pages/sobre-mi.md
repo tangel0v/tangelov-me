@@ -1,9 +1,10 @@
 ---
 title: "Sobre mi"
+slug: sobre-mi
 date: 2018-02-13T09:54:30+02:00
 sidebar: true
 tags: ["contacto"]
-draft: true
+draft: false
 ---
 
 Bienvenido a mi blog. Soy _Tangelov_, un administrador de sistemas entusiasmado con las nuevas tecnologías, el cacharreo y con una ligera tendencia hacia las Humanidades.

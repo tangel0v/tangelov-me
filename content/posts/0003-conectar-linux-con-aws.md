@@ -1,5 +1,6 @@
 ---
 title: "Conectando GNU/Linux con AWS"
+slug: conectar-linux-con-aws
 authors:
   - tangelov
 date: 2018-02-18T11:30:00+02:00

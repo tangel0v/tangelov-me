@@ -1,5 +1,6 @@
 ---
 title: "Packer: creando imágenes para cualquier proveedor"
+slug: packer-i
 authors:
   - tangelov
 date: 2018-11-18T10:00:00+02:00
