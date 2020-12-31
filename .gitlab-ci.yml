@@ -14,6 +14,7 @@ staging-build:
   script:
      - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
      - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=$TMP_ROUTE --no-promote --quiet --project=$PROJECT_ID
+     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud pubsub topics publish $PUBSUB_TOPIC --message="Deploying new version in ${TMP_ROUTE}-dot-${PROJECT_ID}.appspot.com" --project=$PROJECT_ID
   except:
     - master
 
@@ -48,5 +49,6 @@ production-deploy:
     - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app versions delete $TMP_ROUTE --quiet --project=$PROJECT_ID
     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --no-promote --quiet --project=$PROJECT_ID
+    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud pubsub topics publish $PUBSUB_TOPIC --message="Deploying new version in Production - https://tangelov.me" --project=$PROJECT_ID
   only:
     - master
