@@ -62,7 +62,7 @@ Basándonos en lo que nos comenta el cliente, hemos diseñado una nueva infraest
 
 3. Por último, vamos a utilizar dos sistemas de almacenamiento en la nube: por un lado tendremos una base de datos y en el otro, un sistema de almacenamiento de objetos (Google Cloud Storage o Amazon S3) donde guardaremos los ficheros del CMS.
 
-Para crear la infraestructura, vamos a utilizar Terraform, pero la imagen base vamos a generarla vamos a generar utilizando Packer.
+Para crear la infraestructura, vamos a utilizar Terraform, pero la imagen base vamos a generarla utilizando Packer.
 
 
 ### Conectando Packer a Google Cloud Platform
