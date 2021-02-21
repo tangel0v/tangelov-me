@@ -118,10 +118,10 @@ Ahora podemos lanzar `aws ec2 describe-instances` para ver todas las instancias 
 
 ## Documentación
 
-* [Install AWS CLI](https://aws.amazon.com/es/cli/)
+* [Instalación de AWS CLI](https://aws.amazon.com/es/cli/)
 
-* [Repositorio de awscli en Pypi.org](https://pypi.org/project/awscli/)
+* [Repositorio de awscli en Pypi.org (ENG)](https://pypi.org/project/awscli/)
 
-* [First steps in AWS CLI](https://docs.aws.amazon.com/es_es/cli/latest/userguide/cli-chap-getting-started.html)
+* [First steps in AWS CLI (ENG)](https://docs.aws.amazon.com/es_es/cli/latest/userguide/cli-chap-getting-started.html)
 
-Revisado a 01/02/2020.
+Revisado a 01/03/2021.
