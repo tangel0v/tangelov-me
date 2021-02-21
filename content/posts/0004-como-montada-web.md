@@ -11,6 +11,8 @@ draft: false
 
 El nacimiento de esta web fue algo bastante meditado, estuve dándole muchas vueltas. Inicialmente pensé en implementarla de una manera tradicional: con un servidor LAMP y desplegando contra él. Pero a medida que fui ganando práctica en nuevas metodologías y tecnologías y a sentirme cómodo en ellas, decidí aprovecharlo.
 
+> __Nota del autor__: Este artículo representa un estado anterior de esta web puesto que a lo largo del 2020 se ha migrado el gestor de contenido de Nikola a Hugo. Aun así el repositorio original sigue [disponible](https://gitlab.com/tangelov/tangelov-me) para cualquiera que quiera utilizar Nikola en Google Cloud de la misma forma que yo lo hice. También escribí sobre el proceso de migración y el uso de Hugo en [el siguiente post](https://tangelov.me/posts/tangelov-en-hugo.html).
+
 Así a groso modo, esta web está construida gracias a cuatro diferentes tecnologías:
 
 * [Git](https://git-scm.com/): Para su desarrollo y crecimiento.
@@ -87,9 +89,9 @@ Es necesario realizar una serie de cambios y configuraciones para adoptar el có
 
 ## Documentación
 
-* Se puede consultar el código de la web [aquí](https://gitlab.com/tangelov/tangelov.me)
+* Se puede consultar el código de la web [aquí](https://gitlab.com/tangelov/tangelov-me)
 
-* [Cómo instalar Nikola](https://getnikola.com/getting-started.html)
+* [Cómo instalar Nikola (ENG)](https://getnikola.com/getting-started.html)
 
 * [Free Tier en Google Cloud Platform](https://cloud.google.com/free/docs/frequently-asked-questions?hl=es-419)
 
@@ -97,4 +99,4 @@ Es necesario realizar una serie de cambios y configuraciones para adoptar el có
 
 * [Google Cloud Storage](https://cloud.google.com/storage/)
 
-Revisado a 01-02-2020
+Revisado a 01-03-2021
