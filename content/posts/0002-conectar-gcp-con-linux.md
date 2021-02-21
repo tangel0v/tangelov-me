@@ -127,4 +127,4 @@ To update your SDK installation to the latest version [275.0.0], run:
 
 * [Install Google Cloud SDK (ENG)](https://cloud.google.com/sdk/install/)
 
-Revisado a 01/02/2020.
+Revisado a 01/03/2021.
