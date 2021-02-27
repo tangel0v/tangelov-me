@@ -43,4 +43,4 @@ Al ser una certificación de exigencia media y no ser la [_Professional_](https:
 
 * [AWS FAQs](https://aws.amazon.com/es/faqs/): Lista de FAQs de AWS
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

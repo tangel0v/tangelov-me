@@ -43,7 +43,7 @@ Existen multitud de guías sobre cómo instalar Nextcloud así que simplemente v
 
 * [Instalación de Nextcloud en Debian 10](https://chachocool.com/como-instalar-nextcloud-en-debian-10-buster/)
 
-En general, todos ellos se basan en instalar un servidor web (Nginx o Apache), PHP (las últimas versiones aceptan PHP 7.1 o superior) y una base de datos MySQL o MariaDB. Si preferimos utilizar un método automatizado, siempre podemos instalarlo con [este playbook](https://github.com/rbicker/ansible-nextcloud)
+En general, todos ellos se basan en instalar un servidor web (Nginx o Apache), PHP (las últimas versiones aceptan PHP 7.3 o superior) y una base de datos MySQL o MariaDB. Si preferimos utilizar un método automatizado, siempre podemos instalarlo con [este rol](https://github.com/rbicker/ansible-nextcloud) de Ansible.
 
 ## Usos y capacidades
 La comunidad ha creado un auténtico ecosistema de extensiones y aplicaciones que hacen de Nextcloud un sistema todoterreno que podemos usar para casi todo.
@@ -52,13 +52,13 @@ Yo uso un pequeño servidor de Nextcloud instalado en una pequeña placa base (u
 
 Tenemos aplicaciones para todo:
 
- [Collabora Online](https://nextcloud.com/collaboraonline/): Collabora Online es un aplicativo web que nos permite disfrutar de una suite de ofimática completa en la web. Al integrarse con Nextcloud, permite que podamos colaborar entre los distintos miembros del equipo para crear documentos o hojas de cálculo. Para entendernos, es una alternativa a Google Docs o a Office 365.
+* [Collabora Online](https://nextcloud.com/collaboraonline/): Collabora Online es un aplicativo web que nos permite disfrutar de una suite de ofimática completa en la web. Al integrarse con Nextcloud, permite que podamos colaborar entre los distintos miembros del equipo para crear documentos o hojas de cálculo. Para entendernos, es una alternativa a Google Docs o a Office 365.
 
 * [Mail](https://apps.nextcloud.com/apps/mail): Es una aplicación que nos permite instalar un webmail dentro de Nextcloud y que se conecta a nuestra cuenta de correo para convertir nuestra nube en un punto de entrada no sólo a nuestros ficheros sino también a nuestro correo.
 
 * [Nextcloud Talk](https://nextcloud.com/talk/): Es una plataforma de comunicación privada, cifrada y descentralizada con aplicaciones de escritorio y móvil. Podríamos considerarlo una alternativa libre a _Google Hangouts_.
 
-* [Passman](https://github.com/nextcloud/passman): Es un sistema de gestión de contraseñas cifradas integrado con Nextcloud. Aunque no lo uso, me parece muy potente y con muchas funcionalidades: análisis de fuerza de las contraseñas, vulnerabilidad a los diccionarios, etc.
+* [Passman](https://passman.cc/): Es un sistema de gestión de contraseñas cifradas integrado con Nextcloud. Aunque no lo uso, me parece muy potente y con muchas funcionalidades: análisis de fuerza de las contraseñas, vulnerabilidad a los diccionarios, etc.
 
 * [News](https://apps.nextcloud.com/apps/news): Es un lector de RSS integrado directamente en Nextcloud.
 
@@ -72,6 +72,6 @@ Tenemos aplicaciones para todo:
 
 * [Comparación de servicios de almacenamiento en la nube (ENG)](https://en.wikipedia.org/wiki/Comparison_of_online_backup_services)
 
-* [Parámetros y tips en Nextcloud 17 y PHP (ENG)](https://docs.nextcloud.com/server/17/admin_manual/installation/source_installation.html#php-fpm-tips-label)
+* [Parámetros y tips en Nextcloud 20 y PHP (ENG)](https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html#php-fpm-tips-label)
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021
