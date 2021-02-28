@@ -53,7 +53,7 @@ Gracias a esta explosión de aplicaciones, tenemos muchas aplicaciones que podem
 
 * __Vagrant Manager__: Añade una opción en nuestra barra de estado que nos permite controlar nuestras máquinas virtuales gestionadas con Vagrant de una forma centralizada. (Ya hablaré de Vagrant en post futuros).
 
-* __Shiba__: Markdown es un lenguaje muy utilizado para ficheros README y documentaciones varias que está bastante de moda. Shiba es un editor y previsualizador de ficheros Markdown muy potente que nos muestra las modificaciones en tiempo real.
+* __Marktext__: Markdown es un lenguaje muy utilizado para ficheros README y documentaciones varias que está bastante de moda. Marktext es un editor y previsualizador de ficheros Markdown muy potente que nos muestra las modificaciones en tiempo real.
 
 Saludos y esperemos que os sean útiles.
 
@@ -78,7 +78,7 @@ Saludos y esperemos que os sean útiles.
 
 * [Página web oficial de Vagrant Manager (ENG)](https://github.com/absalomedia/vagrant-manager)
 
-* [Página web oficial de Shiba (ENG)](https://github.com/rhysd/Shiba)
+* [Página web oficial de Marktext (ENG)](https://github.com/marktext/marktext)
 
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

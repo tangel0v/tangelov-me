@@ -17,6 +17,8 @@ Cuando empecé a plantearme esta web hace un año aproximadamente la ví como un
 
 * Internet está llena de documentación anticuada. Me comprometía a ir revisando periódicamente el contenido para evitar lo que me ha pasado a mi en numerosas ocasiones... que al buscar documentación ésta ya no funcionara debido a que el producto ya había cambiado tanto que no era compatible (en Ansible es bastante sangrante).
 
+> Desde finales del 2020 [no utilizo Nikola](https://tangelov.me/posts/tangelov-en-hugo.html), por lo que el contenido de este post es meramente informativo.
+
 <!--more-->
 
 En general estoy contento con el resultado del blog, me ha permitido profundizar en un montón de cosas y espero le que haya servido a alguien más. Sin embargo para este año he decidido implementar una serie de cambios para hacer de este pasatiempo mucho más interesante.
@@ -62,11 +64,11 @@ Me gustaría centrarme en tres cosas principalmente para este año:
 
 ## Documentación
 
-* El código de la web sigue estando disponible [aquí](https://gitlab.com/tangelov/tangelov.me)
+* El código de la web sigue estando disponible [aquí](https://gitlab.com/tangelov/tangelov-me).
 
-* Generadores de código estático: [Jekyll (ENG)](https://jekyllrb.com/), [Hugo (ENG)](https://gohugo.io/) y [Nikola (ENG)](https://getnikola.com/)
+* Generadores de código estático: [Jekyll (ENG)](https://jekyllrb.com/), [Hugo (ENG)](https://gohugo.io/) y [Nikola (ENG)](https://getnikola.com/).
 
-* [Actualización de Nikola v7 a v8 (ENG)](https://getnikola.com/blog/upgrading-to-nikola-v8.html)
+* [Actualización de Nikola v7 a v8 (ENG)](https://getnikola.com/blog/upgrading-to-nikola-v8.html).
 
 
-Revisado a 01-02-2020
+Revisado a 01-03-2021

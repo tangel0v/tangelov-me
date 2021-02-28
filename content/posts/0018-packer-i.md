@@ -17,6 +17,8 @@ Una de estas herramientas es [_Packer_](https://www.packer.io/intro/index.html)
 
 ![logo-packer](https://storage.googleapis.com/tangelov-data/images/0018-00.png)
 
+> El código de este post está indicado para versiones de Packer anteriores a la versión 1.5. Para configurar Packer en versiones posteriores, podemos consultarlo en el siguiente [post](https://tangelov.me/posts/packer-ii.html).
+
 <!--more-->
 
 ## Introducción
@@ -312,7 +314,7 @@ Para evitar costes no previstos si estamos utilizando los tier gratuitos debemos
 
 * [¿Qué es Packer? (ENG)](https://www.packer.io/intro/index.html)
 
-* [Configuración de Azure en Packer (ENG)](https://www.packer.io/docs/builders/azure-setup.html)
+* [Configuración de Azure en Packer](https://www.packer.io/docs/builders/azure.html)
 
 * [Configuración de GCP en Packer (ENG)](https://www.packer.io/docs/builders/googlecompute.html)
 
@@ -320,4 +322,4 @@ Para evitar costes no previstos si estamos utilizando los tier gratuitos debemos
 
 * [Página principal de OSBoxes (ENG)](https://www.osboxes.org/)
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

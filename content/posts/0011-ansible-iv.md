@@ -105,7 +105,7 @@ Una vez ya hemos completado nuestras plantillas vamos a añadir su despliegue al
     group: root
 ```
 
-Como podemos ver, estamos utilizando la misma plantilla para desplegar dos pasos diferentes. Para el segundo caso necesitamos configurar algunas variables de nuevo y por ello hemos introducido una nueva tarea con el módulo [set_fact](https://docs.ansible.com/ansible/latest/modules/set_fact_module.html). Estas nuevas variables tendremos que configurarlas en el playbook que lanza el rol.
+Como podemos ver, estamos utilizando la misma plantilla para desplegar dos pasos diferentes. Para el segundo caso necesitamos configurar algunas variables de nuevo y por ello hemos introducido una nueva tarea con el módulo [set_fact](https://docs.ansible.com/ansible/2.9/modules/set_fact_module.html). Estas nuevas variables tendremos que configurarlas en el playbook que lanza el rol.
 
 
 ## Lanzando de nuevo el playbook
@@ -225,12 +225,12 @@ Muchas gracias.
 
 ## Documentación
 
-* [Estructura de un rol (ENG)](http://docs.ansible.com/ansible/latest/playbooks_reuse_roles.html)
+* [Estructura de un rol (ENG)](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html)
 
 * [Gitlab de Backupninja (ENG)](https://0xacab.org/riseuplabs/backupninja)
 
-* [Plantillas en Jinja2 (ENG)](https://jinja.palletsprojects.com/en/2.10.x/templates/)
+* [Plantillas en Jinja2 (ENG)](https://jinja.palletsprojects.com/en/2.11.x/templates/)
 
-* [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
+* [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

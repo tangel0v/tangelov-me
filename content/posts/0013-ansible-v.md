@@ -41,7 +41,7 @@ A día de hoy no podemos añadir Molecule a un rol ya creado previamente de form
 
 ```bash
 mv backupninja backupninja_old
-molecule init role -r backupninja
+molecule init role backupninja
 
 cp -R backupninja_old/* backupninja/
 ```
@@ -49,29 +49,31 @@ cp -R backupninja_old/* backupninja/
 Ahora dentro de la carpeta de backupninja tendremos una nueva carpeta que se llama molecule. Vamos a inspeccionarla:
 
 ```bash
-s -laRt
+ls -laRt
 .:
 total 12
-drwxr-xr-x 10 tangelov tangelov 4096 ago 21 22:54 ..
-drwxr-xr-x  3 tangelov tangelov 4096 ago 21 22:38 default
-drwxr-xr-x  3 tangelov tangelov 4096 ago 21 22:14 .
+drwxr-xr-x 11 tangelov tangelov 4096 feb 28 10:40 ..
+drwxr-xr-x  4 tangelov tangelov 4096 feb 28 10:40 default
+drwxr-xr-x  3 tangelov tangelov 4096 feb 27 15:04 .
 
 ./default:
-total 28
-drwxr-xr-x 2 tangelov tangelov 4096 ago 21 22:57 tests
-drwxr-xr-x 3 tangelov tangelov 4096 ago 21 22:38 .
--rw-r--r-- 1 tangelov tangelov  266 ago 21 22:14 molecule.yml
--rw-r--r-- 1 tangelov tangelov   67 ago 21 22:14 playbook.yml
-drwxr-xr-x 3 tangelov tangelov 4096 ago 21 22:14 ..
--rw-r--r-- 1 tangelov tangelov 1020 ago 21 22:14 Dockerfile.j2
--rw-r--r-- 1 tangelov tangelov  369 ago 21 22:14 INSTALL.rst
+total 36
+drwxr-xr-x 4 tangelov tangelov 4096 feb 28 10:40 .
+-rw-rw-r-- 1 tangelov tangelov 3195 feb 28 10:20 prepare.yml
+-rw-rw-r-- 1 tangelov tangelov  687 feb 27 15:06 molecule.yml
+drwxr-xr-x 3 tangelov tangelov 4096 feb 27 15:04 ..
+drwxr-xr-x 3 tangelov tangelov 4096 feb 27 13:42 tests
+-rw-r--r-- 1 tangelov tangelov  614 ene 11  2020 converge.yml
+drwxr-xr-x 2 tangelov tangelov 4096 ene  7  2020 files
+-rw-r--r-- 1 tangelov tangelov 1153 ene  7  2020 Dockerfile.j2
+-rw-r--r-- 1 tangelov tangelov  369 ene  7  2020 INSTALL.rst
 
 ./default/tests:
-total 12
-drwxr-xr-x 2 tangelov tangelov 4096 ago 21 22:57 .
-drwxr-xr-x 3 tangelov tangelov 4096 ago 21 22:38 ..
--rw-r--r-- 1 tangelov tangelov  313 ago 21 22:14 test_default.py
-
+total 16
+drwxr-xr-x 4 tangelov tangelov 4096 feb 28 10:40 ..
+drwxr-xr-x 2 tangelov tangelov 4096 feb 27 15:03 __pycache__
+drwxr-xr-x 3 tangelov tangelov 4096 feb 27 13:42 .
+-rw-r--r-- 1 tangelov tangelov  523 ene  7  2020 test_default.py
 ```
 
 ## Primeros pasos con Molecule
@@ -79,7 +81,9 @@ Ahora nos movemos a la carpeta molecule/default dentro la carpeta de nuestro rol
 
 * _molecule.yml_ : es el fichero principal para configurar cómo se va a comporar molecule en nuestro rol.
 
-* _playbook.yml_: es el fichero encargado de ejecutar el rol dentro de molecule.
+* _prepare.yml_: es el fichero principal encargado de ejecutar los pasos que preparan las instancias para poder ejecutar luego nuestros roles dentro de molecule.
+
+* _converge.yml_: es el fichero encargado de ejecutar el rol dentro de molecule.
 
 * _Dockerfile.j2_: Por defecto, Molecule utiliza Docker para crear las instancias, salvo que indiquemos que utilice otro _provider_ siempre tendremos este fichero y es el encargado de hacer que nuestro contenedor sea compatible con Ansible.
 
@@ -138,40 +142,46 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
 platforms:
   - name: debian
     image: jrei/systemd-debian
     command: /lib/systemd/systemd
-    privileged: True
+    privileged: true
     volumes:
-     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ubuntu
+    image: jrei/systemd-ubuntu
+    command: /lib/systemd/systemd
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: centos
     image: centos/systemd
     command: /sbin/init
-    privileged: True
+    privileged: true
     volumes:
-     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
 scenario:
   name: default
+  test_secuence:
+    - destroy
+    - create
+    - converge
+    - lint
+    - verify
 verifier:
   name: testinfra
-  lint:
-    name: flake8
 ```
 
 Si ahora ejecutamos _molecule create_ y hacemos _docker ps_ podremos ver nuestros contenedores corriendo:
 
 ```bash
-docker ps
-CONTAINER ID        IMAGE                                COMMAND                  CREATED              STATUS              PORTS               NAMES
-bcf112746e2d        molecule_local/centos/systemd        "bash -c 'while true…"   About a minute ago   Up About a minute                       centos
-d4b441429a64        molecule_local/jrei/systemd-debian   "bash -c 'while true…"   About a minute ago   Up About a minute                       debian
+CONTAINER ID        IMAGE                                COMMAND                  CREATED             STATUS              PORTS               NAMES
+f2532c299664        molecule_local/centos/systemd        "/sbin/init"             2 minutes ago       Up About a minute                       centos
+4656b5096126        molecule_local/jrei/systemd-ubuntu   "/lib/systemd/systemd"   2 minutes ago       Up About a minute                       ubuntu
+b7473fafb19a        molecule_local/jrei/systemd-debian   "/lib/systemd/systemd"   2 minutes ago       Up About a minute                       debian
 ```
 
 Hemos usado contenedores privilegiados para correr los test y controlar _systemd_ al estilo de una máquina virtual clásica.
@@ -234,4 +244,4 @@ Un saludo y espero que os haya resultado interesante.
 
 * [Documentación oficial de Testinfra (ENG)](https://testinfra.readthedocs.io/en/latest/)
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021
