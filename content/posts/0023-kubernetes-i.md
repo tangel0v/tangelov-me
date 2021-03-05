@@ -34,7 +34,7 @@ Se podría definir un contenedor como la agrupación en una unidad del código d
 
 No son una idea nueva, puesto que ha habido aproximaciones al concepto desde los 80, pero sí que están casi convirtiéndose de facto en el estándar que utilizan muchos servicios y aplicaciones que utilizamos en la nube debido a su versatilidad.
 
-De todos los sistemas de creación de contenedores, el más conocido es [Docker](https://www.docker.com/products/docker-engine), pero tenemos otros cómo [RKT](https://coreos.com/rkt/) o [LXC](https://linuxcontainers.org/#LXC).
+De todos los sistemas de creación de contenedores, el más conocido es [Docker](https://www.docker.com/products/docker-engine), pero tenemos otros cómo [ContainerD](https://containerd.io/) o [LXC](https://linuxcontainers.org/#LXC).
 
 La función de este post no es enseñar cómo crear contenedores, sino cómo orquestarlos, pero si alguien necesita dicha información, hay un tutorial maravilloso creando por la comunidad de DigitalOcean [aquí](https://www.digitalocean.com/community/tutorials/docker-explicado-como-crear-contenedores-de-docker-corriendo-en-memcached-es).
 
@@ -109,19 +109,19 @@ Para instalarlo, hacemos lo siguiente:
 # First we have to install the snap daemon
 
 # If we are using Debian or Ubuntu-based distributions
-sudo apt-get install snapd
+sudo apt install snapd
 
 # Other distributions check this:
 # https://docs.snapcraft.io/installing-snapd/6735
 
 # Second, we use snap to install Microk8s
-sudo snap install microk8s --classic --channel=1.14/stable
+sudo snap install microk8s --classic --channel=1.19/stable
 ```
 
 Si todo va bien, haciendo ```sudo snap info microk8s``` veremos en la última línea algo parecido a esto:
 
 ```bash
-installed:        v1.14.1                    (521) 214MB classic
+microk8s (1.19/stable) v1.19.7 from Canonical✓ installed
 ```
 
 Al ser un sistema basado en un sólo nodo, podemos ver que los servicios de los nodos maestro y
@@ -147,7 +147,8 @@ tangelovers@tangeblog.me$microk8s.kubectl config view
 apiVersion: v1
 clusters:
 - cluster:
-    server: http://127.0.0.1:8080
+    certificate-authority-data: DATA+OMITTED
+    server: https://127.0.0.1:16443
   name: microk8s-cluster
 contexts:
 - context:
@@ -160,7 +161,7 @@ preferences: {}
 users:
 - name: admin
   user:
-    username: admin
+    token: REDACTED
 ```
 
 ### Deployments y Services
@@ -202,7 +203,7 @@ Utilizando el código de colores tenemos lo siguiente:
 
 * En color morado también podemos ver el _ReplicaSet_ que gestiona nuestro _Deployment_.
 
-Ahora podríamos acceder a nuestro contenedor de Nginx a través de la dirección http://10.152.183.220:8000
+Ahora podríamos acceder a nuestro contenedor de Nginx a través de la dirección http://10.152.183.217:8000
 
 ![microk8s-objects](https://storage.googleapis.com/tangelov-data/images/0023-05.png)
 
@@ -219,7 +220,7 @@ microk8s.kubectl delete deployment nginx
 
 Ahora generamos un nuevo fichero yaml con el siguiente contenido (que está basado en [este ejemplo](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment)):
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: nginx
@@ -244,7 +245,7 @@ spec:
 
 Como podemos ver en el fichero le estamos indicando a nuestro cluster una serie de objetivos:
 
-* Que tiene que apuntar a la API _extensions/v1beta1_.
+* Que tiene que apuntar a la API _apps/v1_ (desde Kubernetes 1.16 en adelante).
 
 * Que el tipo de objeto que tiene que crear es un _Deployment_.
 
@@ -258,7 +259,7 @@ Procedemos a aplicarlo con ```microk8s.kubectl apply -f nginx-deployment.yaml```
 
 ```bash
 microk8s.kubectl apply -f orig.yaml
-deployment.extensions/nginx unchanged
+deployment.apps/nginx unchanged
 ```
 
 Por último, vamos a crear un nuevo fichero para gestionar el servicio que nos permita conectarnos a nuestro _Deployment_:
@@ -297,7 +298,7 @@ Y poco más por hoy, más Kubernetes en próximos posts :D
 
 * [Definición de contenedor en la Wikipedia (ENG)](https://en.wikipedia.org/wiki/Container_(virtualization))
 
-* Sistemas de ejecución de contenedores: [Docker (ENG)](https://www.docker.com/products/docker-engine), [RKT (ENG)](https://coreos.com/rkt/) y [LXC (ENG)](https://linuxcontainers.org/#LXC)
+* Sistemas de ejecución de contenedores: [Docker (ENG)](https://www.docker.com/products/docker-engine), [Containerd (ENG)](https://containerd.io/) y [LXC (ENG)](https://linuxcontainers.org/#LXC)
 
 * Sistemas de orquestación de contenedores: [Kubernetes (ENG)](https://kubernetes.io/), [Marathon (ENG)](https://mesosphere.github.io/marathon/) y [Docker Swarm (ENG)](https://docs.docker.com/engine/swarm/)
 
@@ -317,4 +318,4 @@ Y poco más por hoy, más Kubernetes en próximos posts :D
 
 * Los YAML de ejemplo son accesibles desde [aquí](https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-deployment.yml) y [aquí](https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-service-nodeport.yml).
 
-Revisado a 01-02-2020
+Revisado a 01-03-2021

@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
         - name: fluentd
-          image: quay.io/fluentd_elasticsearch/fluentd:v2.8.0
+          image: quay.io/fluentd_elasticsearch/fluentd:v3.2.0
       terminationGracePeriodSeconds: 30
 ```
 
@@ -105,7 +105,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: k8s.gcr.io/nginx-slim:0.8
+        image: nginx:stable-alpine
         ports:
         - containerPort: 80
           name: web
@@ -133,7 +133,6 @@ apiVersion: storage.k8s.io/v1
 metadata:
   name: local-storage
   annotations:
-    "storageclass.kubernetes.io/is-default-class": "true"
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 ---
@@ -177,7 +176,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: k8s.gcr.io/nginx-slim:0.8
+        image: nginx:stable-alpine
         ports:
         - containerPort: 80
           name: web
@@ -236,34 +235,32 @@ kubectl apply -f https://gitlab.com/tangelov/proyectos/raw/master/templates/kube
 
 kubectl apply -f https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-service-nodeport.yml
 ```
-Si ahora utilizamos miramos los elementos desplegados veremos un _default-http-backend_ generado por el Ingress controller y nuestro Nginx desplegado:
+Si ahora miramos los elementos que hemo desplegados, veremos nuestro Ingress Controller y el Nginx:
 
 ```bash
 # Listamos todos los Deployment y los Services
-kubectl get deployment,svc
+kubectl get deployment,svc,ds --all-namespaces
+NAMESPACE     NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   deployment.apps/calico-kube-controllers   1/1     1            1           11m
+default       deployment.apps/nginx                     2/2     2            2           6m50s
 
-NAME                                         READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.extensions/default-http-backend   1/1     1            1           7h
-deployment.extensions/nginx                  2/2     2            2           110s
+NAMESPACE   NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+default     service/kubernetes   ClusterIP   10.152.183.1     <none>        443/TCP          11m
+default     service/nginx        NodePort    10.152.183.159   <none>        8000:32471/TCP   6m42s
 
-NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-service/default-http-backend   ClusterIP   10.152.183.61   <none>        80/TCP           7h
-service/nginx                  NodePort    10.152.183.67   <none>        8000:32440/TCP   85s
-
+NAMESPACE     NAME                                               DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+ingress       daemonset.apps/nginx-ingress-microk8s-controller   1         1         1       1            1           <none>                   10m
+kube-system   daemonset.apps/calico-node                         1         1         1       1            1           kubernetes.io/os=linux   11m
 ```
 
-Si accedemos a la IP del _default-http-backend_ podremos ver el Endpoint por defecto de nuestro Nginx controller. Veremos algo parecido a esto:
-
-![default-http-backend](https://storage.googleapis.com/tangelov-data/images/0027-00.png)
-
-Una vez que tenemos algunos servicios de prueba, vamos a crear un Ingress para acceder a nuestro Nginx:
+Si accedemos a la IP del Nodeport podremos acceder a nuestro Nginx, pero en lugar de utilizar dicho endpoint, vamos a crear un Ingress para acceder al mismo:
 
 ```yaml
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: basic-nginx-ingress
+  name: nginx
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -271,12 +268,15 @@ spec:
     - http:
         paths:
           - path: /nginx
+            pathType: Prefix
             backend:
-              serviceName: nginx
-              servicePort: 8000
+              service:
+                name: nginx
+                port:
+                  number: 80
 ```
 
-En esta plantilla le estamos indicando al Ingress Controller que acceda a nuestro _service_ Nginx a través de la ruta /nginx y que envíe las peticiones al _service_ Nginx al puerto 8000.
+En esta plantilla le estamos indicando al Ingress Controller que acceda a nuestro _service_ Nginx a través de la ruta /nginx y que envíe las peticiones al _service_ Nginx al puerto 80.
 
 Ahora nuestro servicio es accesible a través del Ingress Controller. Al utilizar MicroK8s, éste se genera por defecto en https://127.0.0.1 (El Ingress Controller también genera un certificado autofirmado). Debido a la regla que hemos creado, si accedemos a _https://127.0.0.1/nginx_ podremos acceder al Nginx que acabamos de desplegar.
 
@@ -414,8 +414,6 @@ kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
   name: local-storage
-  annotations:
-    "storageclass.kubernetes.io/is-default-class": "true"
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 ```
@@ -467,6 +465,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
+  volumeName: "local-volume"
 ---
 apiVersion: v1
 kind: Pod
@@ -523,7 +522,7 @@ PD: Si deseamos todos los ficheros YAML utilizados en este post, podemos descarg
 
 * [Página oficial de Fluentd (ENG)](https://www.fluentd.org/)
 
-* [Referencias a la API de Kubernetes 1.14 (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/)
+* [Referencias a la API de Kubernetes 1.19 (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/)
 
 * Conceptos varios de Kubernetes (ENG): [DaemonSets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/), [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) e [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers), [Volúmenes](https://kubernetes.io/docs/concepts/storage/volumes), [Configmaps](https://kubernetes.io/docs/concepts/storage/volumes/#configmap) y [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 
@@ -537,4 +536,4 @@ PD: Si deseamos todos los ficheros YAML utilizados en este post, podemos descarg
 
 * Conceptos sobre almacenamiento en Kuberntes (ENG): [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/), [Persistent Volumes and Persistent Volume Claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 
-Revisado a 07-02-2020
+Revisado a 01-03-2021

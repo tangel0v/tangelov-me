@@ -62,7 +62,7 @@ Más o menos el sistema sería así a alto nivel:
 
 __EXTRA__: Todas las dependencias se encuentran almacenadas en un bucket de Cloud Storage.
 
-Todos estos elementos, salvo las funciones, están terraformados. Si alguien quiere revisar el código, puede consultarse [aquí](https://gitlab.com/tangelov/tangelov-infra), principalmente en las carpetas de _IAM_ y _PubSub_.
+Todos estos elementos, salvo las funciones, están terraformados. Si alguien quiere revisar el código, puede consultarse [aquí](https://gitlab.com/tangelov/tangelov-infra/-/tree/ed040ffe65b25f23778b3725bd7734fb8cccc971), principalmente en las carpetas de _IAM_ y _PubSub_.
 
 Por ejemplo, éste sería el código para crear un job de _Cloud Scheduler_:
 
@@ -275,3 +275,5 @@ Espero que os haya gustado el post y... ¡nos vemos en el siguiente!
 * [Diferentes formas de acceder a Google Drive (ENG)](https://help.talend.com/reader/E3i03eb7IpvsigwC58fxQg/bS8nwiwx2K9oNXaaFDkokw)
 
 * [Documentación de Matrix Nio (ENG)](https://matrix-nio.readthedocs.io/en/latest/nio.html#asyncclient)
+
+Revisado a 01-03-2021

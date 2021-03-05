@@ -93,10 +93,11 @@ A la web, formada por un App Engine y un bucket de Cloud Storage para los estát
 * Por último, he añadido los permisos necesarios para que todo el conjunto funcione correctamente.
 
 La infraestructura a groso modo sería ahora mismo así (en líneas discontinuas se encuentra todo lo nuevo):
-![tangelov-infra](https://storage.googleapis.com/tangelov-data/images/021-06.png)
+![tangelov-infra](https://storage.googleapis.com/tangelov-data/images/0021-06.png)
 
 Si alguno desea implementar un sistema igual, todo ello está codificado y puede ser consultado [aquí](https://gitlab.com/tangelov/tangelov-infra).
 
+> Este post fue escrito utilizando Terraform 0.11 y actualmente la herramienta ha seguido evolucionando por lo que puede haber algunos cambios en la sintaxis del código almacenado en el repositorio.
 
 ## Documentación
 
@@ -106,10 +107,8 @@ Si alguno desea implementar un sistema igual, todo ello está codificado y puede
 
 * [Documentación de Terraform para AWS (ENG)](https://www.terraform.io/docs/providers/aws/)
 
-* [Ejemplos oficiales de Terraform (ENG)](https://github.com/hashicorp/terraform/tree/master/examples)
-
 * [Infraestructura como código según GCP (ENG)](https://cloud.google.com/solutions/infrastructure-as-code/)
 
 * [Repositorio del código de la infraestructura de tangelov.me](https://gitlab.com/tangelov/tangelov-infra)
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

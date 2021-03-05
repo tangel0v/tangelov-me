@@ -80,10 +80,10 @@ kubectl exec -ti mysql-0 bash
 root@mysql-0:/# mysql -u traccaruser -p
 Enter password: 
 Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 5
-Server version: 5.7.29 MySQL Community Server (GPL)
+Your MySQL connection id is 2
+Server version: 5.7.33 MySQL Community Server (GPL)
 
-Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2000, 2021, Oracle and/or its affiliates. All rights reserved.
 
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
@@ -91,7 +91,7 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> show databases;
+mysql> SHOW databases;
 +--------------------+
 | Database           |
 +--------------------+
@@ -154,7 +154,7 @@ Ahora tenemos que crear un fichero XML de nombre traccar.xml con la siguiente co
     <entry key='config.default'>./conf/default.xml</entry>
 
     <entry key='database.driver'>com.mysql.jdbc.Driver</entry>
-    <entry key='database.url'>jdbc:mysql://10.152.183.20:3306/traccar-db?serverTimezone=UTC&amp;useSSL=false&amp;allowMultiQueries=true&amp;autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;sessionVariables=sql_mode=''</entry>
+    <entry key='database.url'>jdbc:mysql://10.152.183.254:3306/traccar-db?serverTimezone=UTC&amp;useSSL=false&amp;allowMultiQueries=true&amp;autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;sessionVariables=sql_mode=''</entry>
     <entry key='database.user'>traccaruser</entry>
     <entry key='database.password'>traccarpassword</entry>
 
@@ -171,21 +171,23 @@ secret/traccar-config created
 Ya tenemos todas las dependencias necesarias para crear nuestro _Deployment_:
 
 ```yaml
----
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: traccar-backend
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: traccar
   template:
-    metadata:
+    metadata: 
       labels:
         app: traccar
     spec:
       containers:
       - name: traccar-backend
-        image: traccar/traccar:4.6-debian
+        image: traccar/traccar:4.12-debian
         ports:
           - containerPort: 8082
         volumeMounts:
@@ -248,47 +250,9 @@ kubectl run -i --tty curl --image=curlimages/curl --restart=Never -- sh
 ```
 
 ### Traccar Web
-Ya tenemos una base de datos y un backend funcionando, así que ahora vamos a configurar la interfaz web.
+Ya tenemos una base de datos y un backend funcionando, así que ahora vamos a ponernos con la interfaz web.
 
-Ésta está integrada dentro del binario del Backend, pero para que funcione, primero debemos habilitarla. Vamos a modificar el fichero de configuración y añadir algunas entradas extra:
-
-```xml
-<?xml version='1.0' encoding='UTF-8'?>
-
-<!DOCTYPE properties SYSTEM 'http://java.sun.com/dtd/properties.dtd'>
-
-<properties>
-    <entry key='config.default'>./conf/default.xml</entry>
-
-    <entry key='web.enable'>true</entry>
-    <entry key='web.port'>8082</entry>
-    <entry key='web.path'>./web</entry>
-
-    <entry key='database.driver'>com.mysql.jdbc.Driver</entry>
-    <entry key='database.url'>jdbc:mysql://10.152.183.254:3306/traccar-db?serverTimezone=UTC&amp;useSSL=false&amp;allowMultiQueries=true&amp;autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;sessionVariables=sql_mode=''</entry>
-    <entry key='database.user'>traccaruser</entry>
-    <entry key='database.password'>traccarpassword</entry>
-
-</properties>
-```
-
-Para que nuestro Deployment coja esta nueva configuración debemos sustituir el secreto y matar el pod (el equivalente a reiniciar un servicio en K8s) para que éste coja la nueva configuración.
-
-```bash
-# Borramos y recreamos el secreto
-kubectl delete secret traccar-config && kubectl create secret generic traccar-config --from-file=./traccar.xml
-
-# Reiniciamos el pod del Deployment de traccar
-kubectl get pods | grep traccar
-
-kubectl get pods | grep traccar
-traccar-backend-7f8d8fcd5-87d6v           1/1     Running   0          1h
-
-kubectl delete pod traccar-backend-7f8d8fcd5-87d6v
-pod "traccar-backend-7f8d8fcd5-87d6v" deleted
-```
-
-Ya tenemos la interfaz habilitada, pero aún no podemos acceder al servicio puesto que éste solo es accesible desde el interior del clúster. Para poder utilizarlo, vamos a crear un Ingress (también podríamos utilizar un servicio del tipo LoadBalancer si nuestro proveedor de K8s lo soportara).
+Ésta está integrada dentro del pod de Backend y se encuentra habilitada por defecto, escuchando en el puerto 8082. Sin embargo, para acceder al servicio necesitamos crear algún punto de acceso puesto que ahora mismo sólo es accesible desde el interior del clúster. Para poder utilizarlo, vamos a crear un Ingress (también podríamos utilizar un servicio del tipo LoadBalancer si nuestro proveedor de K8s lo soportara).
 
 Como estamos utilizando Microk8s, el endpoint de nuestro Ingress es siempre la dirección _http://127.0.0.1_ así que vamos a editar nuestro fichero /etc/hosts para utilizar un dominio personalizado:
 
@@ -302,7 +266,8 @@ Finalmente creamos un [ingress](https://gitlab.com/tangelov/proyectos/-/raw/mast
 
 ```yaml
 ---
-apiVersion: extensions/v1beta1
+---
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: traccar-web
@@ -312,10 +277,12 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: traccar-backend
-              servicePort: 8082
-
+              service:
+                name: traccar-backend
+                port:
+                  number: 8082
 ```
 
 Si ahora abrimos un navegador y ponemos http://traccar.prueba.test veremos lo siguiente:
@@ -354,4 +321,4 @@ Un saludo a todos!
 * [Arquitectura de la plataforma Traccar (ENG)](https://www.traccar.org/architecture/)
 
 
-Revisado a 18-03-2020
+Revisado a 01-03-2021
