@@ -22,7 +22,7 @@ Cuando entramos en un repositorio de código en Gitlab, una de las opciones que 
 
 ![cicd](https://storage.googleapis.com/tangelov-data/images/0012-00.png)
 
-Si hacemos click en _Get started with Pipelines_ se nos abrirá un [tutorial](https://gitlab.com/help/ci/quick_start/README) que podremos seguir para configurar nuestro sistema de CI. No voy a entrar en profundidad en el tutorial y sólo comentaré que para activarlo necesitamos crear en la raíz de nuestro repositorio un fichero llamado _gitlab-ci.yml_
+Si hacemos click en _Get started with Pipelines_ se nos abrirá un [tutorial](https://docs.gitlab.com/ee/ci/quick_start/index.html) que podremos seguir para configurar nuestro sistema de CI. No voy a entrar en profundidad en el tutorial y sólo comentaré que para activarlo necesitamos crear en la raíz de nuestro repositorio un fichero llamado _gitlab-ci.yml_
 
 ![cicd-error](https://storage.googleapis.com/tangelov-data/images/0012-01.png)
 
@@ -41,7 +41,7 @@ cd tangelov-me && nikola build
 Con los pasos anteriores, tendríamos nuestro HTML generado y podríamos subirlo a cualquier servidor web. Sin embargo, vamos a darle una vuelta extra y vamos a encapsularlo dentro de un contenedor con Nginx. Para ello creamos un archivo _Dockerfile_ en la raíz del repositorio (si, la mayúscula es importante):
 
 ```Dockerfile
-FROM nginx:1.15.2-alpine
+FROM nginx:stable-alpine
 
 COPY output /usr/share/nginx/html
 ```
@@ -153,11 +153,11 @@ Como podemos ver, ahora tenemos un job que se nos crea una imagen de Docker de f
 
 * [Definición de Integración Continua en la Wikipedia (ENG)](https://en.wikipedia.org/wiki/GitLab)
 
-* [Introducción a la Integración continua en Gitlab (ENG)](https://about.gitlab.com/features/gitlab-ci-cd/)
+* [Introducción a la Integración continua en Gitlab (ENG)](https://about.gitlab.com/stages-devops-lifecycle/continuous-integration/)
 
 * [Documentación sobre cómo configurar gitlab-ci (ENG)](https://docs.gitlab.com/ee/ci/yaml/)
 
 * [Test all the things in GitLab CI with Docker by example (ENG)](https://about.gitlab.com/2018/02/05/test-all-the-things-gitlab-ci-docker-examples/)
 
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

@@ -133,7 +133,7 @@ Imaginemos que hemos generado una cuenta de servicio y nos hemos autenticado con
 
 Una forma de interactuar es utilizar _kubectl apply -f $fichero_. Si utilizaramos este [fichero de ejemplo](https://gitlab.com/tangelov/proyectos/-/raw/master/templates/kubernetes/basic-nginx-deployment.yml) estaríamos haciendo lo siguiente:
 
-* Interactuaríamos contra la API de _extensions/v1beta_.
+* Interactuaríamos contra la API de _apps/v1_.
 
 * El resource creado sería un _Deployment_.
 
@@ -167,7 +167,7 @@ Si no estuviese habilitado, podemos habilitarlo en en clúster ya existente, rel
 
 * En Google Cloud está habilitado por defecto desde la versión de Kubernetes 1.6. Si deseamos actualizar un clúster ya existente para que utilice RBAC debemos actualizar el clúster con la opción _--no-enable-legacy-authorization_.
 
-En MicroK8s tenemos que habilitado con el comando ```microk8s.enable rbac```.
+En MicroK8s tenemos que habilitarlo con el comando ```microk8s.enable rbac```.
 
 ```bash
 microk8s.kubectl api-versions | grep rbac.authorization.k8s.io/v1
@@ -322,8 +322,7 @@ kubectl apply -f https://kutt.it/cJeX5g -n ghost
 Error from server (Forbidden): error when retrieving current configuration of:
 Resource: "apps/v1, Resource=daemonsets", GroupVersionKind: "apps/v1, Kind=DaemonSet"
 Name: "fluentd", Namespace: "ghost"
-from server for: "https://kutt.it/cJeX5g": daemonsets.apps "fluentd" is forbidden: User "system:serviceaccount:ghost:ghost-sa" cannot get resource "daemonsets" in API group "apps" in the namespace "ghost"
-
+from server for: "basic-fluentd-daemonset.yml": daemonsets.apps "fluentd" is forbidden: User "system:serviceaccount:ghost:ghost-sa" cannot get resource "daemonsets" in API group "apps" in the namespace "ghost"
 
 # Intentamos crear un Service
 kubectl apply -f https://kutt.it/9QAO3m -n ghost
@@ -331,8 +330,7 @@ kubectl apply -f https://kutt.it/9QAO3m -n ghost
 Error from server (Forbidden): error when retrieving current configuration of:
 Resource: "/v1, Resource=services", GroupVersionKind: "/v1, Kind=Service"
 Name: "nginx", Namespace: "ghost"
-from server for: "https://kutt.it/9QAO3m": services "nginx" is forbidden: User "system:serviceaccount:ghost:ghost-sa" cannot get resource "services" in API group "" in the namespace "ghost"
-
+from server for: "basic-nginx-service-nodeport.yml": services "nginx" is forbidden: User "system:serviceaccount:ghost:ghost-sa" cannot get resource "services" in API group "" in the namespace "ghost"
 
 # Intentamos añadirnos al grupo de cluster-admins de RBAC
 kubectl create clusterrolebinding ghost-cluster-admin-binding --clusterrole=cluster-admin --user=ghost-sa
@@ -344,11 +342,10 @@ Error from server (Forbidden): clusterrolebindings.rbac.authorization.k8s.io is 
 Por último, podemos ver que los permisos generales funcionan al listar los pods de otros namespaces como _default_
 
 ```bash
+# Aunque no hay nada
 kubectl get pods -n default
 
-NAME                                      READY   STATUS    RESTARTS   AGE
-default-http-backend-5769f6bc66-7xnl2     1/1     Running   0          38m
-nginx-ingress-microk8s-controller-57j95   1/1     Running   1          11d
+No resources found in default namespace
 ```
 
 ## Conclusiones
@@ -377,8 +374,8 @@ Espero que os haya gustado y... ¡os veo en el pŕoximo post!
 
 * [Roles por defecto en clústers de Kubernetes (ENG)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles)
 
-* [Referencia de las APIs de Kubernetes (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/)
+* [Referencia de las APIs de Kubernetes (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/)
 
 * [Repositorio de plantillas de Kubernetes](https://gitlab.com/tangelov/proyectos/-/tree/master/templates/kubernetes)
 
-Revisado a 28-03-2020
+Revisado a 01-03-2021

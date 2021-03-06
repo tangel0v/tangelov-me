@@ -469,4 +469,4 @@ Y ya tendríamos el pipeline completo y optimizado. Los siguientes pasos serán 
 
 * [Integración de Terraform en las Merge Requests (ENG)](https://docs.gitlab.com/ee/user/infrastructure/mr_integration.html)
 
-Revisado a 16-02-2021
+Revisado a 01-03-2021

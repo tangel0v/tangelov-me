@@ -210,7 +210,7 @@ Este código tiene las siguientes peculiaridades:
 
 * Cacheo los plugins de Terraform en una carpeta fija: actualmente el pipeline sólo aplica a funciones, pero lo extenderé en el futuro y para evitar que Terraform descargue continuamente sus plugins.
 
-> __NOTA__: No recomiendo utilizar este código tal cual está en otros pipelines puesto que es algo rápido, pensado para servir de ejemplo en este post. Ahora mismo hace una comprobación muy básica y podríais destruir infraestructura sin querer. A futuro haré un post dedicado a realizar un buen pipeline con Terraform :) 
+> __NOTA__: El código utilizado en este post puede ser peligroso: está pensado para servir de ejemplo y bajo una mala ejecución podríamos destruir infraestructura sin querer. Para ver cómo proteger nuestra infraestructura en sistemas de CICD, podemos visitar este [post](https://tangelov.me/posts/refactor-y-opa.html).
 
 Nuestro pipeline ya está operativo: si actualizamos el código de Terraform de nuestras funciones, también lo hará automáticamente nuestra infraestructura. Pero necesitamos una cosa más: para que los pipelines puedan ser ejecutados desde agentes externos a Gitlab (como Cloud Build), necesitamos generar un _Trigger_. Se habilita en en _Settings / CICD_ en la opción de _Pipeline triggers_, simplemente añadiendo un nombre. También debemos guardar el token que nos aparece para guardarlo en el futuro:
 
@@ -326,4 +326,4 @@ Y ya tendríamos el proceso completo. En el futuro mejoraré el pipeline para qu
 
 * [Ejecutando Terraform en sistemas automáticos (ENG)](https://learn.hashicorp.com/terraform/development/running-terraform-in-automation)
 
-Revisado a 10-06-2020
+Revisado a 01-03-2021

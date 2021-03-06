@@ -29,8 +29,8 @@ Con el mundo _cloud_ pegando cada vez más fuerte y siendo Microsoft uno de los 
 En primer lugar, debemos conectar la CLI de Azure, para gestionar la mayoría de servicios de la nube. Prefiero usar la CLI de Azure en lugar de Powershell por su portabilidad entre sistemas.
 
 ```bash
-# Añadimos el repositorio de Azure-CLI para sistemas Debian o Ubuntu (El ejemplo está basado en Ubuntu 18.04)
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ bionic main" | \
+# Añadimos el repositorio de Azure-CLI para sistemas Debian o Ubuntu (El ejemplo está basado en Ubuntu 20.04)
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ focal main" | \
     sudo tee /etc/apt/sources.list.d/azure-cli.list
 
 # Añadimos la clave GPG del repositorio e instalamos la CLI
@@ -123,4 +123,4 @@ rm -rf azcopy_linux_*
 * [Transfer data with AzCopy on Linux (ENG)](https://docs.microsoft.com/en-gb/azure/storage/common/storage-use-azcopy-v10)
 * [Installation .NET Core on Linux (ENG)](https://docs.microsoft.com/es-es/dotnet/core/install/linux-package-manager-ubuntu-1904)
 
-Revisado a 01/02/2020.
+Revisado a 01/03/2020.

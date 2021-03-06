@@ -11,6 +11,8 @@ draft: false
 
 El nacimiento de esta web fue algo bastante meditado, estuve dándole muchas vueltas. Inicialmente pensé en implementarla de una manera tradicional: con un servidor LAMP y desplegando contra él. Pero a medida que fui ganando práctica en nuevas metodologías y tecnologías y a sentirme cómodo en ellas, decidí aprovecharlo.
 
+> __Nota del autor__: Este artículo fue escrito cuando Tangelov.me estaba desplegado con Nikola. Aunque a lo largo del 2020, se ha migrado a Hugo, el repositorio original sigue [disponible](https://gitlab.com/tangelov/tangelov-me) para cualquiera que quiera utilizar Nikola en Google Cloud de la misma forma que yo lo hice. También escribí sobre el proceso de migración y el uso de Hugo en [el siguiente post](https://tangelov.me/posts/tangelov-en-hugo.html).
+
 Así a groso modo, esta web está construida gracias a cuatro diferentes tecnologías:
 
 * [Git](https://git-scm.com/): Para su desarrollo y crecimiento.
@@ -39,13 +41,12 @@ Los primeros pasos son montar el entorno de desarrollo: comenzé con un reposito
 git clone git@gitlab.com:tangelov/tangelov.me.git
 
 # Primero instalamos virtualenv si no lo tenemos instalado
-pip install virtualenv --user
+pip3 install virtualenv --user
 
-# Creamos el entorno de desarrollo con Python2
-# Esto nos instalará la última versión de Nikola compatible con Python2 (v.7.x)
+# Creamos el entorno de desarrollo con Python3
 virtualenv nikola
 source nikola/bin/activate
-pip install "nikola[extras]" --upgrade
+pip3 install "nikola[extras]" --upgrade
 
 # Añadimos el primer commit y lo pusheamos al repositorio de código de Gitlab.
 touch README.md
@@ -73,8 +74,6 @@ nikola new_post -f markdown
 vim posts/00-nuevo-post.md
 ```
 
-> __Nota del autor__: Cuando comencé el desarrollo de esta web, la última versión de Nikola era la 7.8, pero actualmente se utiliza la versión 8, que sólo está soportada por Python3. Los cambios entre versiones no cambian la sintaxis de creación de posts y sólo necesitaremos cambiar la versión de pip a _pip3_ para poder seguir este tutorial. [Aquí](https://tangelov.me/posts/mejoras-tangelov-nikola.html) hay más información.
-
 Al usar el último comando, podremos escribir el contenido de nuestro post en markdown. Una vez hecho tan sólo tenemos que ejecutar el comando ``nikola build`` para generar el HTML asociado. Aparecerá una carpeta llamada ~/output dentro de la estructura de ficheros de nikola, que contiene todo lo necesario para que la página web sea funcional en cualquier sitio que esté alojada.
 
 ## Uso de Google App Engine
@@ -87,9 +86,9 @@ Es necesario realizar una serie de cambios y configuraciones para adoptar el có
 
 ## Documentación
 
-* Se puede consultar el código de la web [aquí](https://gitlab.com/tangelov/tangelov.me)
+* Se puede consultar el código de la web [aquí](https://gitlab.com/tangelov/tangelov-me)
 
-* [Cómo instalar Nikola](https://getnikola.com/getting-started.html)
+* [Cómo instalar Nikola (ENG)](https://getnikola.com/getting-started.html)
 
 * [Free Tier en Google Cloud Platform](https://cloud.google.com/free/docs/frequently-asked-questions?hl=es-419)
 
@@ -97,4 +96,4 @@ Es necesario realizar una serie de cambios y configuraciones para adoptar el có
 
 * [Google Cloud Storage](https://cloud.google.com/storage/)
 
-Revisado a 01-02-2020
+Revisado a 01-03-2021

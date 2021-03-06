@@ -105,4 +105,4 @@ Espero que sea de utilidad y muchas gracias!
 * Rol de [Backupninja](https://gitlab.com/tangelov-roles/backupninja)
 
 
-Revisado a 16/01/2020
+Revisado a 01/03/2021

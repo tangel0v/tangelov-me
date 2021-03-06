@@ -181,7 +181,6 @@ includes = /media/disk/datos /var/www/nextcloud
 excludes = /tmp /proc /sys /dev /srv /misc /net /selinux
 
 DATEFORMAT = %Y.%m.%d
-
 ```
 
 Hasta aquí llegamos con el despleigue del rol de Backupninja. En la próxima entrega añadiremos dos pasos más y configuraremos el rol para que sea multi-distribución.
@@ -189,13 +188,13 @@ Hasta aquí llegamos con el despleigue del rol de Backupninja. En la próxima en
 
 ## Documentación
 
-* [Estructura de un rol (ENG)](http://docs.ansible.com/ansible/latest/playbooks_reuse_roles.html)
+* [Estructura de un rol (ENG)](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html)
 
 * [Gitlab de Backupninja (ENG)](https://0xacab.org/riseuplabs/backupninja)
 
-* [Plantillas en Jinja2 (ENG)](https://jinja.palletsprojects.com/en/2.10.x/templates/)
+* [Plantillas en Jinja2 (ENG)](https://jinja.palletsprojects.com/en/2.11.x/templates/)
 
-* [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
+* [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
 
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

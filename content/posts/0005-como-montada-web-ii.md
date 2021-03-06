@@ -16,10 +16,12 @@ En el primer post explicamos las tecnologías utilizadas para desarrollar y hosp
 ## Configuración en conf.py
 La documentación de Nikola es muy buena y puede consultarse [aquí](https://getnikola.com/conf.html). Trata prácticamente todo lo configurable en la aplicación, por lo que me voy a centrar sólo en los cambios necesarios (no en el título, o en como cambiar de tema) para que lo generado funcione en la nube de Google.
 
+> __Nota del autor__: Este artículo no representa el estado actual de la web puesto que se ha migrado a Hugo a lo largo del 2020. Para saber más sobre el proceso de migración, puede acceder al [siguiente post](https://tangelov.me/posts/tangelov-en-hugo.html).
+
 Google App Engine no soporta por defecto _Pretty URLs_ por lo que debemos deshabilitalas en Nikola.
 ![Pretty URLS](https://storage.googleapis.com/tangelov-data/images/0005-00.png)
 
-_Pretty URLs_ son las configuraciones que nos permiten que cuando accedemos a una página web, no tengamos que poner siempre .html al final de cada fichero. Se entiende mucho mejor con un ejemplo: si anteriormente para acceder al post anterior, lo hacíamos a través de la URL _https://tangelov.me/como-montada-web-i/_ ahora lo haremos a través de _https://tangelov.me/como-montada-web-i/index.html_
+_Pretty URLs_ son las configuraciones que nos permiten que cuando accedemos a una página web, no tengamos que poner siempre .html al final de cada fichero. Se entiende mucho mejor con un ejemplo: si anteriormente para acceder al post anterior, lo hacíamos a través de la URL https://tangelov.me/como-montada-web-i/ ahora lo haremos a través de https://tangelov.me/como-montada-web-i/index.html .
 
 Este cambio habrá roto algunas de las configuraciones que deberemos cambiar. Todas las referencias internas que no apuntasen al .html directamente fallarían y de caja es lo que pasará con algunas de las URLs de la estructura del tema (archivo, categorías, etc). Procedemos a cambiarlas para que apunten a sus HTMLs.
 ![Rutas internas](https://storage.googleapis.com/tangelov-data/images/0005-01.png)
@@ -32,7 +34,7 @@ Con esto, nuestro código ya funcionará en GAE, pero también necesitamos despl
 ## Configuración de Google App Engine (GAE)
 Como ya se ha comentado, Google App Engine es una Plataforma como servicio que permite a desarrolladores, publicar sus páginas web, proporcionando autoescalado, certificados SSL (vía Let's Encrypt), protección ante caídas de servicio... Google ofrece este servicio en dos modalidades diferentes: _standard_ y _flexible_
 
-Como nosotros utilizamos HTML puro, podemos usar el _standard_. Éste se diferencia del flexible por una cantidad más limitada de frameworks que se pueden ejecutar. Actualmente podemos usar python 2.7, Java 7, Java 8, PHP 5,5 y Go 1.9 aunque Python 3.7, Node.js (8 y 10), PHP 7.2 y Go 1.11 se encuentran en beta.
+Como nosotros utilizamos HTML puro, podemos usar el _standard_. Éste se diferencia del flexible por una cantidad más limitada de frameworks que se pueden ejecutar. Actualmente podemos usar Python (2.7, 3.X), Java (8, 11), PHP (5.5, 7.X), NodeJS (10, 12 o 14), Ruby (2.5, 2.6 y 2.7) y Go (1.11 o superiores) aunque Python 3.9, Node.js 14, PHP 7.4 y Go 1.15 se encuentran en beta.
 
 Antes de realizar el despliegue, necesitamos crear la _"infraestructura"_ en Google Cloud que nos permita hacerlo. En este caso caso concreto la he dividido en dos partes:
 
@@ -124,4 +126,4 @@ Resumiendo:
 
 * [Google Cloud Storage (ENG)](https://cloud.google.com/storage/docs/how-to)
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

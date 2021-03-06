@@ -20,7 +20,7 @@ Por ejemplo, nuestro Jenkins podría comprobar si el rendimiento de nuestra apli
 ## Instalación y configuración
 Ya existen tutoriales muy buenos sobre cómo instalar Jenkins en nuestro PC. En mi caso he decidido utilizar simplemente un contenedor Docker para ganar agilidad y levantarlo sólo cuando lo necesite.
 
-> En la primera versión de este post, se utilizaba Python 2 y se utilizaba una imagen de Docker oficial pero ahora vamos a generar una derivada para que el uso de Python 3 sea el predeterminado
+> __Nota del autor__: En la primera versión de este post, se utilizaba Python 2 y se utilizaba una imagen de Docker oficial pero ahora vamos a generar una derivada para que el uso de Python 3 sea el predeterminado.
 
 Primero creamos un Dockerfile con el siguiente contenido para crear una imagen Docker de Jenkins con Python 3.
 
@@ -51,13 +51,13 @@ Vamos a explicarlo un poco:
 
 * Mapeamos a nuestro host dos puertos: 8080, el puerto desde el que nos conectaremos a Jenkins a través de nuestro navegador y 50000, el puerto con el que Jenkins se conectará a ejecutores externos mediante el protocolo [JNLP](https://es.wikipedia.org/wiki/Java_Network_Launching_Protocol)
 
-Si necesitamos más información acerca de cómo configurar nuestros contenedores, la documentación de Jenkins al respecto es decente y puede consultarse [aquí](https://github.com/jenkinsci/docker/blob/master/README.md)
+Si necesitamos más información acerca de cómo configurar nuestros contenedores, la documentación de Jenkins al respecto es decente y puede consultarse [aquí](https://github.com/jenkinsci/docker/blob/master/README.md).
 
 La primera vez que arrancamos Jenkins tendremos que crear un usuario administrador y nos pedirá permiso para instalar una serie de plugins. Le decimos que si y continuamos.
 
 ![interfaz-jenkins](https://storage.googleapis.com/tangelov-data/images/0016-00.png)
 
-Para poder seguir este tutorial, debemos instalar el plugin para integrar Jenkins con Gitlab, que está disponible [aquí](https://github.com/jenkinsci/gitlab-plugin)
+Para poder seguir este tutorial, debemos instalar el plugin para integrar Jenkins con Gitlab, que está disponible [aquí](https://github.com/jenkinsci/gitlab-plugin).
 
 
 ## Nuestro primer job de Jenkins
@@ -116,8 +116,7 @@ Jenkins soporta dos tipos de pipelines: declarativas y _scripted_:
 
 * Las _scripted pipelines_ tienen una sintaxis completa y siguen un método de programación imperativo. Son más complejas pero permiten un control absoluto sobre el proceso de despliegue y test si el controlador de Jenkins las domina.
 
-* Las pipelines declarativas tienen una sintaxis simple y nos permite ir definiendo paso a pas
-o lo que queremos que haga nuestra variable. En caso de ser necesario, podemos intercalar partes de código _scripted_ en nuestros pipeliens declarativos.
+* Las pipelines declarativas tienen una sintaxis simple y nos permite ir definiendo paso a paso lo que queremos que haga nuestra variable. En caso de ser necesario, podemos intercalar partes de código _scripted_ en nuestros pipeliens declarativos.
 
 Vamos a crear una nueva tarea de Jenkins de tipo pipeline y vamos a introducir este código
 
@@ -131,10 +130,10 @@ pipeline {
     stages {
         stage('Install prerrequisites') {
             steps {
-                sh 'mkdir tools & wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-275.0.0-linux-x86_64.tar.gz -O tools/gcloud.tar.gz'
+                sh 'mkdir tools & wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-329.0.0-linux-x86_64.tar.gz -O tools/gcloud.tar.gz'
                 sh 'tar xvf tools/gcloud.tar.gz -C tools/'
                 
-                sh 'pip3 install "nikola[extras]"==8.0.2 --user'
+                sh 'pip3 install "nikola[extras]"==8.1.1 --user'
             }
         }
         
@@ -187,4 +186,4 @@ Este código replica lo que hemos realiado en el anterior job, pero a través de
 * [La integración continua pasa por pipelines](https://sdos.es/integracion-continua-pasa-por-pipelines/)
 
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

@@ -55,13 +55,13 @@ spec:
         image: nginx:stable-alpine
         ports:
         - containerPort: 80
-	resources:
-	  limits:
-	    cpu: 100m
-	    memory: 300Mi
-	  requests:
-	    cpu: 50m
-	    memory: 150Mi
+        resources:
+          limits:
+            cpu: 100m
+            memory: 300Mi
+          requests:
+            cpu: 50m
+            memory: 150Mi
 ```
 
 > La definición de unidades de recursos, ante un hardware tan distinto como el que hay en computación, puede ser un problema. Por ello definimos cada unidad de CPU con un hilo de hyperthreading en una CPU física o un core en cualquier proveedor de nube pública.
@@ -221,7 +221,7 @@ nginx   3/4     3            3           5m53s
 
 Una vez finalizada la prueba, vamos a desescalar el despliegue otra vez a dos copias con ```kubectl scale --replicas=2 deployment/nginx -n prueba```.
 
-Utilizando los _ResourceQuota_ podemos aplicar algunas restricciones a nuestro clúster: desde limitar el número de objetos creados por namespace hasta asignar automáticamente un _ResourceQuota_ en función de la prioridad que tengan los pods de nuestra aplicación. Podemos ver ejemplos en la [documentación oficial](bernetes.io/docs/concepts/policy/resource-quotas/#resource-quota-per-priorityclass).
+Utilizando los _ResourceQuota_ podemos aplicar algunas restricciones a nuestro clúster: desde limitar el número de objetos creados por namespace hasta asignar automáticamente un _ResourceQuota_ en función de la prioridad que tengan los pods de nuestra aplicación. Podemos ver ejemplos en la [documentación oficial](https://kubernetes.io/docs/concepts/policy/resource-quotas/#resource-quota-per-priorityclass).
 
 
 ## Ajustando recursos a la demanda
@@ -338,4 +338,4 @@ Y ya se ha terminado el sexto post sobre Kubernetes. Espero que os guste y que s
 
 * [Kubernetes HPA with Custom Metrics from Prometheus (ENG)](https://towardsdatascience.com/kubernetes-hpa-with-custom-metrics-from-prometheus-9ffc201991e)
 
-Revisado a 31-08-2020
+Revisado a 01-03-2021

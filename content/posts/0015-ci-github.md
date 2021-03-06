@@ -13,6 +13,8 @@ Github es uno de los servicios más importantes que existen en este momento en e
 
 Como ya comenté [hace tiempo](http://tangelov.me/posts/ic-gitlab.html), utilizo personalmente Gitlab como sistema de repositorios de código fuente, pero la verdad es que estaba deseando probar "su" sistema de integración continua, llamado [Travis CI](https://travis-ci.org/).
 
+> __Nota del autor__: Las políticas de uso de Travis CI han cambiado desde que escribí este post y aunque el servicio sigue funcionando, ahora recomendaría el uso de [Github Actions](https://github.com/features/actions) y sólo mantengo este post activo por su posible utilidad.  Para más información sobre las nuevas políticas de uso de Travis CI, recomiendo [el post](https://www.jeffgeerling.com/blog/2020/travis-cis-new-pricing-plan-threw-wrench-my-open-source-works) de Jeff Geerling al respecto.
+
 <!--more-->
 
 ## Primeros pasos
@@ -143,4 +145,4 @@ Y listo :D
 
 * [Introducción a la Integración continua en Gitlab (ENG)](https://about.gitlab.com/product/continuous-integration/)
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

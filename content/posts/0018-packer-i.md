@@ -11,15 +11,18 @@ draft: false
 
 Hashicorp es una de las compañías que considero que más están innovando y que más nos están facilitando la vida a los administradores de sistemas para adoptar tecnologías ágiles y nuevas formas de trabajar más orientadas a los proveedores de nube.
 
-Su compromiso con los entornos multi-cloud (privada, pública y mixta) es innegable y su suite de herramientas facilita mucho la transición entre proveedores, evitando que podamos caer en exceso en el llamado [_vendor lock-in_](https://en.wikipedia.org/wiki/Vendor_lock-in)
+Su compromiso con los entornos multi-cloud (privada, pública y mixta) es innegable y su suite de herramientas facilita mucho la transición entre proveedores, evitando que podamos caer en exceso en el llamado [_vendor lock-in_](https://en.wikipedia.org/wiki/Vendor_lock-in).
 
-Una de estas herramientas es [_Packer_](https://www.packer.io/intro/index.html)
+Una de estas herramientas es [_Packer_](https://www.packer.io/intro/index.html).
 
 ![logo-packer](https://storage.googleapis.com/tangelov-data/images/0018-00.png)
 
 <!--more-->
 
 ## Introducción
+
+> __Nota del autor__: El código de este post está indicado para versiones de Packer anteriores a la versión 1.5. Para configurar Packer en versiones posteriores, podemos consultarlo en el siguiente [post](https://tangelov.me/posts/packer-ii.html).
+
 Como bien pone en su documentación, Packer es una herramienta de código abierto que nos permite generar imágenes para diferentes proveedores utilizando una única fuente para todos ellos.
 
 Imaginemos que tenemos un entorno híbrido: parte de nuestra infraestructura está desplegada en AWS y otra parte está en un CPD propio montado sobre servidores de Openstack y VMWare. Ambas partes están conectadas a través de una VPN.
@@ -45,7 +48,7 @@ Available commands are:
     version     Prints the Packer version
 ```
 
-Una vez que tenemos instalado Packer vamos a generar una plantilla válida. Para este primer ejemplo vamos a utilizar Virtualbox y uno de los discos de _OSBoxes_, concretamente el de Ubuntu 18.04.1 y con él vamos a añadir el usuario osboxes para que no pida credenciales al hacer sudo y  vamos a generar un .OVA. Dicho proceso no voy a reproducirlo puesto que está muy extendido en Internet, pero en resumen sería [esto](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
+Una vez que tenemos instalado Packer vamos a generar una plantilla válida. Para este primer ejemplo vamos a utilizar Virtualbox y uno de los discos de _OSBoxes_, concretamente el de Ubuntu 18.04.1 y con él vamos a añadir el usuario osboxes para que no pida credenciales al hacer sudo y  vamos a generar un .OVA. Dicho proceso no voy a reproducirlo puesto que está muy extendido en Internet, pero en resumen sería [esto](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/).
 
 Tras tener un OVA válido y haber instalado Packer podemos empezar a crear plantillas de Packer. Son archivos JSON que estructurados de una determinada manera nos permiten gestionar todo el proceso de configuración y despliegue en la nube. Nosotros en este tutorial vamos a usar los siguientes:
 
@@ -312,7 +315,7 @@ Para evitar costes no previstos si estamos utilizando los tier gratuitos debemos
 
 * [¿Qué es Packer? (ENG)](https://www.packer.io/intro/index.html)
 
-* [Configuración de Azure en Packer (ENG)](https://www.packer.io/docs/builders/azure-setup.html)
+* [Configuración de Azure en Packer](https://www.packer.io/docs/builders/azure.html)
 
 * [Configuración de GCP en Packer (ENG)](https://www.packer.io/docs/builders/googlecompute.html)
 
@@ -320,4 +323,4 @@ Para evitar costes no previstos si estamos utilizando los tier gratuitos debemos
 
 * [Página principal de OSBoxes (ENG)](https://www.osboxes.org/)
 
-Revisado a 01/02/2020
+Revisado a 01/03/2021

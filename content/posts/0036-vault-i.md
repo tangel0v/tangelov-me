@@ -192,7 +192,7 @@ Initialized            true
 Sealed                 false
 Total Shares           1
 Threshold              1
-Version                1.5.4
+Version                1.6.2
 Cluster Name           vault-cluster-xxxxxxxx
 Cluster ID             xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 HA Enabled             true
@@ -254,4 +254,4 @@ Y hasta aquí va a llegar el post de hoy. En siguientes posts, trataremos la ges
 
 * [Arquitectura a bajo nivel de Hashicorp Vault (ENG)](https://www.vaultproject.io/docs/internals/architecture)
 
-Revisado a 14-10-2020
+Revisado a 01-03-2021
