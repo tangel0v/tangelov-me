@@ -273,4 +273,4 @@ Y nada, espero que os haya gustado y os espero en el próximo posts. ¡Muchas gr
 
 * El nuevo código de la web está disponible [aquí](https://gitlab.com/tangelov/go-tangelov.me).
 
-Revisado a 02-11-2020
+Revisado a 03-01-2021

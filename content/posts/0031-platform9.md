@@ -27,6 +27,8 @@ Pero... ¿Y si no queremos utilizar nube pública? ¿No existe alguna alternativ
 
 Platform 9 es una compañía californiana, fundada en 2013, que nos ofrece exactamente eso: convertir cualquier potencia de computación que tengamos en un servicio de nube gestionado por ellos. Es un sistema relativamente flexible, pudiendo sus herramientas sobre máquinas físicas o virtuales, desplegadas tanto en nuestros CPDs (VMWare, KVM, Virtualbox, etc) como en la nube (Amazon Web Services o Microsoft Azure). De esta forma, nuestros servidores se convierten en un SaaS al que accederemos a través de una consola web.
 
+> El servicio de Platform9 fue analizado a finales de Mayo de 2020, es posible que el servicio haya cambiado y no se corresponda con la actualidad.
+
 A día de hoy ofrecen dos servicios principales:
 
 * __PMO__ o _Platform9 Managed OpenStack_ que es Openstack gestionado por ellos.
@@ -337,11 +339,11 @@ Y nada... este ha sido todo el análisis, espero que a alguien le sea de utilida
 
 * [Preparación de nodos para añadir a un clúster de PMK a través de la CLI (ENG)](https://docs.platform9.com/kubernetes/PMK-CLI/prep-node/)
 
-* [Añadiendo nodos a un clúster de PMK a través de la CLI (ENG)](https://docs.platform9.com/kubernetes/PMK-CLI/cluster/attach-node/)
+* [Añadiendo nodos a un clúster de PMK a través de la CLI (ENG)](https://docs.platform9.com/v4.1/kubernetes/pmk-cli-cluster-attach-node)
 
 * [Helm de Bitnami para instalar Ghost en Helm Hub (ENG)](https://hub.helm.sh/charts/bitnami/ghost)
 
 * [Comparación entre las diferentes versiones de Platform9 (ENG)](https://platform9.com/pricing/comparison/)
 
 
-Revisado a 30-05-2020
+Revisado a 01-03-2021

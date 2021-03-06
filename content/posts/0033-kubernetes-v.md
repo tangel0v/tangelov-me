@@ -104,9 +104,9 @@ Con los tres puntos anteriores como base, las Network Policies de Calico permite
 
 
 ### Instalando Calico en Kubernetes
-Para poder utilizar Calico, primero debemos tener un clúster de Kubernetes que lo soporte. En anteriores tutoriales hemos utilizado Microk8s, pero he tenido problemas a la hora de instalar y voy a recomendar que generemos un nuevo clúster con Minikube.
+Para poder utilizar Calico, primero debemos tener un clúster de Kubernetes que lo soporte. Microk8s actualmente lo soporta de caja, pero vamos a utilizar Minikube debido a su capacidad de personalización.
 
-Nos descargamos el binario de Github, le damos permisos de ejecución y ejecutamos el siguiente comando:
+Para crear un clúster con Minikube nos descargamos el binario de Github, le damos permisos de ejecución y ejecutamos el siguiente comando:
 
 ```
 # Descargamos Minikube de Github
@@ -235,7 +235,7 @@ Por todo ello, vamos a descargar _calicoctl_, darle permisos y conectarlo a nues
 
 ```bash
 # Descargamos la CLI con curl
-curl -O -L  https://github.com/projectcalico/calicoctl/releases/download/v3.15.1/calicoctl
+curl -O -L  https://github.com/projectcalico/calicoctl/releases/download/v3.16.9/calicoctl
 
 # Lo hacemos ejecutable
 chmod +x calicoctl
@@ -436,7 +436,7 @@ La potencia de Calico está fuera de duda, pero he tenido que realizar muchas pr
 
 * Me he encontrado con un funcionamiento la mar de extraño al ir añadiendo reglas de tipo _Allow_: a veces afectan a otros objetos que no deberían y bloquean el tráfico a dichos objetos (WTF!). Por ejemplo, tras aplicar las políticas _default-deny-traffic_ y _allow-traffic-front-back_ todo funcionaba como se había diseñado, pero si después aplicabamos alguna otra de las descritas en este post, el tráfico entre los namespaces de front y back dejaba de funcionar. No se que causaba la incidencia, pero no he encontrado mucha información al respecto y entiendo que debe de ser alguna metida de pata mía o algún problema relacionado con mi instalación. Si algún lector tiene ve el fallo, me encantaría que me escribiera para corregir este post :P.
 
-> MEe ha pasado tanto en Minikube como en Google Kubernetes Engine y que me tiene desconcertado.
+> Me ha pasado tanto en Minikube como en Google Kubernetes Engine y que me tiene desconcertado.
 
 Muchas gracias por leerme y espero que os haya gustado.
 
@@ -451,7 +451,7 @@ Muchas gracias por leerme y espero que os haya gustado.
 
 * [Definición de Network Policies en Kubernetes (ENG)](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
-* [Cómo instalar Minikube en nuestro ordenador (ENG)](https://kubernetes.io/es/docs/tasks/tools/install-minikube/)
+* [Cómo instalar Minikube en nuestro ordenador (ENG)](https://minikube.sigs.k8s.io/docs/start/)
 
 * [Cómo instalar un cluster multinodo con Minikube (ENG)](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/)
 
@@ -470,4 +470,4 @@ Muchas gracias por leerme y espero que os haya gustado.
 * [Calico for Kubernetes networking: the basics & examples by Flant (ENG)](https://medium.com/flant-com/calico-for-kubernetes-networking-792b41e19d69)
 
 
-Revisado a 15-07-2020
+Revisado a 01-03-2021

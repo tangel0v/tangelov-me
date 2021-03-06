@@ -300,7 +300,7 @@ nginx_group: "www-data"
 tools_folder: "{{ ansible_user_dir }}/tools"
 wordpress_web_directory: "/var/www/html"
 
-wordpress_version: "5.5.3"
+wordpress_version: "5.5.4"
 wpcli_version: "2.4.0"
 
 wordpress_mysql_database: wordpressdb
@@ -424,4 +424,4 @@ Espero que os guste y ¡nos vemos en el siguiente episodio!
 
 * [Módulo de Terraform de creación de instancias de Amazon RDS (ENG)](https://github.com/terraform-aws-modules/terraform-aws-rds)
 
-Revisado a 13-01-2021
+Revisado a 01-03-2021
