@@ -97,7 +97,7 @@ La infraestructura a groso modo sería ahora mismo así (en líneas discontinuas
 
 Si alguno desea implementar un sistema igual, todo ello está codificado y puede ser consultado [aquí](https://gitlab.com/tangelov/tangelov-infra).
 
-> Este post fue escrito utilizando Terraform 0.11 y actualmente la herramienta ha seguido evolucionando por lo que puede haber algunos cambios en la sintaxis del código almacenado en el repositorio.
+> __Nota del autor__: Este post fue escrito utilizando Terraform 0.11 y actualmente la herramienta ha seguido evolucionando por lo que puede haber algunos cambios en la sintaxis del código almacenado en el repositorio.
 
 ## Documentación
 

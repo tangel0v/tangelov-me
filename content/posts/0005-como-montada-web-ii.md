@@ -16,12 +16,12 @@ En el primer post explicamos las tecnologías utilizadas para desarrollar y hosp
 ## Configuración en conf.py
 La documentación de Nikola es muy buena y puede consultarse [aquí](https://getnikola.com/conf.html). Trata prácticamente todo lo configurable en la aplicación, por lo que me voy a centrar sólo en los cambios necesarios (no en el título, o en como cambiar de tema) para que lo generado funcione en la nube de Google.
 
-> __Nota del autor__: Este artículo representa un estado anterior de esta web puesto que a lo largo del 2020 se ha migrado el gestor de contenido de Nikola a Hugo. Escribí sobre el proceso de migración y el uso de Hugo en [el siguiente post](https://tangelov.me/posts/tangelov-en-hugo.html), aunque aquí explico ciertas limitaciones que tiene Google App Engine y que siguen siendo importantes a la hora de usarlo.
+> __Nota del autor__: Este artículo no representa el estado actual de la web puesto que se ha migrado a Hugo a lo largo del 2020. Para saber más sobre el proceso de migración, puede acceder al [siguiente post](https://tangelov.me/posts/tangelov-en-hugo.html).
 
 Google App Engine no soporta por defecto _Pretty URLs_ por lo que debemos deshabilitalas en Nikola.
 ![Pretty URLS](https://storage.googleapis.com/tangelov-data/images/0005-00.png)
 
-_Pretty URLs_ son las configuraciones que nos permiten que cuando accedemos a una página web, no tengamos que poner siempre .html al final de cada fichero. Se entiende mucho mejor con un ejemplo: si anteriormente para acceder al post anterior, lo hacíamos a través de la URL _https://tangelov.me/como-montada-web-i/_ ahora lo haremos a través de _https://tangelov.me/como-montada-web-i/index.html_
+_Pretty URLs_ son las configuraciones que nos permiten que cuando accedemos a una página web, no tengamos que poner siempre .html al final de cada fichero. Se entiende mucho mejor con un ejemplo: si anteriormente para acceder al post anterior, lo hacíamos a través de la URL https://tangelov.me/como-montada-web-i/ ahora lo haremos a través de https://tangelov.me/como-montada-web-i/index.html .
 
 Este cambio habrá roto algunas de las configuraciones que deberemos cambiar. Todas las referencias internas que no apuntasen al .html directamente fallarían y de caja es lo que pasará con algunas de las URLs de la estructura del tema (archivo, categorías, etc). Procedemos a cambiarlas para que apunten a sus HTMLs.
 ![Rutas internas](https://storage.googleapis.com/tangelov-data/images/0005-01.png)

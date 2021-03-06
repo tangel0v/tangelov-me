@@ -20,7 +20,7 @@ Por ejemplo, nuestro Jenkins podría comprobar si el rendimiento de nuestra apli
 ## Instalación y configuración
 Ya existen tutoriales muy buenos sobre cómo instalar Jenkins en nuestro PC. En mi caso he decidido utilizar simplemente un contenedor Docker para ganar agilidad y levantarlo sólo cuando lo necesite.
 
-> En la primera versión de este post, se utilizaba Python 2 y se utilizaba una imagen de Docker oficial pero ahora vamos a generar una derivada para que el uso de Python 3 sea el predeterminado
+> __Nota del autor__: En la primera versión de este post, se utilizaba Python 2 y se utilizaba una imagen de Docker oficial pero ahora vamos a generar una derivada para que el uso de Python 3 sea el predeterminado.
 
 Primero creamos un Dockerfile con el siguiente contenido para crear una imagen Docker de Jenkins con Python 3.
 

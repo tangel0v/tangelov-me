@@ -227,7 +227,7 @@ Aquí podremos ver el proceso entero utilizando _molecule test_ (el gif dura cin
 
 El gif muestra como se realiza la creación de las instancias, el despliegue del entorno de pruebas y nuestro rol en él y finalmente si éste es idempotente y si el test automático de Molecule ha pasado o no.
 
-> Un error que he cometido en el pasado es introducir la configuración de los pasos previos dentro del fichero _playbook.yml_ en lugar de _prepare.yml_ y esto causaba problemas de idempotencia al ejecutar los tests de molecule. 
+> En el pasado introduje un error al crear el fichero _playbook.yml_ en lugar de _prepare.yml_. Esto causaba problemas de idempotencia en los tests de molecule pero ya está solucionado.
 
 Con esto, terminamos el post. En el siguiente añadiremos algo más de complejidad a los tests y explicaremos más en profundidad los pasos que realiza molecule.
 

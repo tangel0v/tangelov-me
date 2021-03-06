@@ -17,7 +17,7 @@ Cuando empecé a plantearme esta web hace un año aproximadamente la ví como un
 
 * Internet está llena de documentación anticuada. Me comprometía a ir revisando periódicamente el contenido para evitar lo que me ha pasado a mi en numerosas ocasiones... que al buscar documentación ésta ya no funcionara debido a que el producto ya había cambiado tanto que no era compatible (en Ansible es bastante sangrante).
 
-> Desde finales del 2020 [no utilizo Nikola](https://tangelov.me/posts/tangelov-en-hugo.html), por lo que el contenido de este post es meramente informativo.
+> __Nota del autor__: Desde finales del 2020 [no utilizo Nikola](https://tangelov.me/posts/tangelov-en-hugo.html), por lo que el contenido de este post es meramente informativo.
 
 <!--more-->
 
