@@ -8,6 +8,7 @@ hugo_stats.json
 
 # Testing temporal folders to avoid
 /tests/__pycache__/
+/venv
 
 # Executable may be added to repository
 hugo.exe
