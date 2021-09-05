@@ -13,7 +13,7 @@ En este blog he decidido plasmar algunas de las cosas que hago y que investigo e
 
 Mi especialidad actualmente es la arquitectura de sistemas en nubes públicas (Azure, AWS y Google Cloud), así cómo sistemas híbridos Windows/Linux. También poseo las siguientes certificaciones:
 
-* AWS Certified Solutions Architect - Associate
+* AWS Certified Solutions Architect - Professional
 
 * Google Cloud Certified Professional Cloud Architect
 
