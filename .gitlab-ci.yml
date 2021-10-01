@@ -6,17 +6,33 @@ stages:
   - test
   - deploy
 
+develop-build:
+  image: docker:latest
+  stage: build
+  before_script:
+    - docker run --rm -v $PWD:/src klakegg/hugo:$HUGO_VERSION
+  script:
+    - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
+    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --no-promote --quiet --project=$DEV_PROJECT_ID
+  environment:
+    name: development
+  rules:
+    - if: '$CI_COMMIT_BRANCH != "master" && $CI_PIPELINE_SOURCE != "merge_request_event"'
+
 staging-build:
   image: docker:latest
   stage: build
   before_script:
-    - docker run --rm -v $PWD:/src klakegg/hugo:0.86.1-debian
+    - docker run --rm -v $PWD:/src klakegg/hugo:$HUGO_VERSION
   script:
-     - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
-     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=$TMP_ROUTE --no-promote --quiet --project=$PROJECT_ID
-     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud pubsub topics publish $PUBSUB_TOPIC --message="Deploying new version in ${TMP_ROUTE}-dot-${PROJECT_ID}.appspot.com" --project=$PROJECT_ID
-  except:
-    - master
+    - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
+    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=$TMP_ROUTE --no-promote --quiet --project=$PROJECT_ID
+    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud pubsub topics publish $PUBSUB_TOPIC --message="Deploying new version in ${TMP_ROUTE}-dot-${PROJECT_ID}.appspot.com" --project=$PROJECT_ID
+  environment:
+    name: staging
+    url: "https://${TMP_ROUTE}-dot-${PROJECT_ID}.appspot.com"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 staging-test:
   image: python:3.7-alpine
@@ -25,30 +41,36 @@ staging-test:
     - pip3 install -r requirements-test.txt
     - pytest tests/basic_tests.py
     - pytest tests/content_tests.py
-  except:
-    - master
+  environment:
+    name: staging
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 docker-deploy:
   image: docker:latest
   stage: deploy
   before_script:
-    - docker run --rm -v $PWD:/src klakegg/hugo:0.86.1-debian
+    - docker run --rm -v $PWD:/src klakegg/hugo:$HUGO_VERSION
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build -t $CI_REGISTRY/tangelov/go-tangelov-me:latest .
     - docker push $CI_REGISTRY/tangelov/go-tangelov-me:latest
-  only:
-    - master
+  environment:
+    name: production
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
 production-deploy:
   image: docker:latest
   stage: deploy
   before_script:
-    - docker run --rm -v $PWD:/src klakegg/hugo:0.86.1-debian
+    - docker run --rm -v $PWD:/src klakegg/hugo:$HUGO_VERSION
   script:
     - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app versions delete $TMP_ROUTE --quiet --project=$PROJECT_ID
     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --no-promote --quiet --project=$PROJECT_ID
     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud pubsub topics publish $PUBSUB_TOPIC --message="Deploying new version in Production - https://tangelov.me" --project=$PROJECT_ID
-  only:
-    - master
+  environment:
+    name: production
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
