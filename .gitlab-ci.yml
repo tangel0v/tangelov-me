@@ -17,7 +17,7 @@ develop-build:
   environment:
     name: development
   rules:
-    - if: '$CI_COMMIT_BRANCH != "master"'
+    - if: '$CI_COMMIT_BRANCH != "master" && $CI_PIPELINE_SOURCE != "merge_request_event"'
 
 staging-build:
   image: docker:latest
