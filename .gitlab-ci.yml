@@ -11,9 +11,10 @@ develop-build:
   stage: build
   before_script:
     - docker run --rm -v $PWD:/src klakegg/hugo:$HUGO_VERSION
+    - ls -l .
   script:
-    - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
-    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --quiet --project=$DEV_PROJECT_ID
+    - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:slim gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
+    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:slim gcloud app deploy /root --version=master --quiet --project=$DEV_PROJECT_ID
   environment:
     name: development
   cache:
