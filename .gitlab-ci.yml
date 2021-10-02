@@ -16,6 +16,10 @@ develop-build:
     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --quiet --project=$DEV_PROJECT_ID
   environment:
     name: development
+  cache:
+    key: appengine
+    paths:
+      - $PWD/.config/gcloud/logs
   rules:
     - if: '$CI_COMMIT_BRANCH != "master" && $CI_PIPELINE_SOURCE != "merge_request_event"'
 
