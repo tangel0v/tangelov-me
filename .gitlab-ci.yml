@@ -14,7 +14,7 @@ develop-build:
     - ls -l .
   script:
     - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
-    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --quiet --project=$DEV_PROJECT_ID
+    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --verbosity=debug --quiet --project=$DEV_PROJECT_ID
   environment:
     name: development
   rules:
