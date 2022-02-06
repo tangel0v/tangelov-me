@@ -123,4 +123,6 @@ Un saludo y hasta la próxima.
 
 * [Don’t start with microservices in production – monoliths are your friend (ENG)](https://arnoldgalovics.com/microservices-in-production/) and [The Truth About Starting With Microservices (ENG)](https://arnoldgalovics.com/truth-about-microservices/)
 
+* [How WhatsApp scaled to 1 billion users with only 50 engineers (ENG)](https://www.quastor.org/p/how-whatsapp-scaled-to-1-billion)
+
 Revisado a 05/02/2022
