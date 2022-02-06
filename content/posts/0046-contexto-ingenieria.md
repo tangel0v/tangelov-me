@@ -74,7 +74,7 @@ En empresas más tradicionales, estos ciclos son relativamente largos (con más 
 
 En empresas más _techies_ vemos más variabilidad y adaptabilidad. Sus desarrollos pueden ser productos totalmente a medida y son reemplazados con mayor frecuencia. Por ejemplo, algunos de los servicios ofertados por GCP o AWS, nacieron como productos internos que solucionaban problemas específicos (BigQuery, Hadoop o S3 son buenos ejemplos).
 
-Ante una aplicación antigua, que presenta problemas, recomiendan [su reescritura]((https://timeular.com/blog/rewriting-an-existing-web-service-in-rust/) usando nuevos patrones y tecnologías. Esto mejora su eficacia y evita que tengamos que mantener software obsoleto.
+Ante una aplicación antigua, que presenta problemas, recomiendan [su reescritura](https://timeular.com/blog/rewriting-an-existing-web-service-in-rust/) usando nuevos patrones y tecnologías. Esto mejora su eficacia y evita que tengamos que mantener software obsoleto.
 
 Me parece una metodología de trabajo muy positiva que aprovecha la experiencia y el conocimiento acumulado por la comunidad para innovar. Además, existen lenguajes que son mucho más eficientes que otros para ciertos casos de uso. Discord utiliza Erlang, Rust o Go (entre otros) según las necesidades del servicio. Recomiendo que le echéis un ojo a sus post sobre _Engineering_ porque son increíbles.
 
