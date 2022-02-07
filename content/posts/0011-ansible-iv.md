@@ -68,14 +68,14 @@ Una vez ya hemos completado nuestras plantillas vamos a añadir su despliegue al
 # tasks file for backupninja
 
 - name: Install backupninja packages
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
-  with_items:
+  loop:
     - backupninja
 
 - name: Deploy TAR template
-  template:
+  ansible.builtin.template:
     src: tar.j2
     dest: "/etc/backup.d/10.tar"
     mode: '0600'
@@ -83,7 +83,7 @@ Una vez ya hemos completado nuestras plantillas vamos a añadir su despliegue al
     group: root
 
 - name: Backup MySQL
-  template:
+  ansible.builtin.template:
     src: mysql.j2
     dest: "/etc/backup.d/20.mysql"
     mode: '0600'
@@ -91,13 +91,13 @@ Una vez ya hemos completado nuestras plantillas vamos a añadir su despliegue al
     group: root
 
 - name: Prepare variables for last tar template
-  set_fact:
+  ansible.builtin.set_fact:
     ninja_backupname: "{{ ninja_backupname_def }}"
     ninja_includes: "{{ ninja_backupdir }}"
     ninja_backupdir: "{{ ninja_backupdir_def }}"
 
 - name: Deploy full TAR template
-  template:
+  ansible.builtin.template:
     src: tar.j2
     dest: "/etc/backup.d/30.tar"
     mode: '0600'
@@ -206,7 +206,7 @@ Debemos añadir una una tarea al rol que permita a los usuarios de las distribuc
 ```yaml
 # tasks file for backupninja
 - name: Install EPEL repository if needed
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: EPEL YUM repo
     baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
     enabled: yes
@@ -225,12 +225,12 @@ Muchas gracias.
 
 ## Documentación
 
-* [Estructura de un rol (ENG)](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html)
+* [Estructura de un rol (ENG)](https://docs.ansible.com/ansible/5/user_guide/playbooks_reuse_roles.html)
 
-* [Gitlab de Backupninja (ENG)](https://0xacab.org/riseuplabs/backupninja)
+* [Gitlab de Backupninja (ENG)](https://0xacab.org/liberate/backupninja)
 
-* [Plantillas en Jinja2 (ENG)](https://jinja.palletsprojects.com/en/2.11.x/templates/)
+* [Plantillas en Jinja2 (ENG)](https://jinja.palletsprojects.com/en/3.0.x/templates/)
 
-* [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
+* [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/5/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022
