@@ -42,12 +42,12 @@ Mis recomendaciones para el examen son las siguientes:
 
 ## Documentación
 
-* [Qwiklabs (ENG)](https://qwiklabs.com/home?locale=en) : Proporciona laboratorios que permiten ganar experiencia extra respecto a nuestra experiencia profesional. Los proporciona una empresa que fue comprada con Google y tienen algún "curso" dedicado explícitamente a preparar el examen. Es algo caro, pero tienen una suscripción mensual que nos permite hacer todos los talleres que queramos por 55 dólares.
+* [Qwiklabs (ENG)](https://qwiklabs.com/) : Proporciona laboratorios que permiten ganar experiencia extra respecto a nuestra experiencia profesional. Los proporciona una empresa que fue comprada con Google y tienen algún "curso" dedicado explícitamente a preparar el examen. Es algo caro, pero tienen una suscripción mensual que nos permite hacer todos los talleres que queramos por 29 dólares.
 
 * [Coursera (ENG)](https://www.coursera.org/) : Curso online que nos puede aportar la base necesaria para preparar el examen. Sirve para conocer con un nivel intermedio los productos y servicios de GCP pero bajo mi punto de vista se queda un poco corto con el conocimiento que se exige en la prueba
 
-* [Linux Academy (ENG)](https://linuxacademy.com/): Similar al anterior, pero con un análisis muy bueno de los casos de uso y un examen que me han parecido muy buenos.
+* [Linux Academy (ENG)](https://linuxacademy.com/): Similar al anterior, pero con un análisis muy bueno de los casos de uso y un examen que me han parecido muy buenos. Actualmente forma parte de A Cloud Guru, pero los cursos siguen estando disponibles.
 
 * [GCP FAQs (ENG)](https://cloud.google.com/certification/faqs/#0): Lista de FAQs de GCP
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022

@@ -13,7 +13,9 @@ En el post [anterior](https://tangelov.me/posts/ansible-iv.html) sobre Ansible y
 
 Imaginemos que realizamos cambios en nuestro rol y queremos probarlos a medida que seguimos desarrollándolo y que en una de las pruebas omitimos sin querer algun test y al aplicarno en nuestros servidores rompemos algo. Todo el desarrollo realizado anteriormente podría provocar pérdidas de datos o de servicio debido a un error humano.
 
-¿Cómo podemos evitarlo? Podemos añadir a nuestro rol, [molecule](https://molecule.readthedocs.io/en/latest/)
+¿Cómo podemos evitarlo? Podemos añadir a nuestro rol, [Molecule](https://molecule.readthedocs.io/en/latest/).
+
+> __Nota del autor__: Molecule ha sido completamente reescrito en los últimos tiempos y el contenido de este post no es válido en las últimas versiones de la herramienta. Por lo tanto, este artículo queda con carácter consultivo y quien desee ver información actualizada, puede hacerlo en [éste otro](https://tangelov.me/posts/ansible-vi.html).
 
 <!--more-->
 
@@ -244,4 +246,4 @@ Un saludo y espero que os haya resultado interesante.
 
 * [Documentación oficial de Testinfra (ENG)](https://testinfra.readthedocs.io/en/latest/)
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022
