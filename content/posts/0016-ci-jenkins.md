@@ -22,7 +22,7 @@ Ya existen tutoriales muy buenos sobre cómo instalar Jenkins en nuestro PC. En 
 
 > __Nota del autor__: En la primera versión de este post, se utilizaba Python 2 y se utilizaba una imagen de Docker oficial pero ahora vamos a generar una derivada para que el uso de Python 3 sea el predeterminado.
 
-Primero creamos un Dockerfile con el siguiente contenido para crear una imagen Docker de Jenkins con Python 3.
+Primero creamos un Dockerfile con el siguiente contenido para crear una imagen personalizada de Jenkins con Python 3.
 
 ```Dockerfile
 FROM jenkins/jenkins:lts
@@ -36,11 +36,11 @@ RUN apt-get update &&  \
 USER jenkins
 ```
 
-Ahora debemos construir la imagen con el comando ```docker build -t jenkins/jenkins:lts .```
+Ahora debemos construir la imagen con el comando ```docker build -t jenkins/jenkins:lts .``` o ```podman build -t jenkins/jenkins:lts .```, dependiendo del sistema que utilicemos para ejecutar contenedores.
 
-Una vez ya hemos construido nuestra imagen Docker, sólo necesitamos ejecutar este comando para tener un Jenkins totalmente funcional, independientemente del sistema operativo o de la distribución Linux que usemos:
+Una vez ya hemos construido nuestra imagen, sólo necesitamos ejecutar este comando para tener un Jenkins totalmente funcional, independientemente del sistema operativo o de la distribución Linux que usemos:
 
-```docker run -d -v jenkins_home:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts```
+```podman run -d -v jenkins_home:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts```
 
 
 Vamos a explicarlo un poco:
@@ -49,7 +49,7 @@ Vamos a explicarlo un poco:
 
 * Creamos un volumen llamado _jenkins_home_ que mapee _/var/jenkins_home/_ en el contenedor para que no perdamos los datos en el caso de actualizaciones o mantenimiento.
 
-* Mapeamos a nuestro host dos puertos: 8080, el puerto desde el que nos conectaremos a Jenkins a través de nuestro navegador y 50000, el puerto con el que Jenkins se conectará a ejecutores externos mediante el protocolo [JNLP](https://es.wikipedia.org/wiki/Java_Network_Launching_Protocol)
+* Mapeamos a nuestro host dos puertos: 8080, el puerto desde el que nos conectaremos a Jenkins a través de nuestro navegador y 50000, el puerto con el que Jenkins se conectará a ejecutores externos mediante el protocolo [JNLP](https://es.wikipedia.org/wiki/Java_Network_Launching_Protocol).
 
 Si necesitamos más información acerca de cómo configurar nuestros contenedores, la documentación de Jenkins al respecto es decente y puede consultarse [aquí](https://github.com/jenkinsci/docker/blob/master/README.md).
 
@@ -69,16 +69,16 @@ Como en otras pruebas de CI, vamos a utilizar como ejemplo el proceso de creaci�
 
 * Publicación del código final en Google Cloud
 
-En primer lugar vamos a crear una nueva credencial de Jenkins para que pueda acceder al contenido de Git a través de la API. Se hace en _Jenkins/Credentials/System/Add Credentials_
+En primer lugar vamos a crear una nueva credencial de Jenkins para que pueda acceder al contenido de Git a través de la API. Se hace en _Manage Jenkins/Manage Credentials/Stored Scopes to Jenkins/Global Credentials/Add Credentials_
 
 ![credencial-gitlab](https://storage.googleapis.com/tangelov-data/images/0016-02.png)
 
-Después configuramos la conexión contra Gitlab en _Configurar el Sistema_:
+Después configuramos la conexión contra Gitlab en _Manage Jenkins/Configure System_:
 
 ![jenkins-gitlab](https://storage.googleapis.com/tangelov-data/images/0016-03.png) 
 
 
-Ahora vamos a crear una nueva tarea y vamos hacer click en _Crear un proyecto de estilo libre_ y hacemos click en OK.
+Ahora vamos a crear una nueva tarea y vamos hacer click en _New Item/Freestyle project_ y hacemos click en OK.
 
 ![creacion-job](https://storage.googleapis.com/tangelov-data/images/0016-01.png)
 
@@ -86,11 +86,11 @@ En la pestaña de _General_ seleccionamos la conexión de Gitlab que acabamos de
 
 ![nikola-job](https://storage.googleapis.com/tangelov-data/images/0016-04.png)
 
-Y en la pestaña de configurar el código fuente, seleccionamos la rama que queremos utilizar y la forma de conectarnos. Si usamos SSH tendremos que añadir una nueva credencial con nuestra llave.
+Y en la pestaña de _Source code management_, seleccionamos la rama que queremos utilizar y la forma de conectarnos. Si usamos SSH tendremos que añadir una nueva credencial con nuestra llave.
 
 ![gitlab-credentials](https://storage.googleapis.com/tangelov-data/images/0016-05.png)
 
-Y finalmente en ejecutar añadimos el tipo de paso _Ejecutar linea de comandos (shell)_ con el siguiente contenido:
+Y finalmente en _Build_ añadimos el tipo de paso _Execute shell_ con el siguiente contenido:
 
 ![nikola-execution](https://storage.googleapis.com/tangelov-data/images/0016-06.png)
 
@@ -130,10 +130,10 @@ pipeline {
     stages {
         stage('Install prerrequisites') {
             steps {
-                sh 'mkdir tools & wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-329.0.0-linux-x86_64.tar.gz -O tools/gcloud.tar.gz'
+                sh 'mkdir tools & curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-371.0.0-linux-x86_64.tar.gz --output tools/gcloud.tar.gz'
                 sh 'tar xvf tools/gcloud.tar.gz -C tools/'
                 
-                sh 'pip3 install "nikola[extras]"==8.1.1 --user'
+                sh 'pip3 install "nikola[extras]"==8.2.0 --user'
             }
         }
         
@@ -186,4 +186,4 @@ Este código replica lo que hemos realiado en el anterior job, pero a través de
 * [La integración continua pasa por pipelines](https://sdos.es/integracion-continua-pasa-por-pipelines/)
 
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022
