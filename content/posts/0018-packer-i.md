@@ -323,4 +323,4 @@ Para evitar costes no previstos si estamos utilizando los tier gratuitos debemos
 
 * [Página principal de OSBoxes (ENG)](https://www.osboxes.org/)
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022
