@@ -29,7 +29,7 @@ Tras un par de pruebas satisfactorias con máquinas virtuales, me puse a investi
 
 Ya había descartado el uso de placas ATX debido a su _alto_ consumo energético y me había empezado a interesar por las placas de desarrollo, especialmente por las Raspberry Pi. Aunque me gustaba su precio, no me convencían algunos de los puntos de dichas placas: su velocidad de red era baja y compartían el bus con los USBs, por lo que si enchufaba un disco duro (ya tenía dos que había sacado de portátiles rotos) sería un gran cuello de botella.
 
-Así que decidí esperar hasta que saliera algo acorde a mis necesidades y pocos meses después llegó una placa hecha casi a medida: la Banana Pi M1. Con más potencia de procesamiento, un puerto Gigabit Ethernet y un SATA2 al que enchufarle un disco duro, era todo lo que necesitaba. Sus especificaciones completas están [aquí](http://www.banana-pi.org/m1.html).
+Así que decidí esperar hasta que saliera algo acorde a mis necesidades y pocos meses después llegó una placa hecha casi a medida: la Banana Pi M1. Con más potencia de procesamiento, un puerto Gigabit Ethernet y un SATA2 al que enchufarle un disco duro, era todo lo que necesitaba. Sus especificaciones completas están [aquí](https://wiki.banana-pi.org/Banana_Pi_BPI-M1).
 
 
 ## Servicios
@@ -85,4 +85,4 @@ Y nada, recomiendo a todo el mundo que le guste el cacharreo que se monte uno, l
 
 * [Instalación de Rclone (ENG)](https://rclone.org/downloads/)
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022

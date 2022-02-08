@@ -71,4 +71,4 @@ Me gustaría centrarme en tres cosas principalmente para este año:
 * [Actualización de Nikola v7 a v8 (ENG)](https://getnikola.com/blog/upgrading-to-nikola-v8.html).
 
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022
