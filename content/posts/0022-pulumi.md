@@ -316,16 +316,14 @@ Y eso es todo por hoy. Me he retrasado un poco con este post por motivos persona
 
 * [Hashicorp Configuration Language (ENG)](https://github.com/hashicorp/hcl)
 
-* [Página oficial de Pulumi (ENG)](https://pulumi.io/)
+* [Página oficial de Pulumi (ENG)](https://www.pulumi.com/docs/index.html)
 
-* [Conceptos básicos de Pulumi (ENG)](https://pulumi.io/reference/concepts.html)
+* [Conceptos básicos de Pulumi (ENG)](https://www.pulumi.com/docs/intro/concepts/)
 
-* [Modelo de programación en Pulumi (ENG)](https://pulumi.io/reference/programming-model.html)
+* [Configuración de Python en Pulumi (ENG)](https://www.pulumi.com/docs/intro/languages/python/)
 
-* [Configuración de Python en Pulumi (ENG)](https://pulumi.io/reference/python.html)
-
-* [API Reference de Python3 en Pulumi para Azure (ENG)](https://pulumi.io/reference/pkg/python/pulumi_azure/index.html)
+* [API Reference de Python3 en Pulumi para Azure (ENG)](https://www.pulumi.com/registry/packages/azure-native/api-docs/)
 
 * [Pulumi as Infraestructure as Code software (ENG)](https://medium.com/hara-engineering/pulumi-as-infrastructure-as-code-software-720d62987e9f).
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022

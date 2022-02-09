@@ -50,7 +50,7 @@ Con esto, ya podemos empezar a desplegar infraestructura. En este ejemplo, vamos
 
 ```terraform
 resource "aws_instance" "ec2_example" {
-  ami           = "ami-0fad7378adf284ce0"
+  ami           = "ami-0bf84c42e04519c85"
   instance_type = "t2.micro"
 
   key_name = "tangelov"
@@ -111,4 +111,4 @@ Si alguno desea implementar un sistema igual, todo ello está codificado y puede
 
 * [Repositorio del código de la infraestructura de tangelov.me](https://gitlab.com/tangelov/tangelov-infra)
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022
