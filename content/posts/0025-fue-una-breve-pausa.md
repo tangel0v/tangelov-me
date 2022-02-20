@@ -45,6 +45,8 @@ Mi metodología de trabajo para prepararme ambos exámenes no ha variado demasia
 
 * También podemos utilizar Qwiklabs y las FAQs de la certificación.
 
+> __Nota del autor__: Esta certficicaciones han sido actualizada a una nueva versión donde se preguntan añadidos respecto a los nuevos servicios que ha añadido Google en estos últimos dos años por lo que el estudio de la información aquí añadida debe ampliarse con las guías oficiales del exámen.
+
 
 ## Distracciones personales
 El tiempo dedicado al estudio me consumió todo el verano junto a Septiembre y a mediados de Octubre, pero cuando iba a retomar el blog apareció un segundo contratiempo: he tenido una _tremenda sobrecarga de trabajo_ que ha hecho que cuando llegara a casa decidiera desconectar más que escribir. También petó mi instalación de Linux en el PC y tuve que dedicarme a replataformarlo. Aunque no me llevó mucho tiempo y no perdí datos, si me dio pereza y estuve 10-12 días sin poder hacer nada con él.
@@ -74,4 +76,4 @@ Así que nada, a partir de ahora (más liberado) volvemos a la rutina y espero p
 
 * [GCP FAQs (ENG)](https://cloud.google.com/certification/faqs/#0): Lista de FAQs de GCP
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022
