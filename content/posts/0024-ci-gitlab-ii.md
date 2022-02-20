@@ -125,13 +125,15 @@ Tras integrar la subida de imágenes en nuestro flujo de trabajo, vamos a mejora
 #### Preparación del entorno
 Lo primero que tenemos que hacer es crear una cuenta de servicio dentro de GCP que podamos usar desde Gitlab. Utilizando los permisos más restrictivos posibles, tendrá las siguientes características:
 
-* Permisos de _App Engine Deployer_ (para desplegar y eliminar versiones de GAE), _Storage Object Creator_ (para poder subir el código) y _Cloud Object Viewer_ (para poder listar el contenido).
+* Permisos de _App Engine Deployer_ (para desplegar y eliminar versiones de GAE), _App Engine Service Admin_ (para cambiar el tráfico a cada versión) _Storage Object Creator_ (para poder subir el código), _Cloud Object Viewer_ (para poder listar el contenido), _Cloud Build Service Account_ (para poder usar dicho servicio) y _Pub/Sub Publisher_ (para poder crear mensajes en una cola de PubSub).
+
+> Google Cloud utiliza Cloud Build y Pub/Sub para hacer determinadas acciones al desplegar un nuevo servicio de App Engine.
 
 * Una llave JSON asociada para impersonarnos en dicha cuenta desde Gitlab.
 
-El proceso completo podemos verlo en el siguiente GIF:
+Podemos ver todos los permisos en la siguiente captura:
 
-![sa-gcp-creation](https://storage.googleapis.com/tangelov-data/images/0024-01.gif)
+![sa-gcp-creation](https://storage.googleapis.com/tangelov-data/images/0024-01.png)
 
 Una vez que tenemos la llave JSON, vamos a Gitlab para que éste lo pueda usar. Vamos a generar tres variables dentro de _Settings_ -- _CI/CD_ -- _Variables_:
 
@@ -188,8 +190,8 @@ docker-deploy:
   script:
     - docker build -t $CI_REGISTRY/tangelov/tangelov-me:latest .
     - docker push $CI_REGISTRY/tangelov/tangelov-me:latest
-  only:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 ```
 
 #### Testing básico
@@ -249,8 +251,8 @@ staging-build:
   script:
      - docker run --name gcloud-config -v /builds/tangelov/tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
      - docker run --rm --volumes-from gcloud-config -v $PWD/output:/root google/cloud-sdk:alpine gcloud app deploy /root --version=$TMP_ROUTE --no-promote --quiet --project=$PROJECT_ID
-  except:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH != "master"'
 
 staging-test:
   image: python:3.7-alpine
@@ -258,8 +260,8 @@ staging-test:
   script:
     - pip3 install -r requirements-test.txt
     - pytest tests/basic_tests.py
-  except:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH != "master"'
 
 docker-deploy:
   image: docker:latest
@@ -270,8 +272,8 @@ docker-deploy:
   script:
     - docker build -t $CI_REGISTRY/tangelov/tangelov-me:latest .
     - docker push $CI_REGISTRY/tangelov/tangelov-me:latest
-  only:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
 production-deploy:
   image: docker:latest
@@ -282,8 +284,8 @@ production-deploy:
     - docker run --name gcloud-config -v /builds/tangelov/tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
     - docker run --rm --volumes-from gcloud-config -v $PWD/output:/root google/cloud-sdk:alpine gcloud app versions delete $TMP_ROUTE --quiet --project=$PROJECT_ID
     - docker run --rm --volumes-from gcloud-config -v $PWD/output:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --no-promote --quiet --project=$PROJECT_ID
-  only:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 ```
 
 Ya tenemos nuestro pipeline funcionando, no es perfecto (podría usar dos proyectos para tener un entorno de preproducción real, etc.) pero de momento me vale.
@@ -302,7 +304,7 @@ Un saludo a todo el mundo y gracias.
 
 * [Sección sobre Git Hooks en la Doc oficial (ENG)](https://git-scm.com/book/pl/v2/Customizing-Git-Git-Hooks)
 
-* [Documentación de Atlassian sobre Git Hoks (ENG)](https://es.atlassian.com/git/tutorials/git-hooks)
+* [Documentación de Atlassian sobre Git Hoks (ENG)](https://www.atlassian.com/es/git/tutorials/git-hooks)
 
 * [Página sobre de Git Hooks (ENG)](https://githooks.com/)
 
@@ -313,4 +315,4 @@ Un saludo a todo el mundo y gracias.
 * [Gitlab: Automatically testing your Python project (ENG)](https://cylab.be/blog/18/gitlab-automatically-testing-your-python-project)
 
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022

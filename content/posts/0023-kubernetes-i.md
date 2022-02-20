@@ -51,7 +51,7 @@ Al igual que existen multiples formas de crear contenedores también existen dif
 
 * __Docker Swarm__: es el sistema desarrollado por Docker para orquestar sus contenedores. Aunque ha perdido algo de protagonismo, sigue teniendo peso en el mercado a pesar de carecer de algunas funcionalidades que si tiene su competencia. Microsoft Azure lo soporta de forma nativa.
 
-* __Marathon__: es el sistema utilizado por Mesosphere DC/OS y Apache Mesos para orquestar contenedores dentro. No lo he usado personalmente, aunque he visto su uso en un par de meetups.
+* __Nomad__: es el sistema utilizado para orquestar workloads, ya sea en contenedores o máquinas virtuales, desarrollado por Hashicorp. Aunque no lo he usado personalmente, tengo muchas ganas de hacerlo.
 
 
 ## K8s o Kubernetes
@@ -115,13 +115,13 @@ sudo apt install snapd
 # https://docs.snapcraft.io/installing-snapd/6735
 
 # Second, we use snap to install Microk8s
-sudo snap install microk8s --classic --channel=1.19/stable
+sudo snap install microk8s --classic --channel=1.23/stable
 ```
 
 Si todo va bien, haciendo ```sudo snap info microk8s``` veremos en la última línea algo parecido a esto:
 
 ```bash
-microk8s (1.19/stable) v1.19.7 from Canonical✓ installed
+microk8s (1.23/stable) v1.23.3 from Canonical✓ installed
 ```
 
 Al ser un sistema basado en un sólo nodo, podemos ver que los servicios de los nodos maestro y
@@ -296,19 +296,19 @@ Y poco más por hoy, más Kubernetes en próximos posts :D
 
 ## Documentación
 
-* [Definición de contenedor en la Wikipedia (ENG)](https://en.wikipedia.org/wiki/Container_(virtualization))
+* [Definición de contenedor en la Wikipedia (ENG)](https://en.wikipedia.org/wiki/OS-level_virtualization)
 
 * Sistemas de ejecución de contenedores: [Docker (ENG)](https://www.docker.com/products/docker-engine), [Containerd (ENG)](https://containerd.io/) y [LXC (ENG)](https://linuxcontainers.org/#LXC)
 
-* Sistemas de orquestación de contenedores: [Kubernetes (ENG)](https://kubernetes.io/), [Marathon (ENG)](https://mesosphere.github.io/marathon/) y [Docker Swarm (ENG)](https://docs.docker.com/engine/swarm/)
+* Sistemas de orquestación de contenedores: [Kubernetes (ENG)](https://kubernetes.io/), [Nomad (ENG)](https://www.nomadproject.io/) y [Docker Swarm (ENG)](https://docs.docker.com/engine/swarm/)
 
 * [Página oficial de Micro8ks (ENG)](https://microk8s.io/)
 
-* [Instalación de kubectl (ENG)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+* [Instalación de kubectl (ENG)](https://kubernetes.io/docs/tasks/tools/#kubectl)
 
 * [Cheatsheet de kubectl (ENG)](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 
-* [Documentación oficial de Pods (ENG)](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
+* [Documentación oficial de Pods (ENG)](https://kubernetes.io/docs/concepts/workloads/pods/)
 
 * [Documentación oficial de Deployments (ENG)](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
@@ -318,4 +318,4 @@ Y poco más por hoy, más Kubernetes en próximos posts :D
 
 * Los YAML de ejemplo son accesibles desde [aquí](https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-deployment.yml) y [aquí](https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-service-nodeport.yml).
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022
