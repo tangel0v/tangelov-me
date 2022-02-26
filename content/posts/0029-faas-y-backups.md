@@ -126,7 +126,7 @@ Si utilizamos esta cuenta en nuestra función, podríamos acceder inyectar mensa
 ## Cloud functions
 El nombre de este post es _Funciones y backups_: una vez ya tenemos toda la infraestructura necesaria, vamos a picar el código que va a poner en marcha el sistema: las funciones. Cada función es un fragmento de código que es ejecutado ante un evento. Si utilizamos un servicio de funciones en la nube, pagamos por el número de ejecuciones y eliminamos toda la gestión de la infraestructura subyacente.
 
-Cloud Functions soporta diferentes lenguajes (Go 1.11/1.13, Python 3.7 o Node.js 8 o 10), pero debido a que desconozco Node.js o Go, vamos a utilizar Python 3.
+Cloud Functions soporta diferentes lenguajes (Go 1.11/1.13/1.16, Python 3.7/3.8/3.9, o Node.js 10/12/14/16), pero debido a que desconozco Node.js o Go, vamos a utilizar Python 3.
 
 Recordando el primer esquema, he creado dos funciones diferentes:
 
@@ -264,6 +264,8 @@ Y ya está :D . Con ésto ya tendríamos el sistema funcionando. He borrado un p
 
 Espero que os haya gustado el post y... ¡nos vemos en el siguiente!
 
+> __NOTA DEL AUTOR__: A mediados de 2021, me dejó de funcionar la función del envío de mensajes a Matrix por alguna limitación oculta dentro de Cloud Functions y el uso de funciones asíncronas. En otros proveedores de nube el código sigue siendo totalmente válido.
+
 ## Documentación
 
 * [Página oficial de Matrix (ENG)](https://matrix.org/)
@@ -272,8 +274,8 @@ Espero que os haya gustado el post y... ¡nos vemos en el siguiente!
 
 * Documentación oficial de los servicios de GCP utilizados (ENG): [Cloud Scheduler](https://cloud.google.com/scheduler/docs), [Cloud PubSub](https://cloud.google.com/pubsub/docs/quickstart-py-mac), [Cloud Functions](https://cloud.google.com/functions/docs) y [Cloud Storage](https://cloud.google.com/storage/docs)
 
-* [Diferentes formas de acceder a Google Drive (ENG)](https://help.talend.com/reader/E3i03eb7IpvsigwC58fxQg/bS8nwiwx2K9oNXaaFDkokw)
+* [Diferentes formas de acceder a Google Drive (ENG)](https://help.talend.com/r/E3i03eb7IpvsigwC58fxQg/Lp096EBnOyWNk33h~CKm~Q)
 
 * [Documentación de Matrix Nio (ENG)](https://matrix-nio.readthedocs.io/en/latest/nio.html#asyncclient)
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022

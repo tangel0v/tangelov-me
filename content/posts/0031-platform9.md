@@ -42,7 +42,7 @@ Según su documentación __PMK__ ofrece lo siguiente:
 
 * El acceso a un catálogo integrado de aplicaciones (MySQL, Kibana, etc) que podemos desplegar directamente en nuestros clústers. Dicho catálogo se gestiona mediante Helm y está disponible para las distintas opciones de pago de PMK.
 
-* La monitorización y gestión de logs de forma automática gracias al uso de Prometheus, Grafana y Fluentd, en un servicio 24x7. Podemos ampliar la capacidad operativa del equipo de PF9 si les damos acceso por SSH (más información [aquí](https://docs.platform9.com/openstack/troubleshooting/enable-ars/))
+* La monitorización y gestión de logs de forma automática gracias al uso de Prometheus, Grafana y Fluentd, en un servicio 24x7.
 
 * Una gestión más sencilla de las operaciones de nuestro clúster: actualizaciones, aplicación de parches de seguridad, etc. También aporta una gestión totalmente centralizada para el sistema de RBAC de Kubernetes y de la autenticación de los usuarios.
 
@@ -331,19 +331,15 @@ Y nada... este ha sido todo el análisis, espero que a alguien le sea de utilida
 
 * Servicios gestionados por Platform9 (ENG): [Managed Kubernetes](https://platform9.com/managed-kubernetes/) y [Managed OpenStack](https://platform9.com/managed-openstack/)
 
-* [¿Qué es BareOS? (ENG)](https://docs.platform9.com/kubernetes/bareos/what-is-bareos)
+* [¿Qué es BareOS? (ENG)](https://platform9.com/docs/v5.4/kubernetes/bareos-what-is-bareos)
 
-* [Tenants y regiones en Platform9 (ENG)](https://docs.platform9.com/kubernetes/tenant-user-administration/regions_tenants/)
+* [Tenants y regiones en Platform9 (ENG)](https://platform9.com/docs/kubernetes/multi-tenancy)
 
-* [Creación avanzada de clústers de PMK a través de la CLI (ENG)](https://docs.platform9.com/kubernetes/PMK-CLI/create/)
+* [Creación de clústers de PMK (ENG) en Platform9](https://platform9.com/docs/v5.4/kubernetes/create-single-master-multi-node-cluster)
 
-* [Preparación de nodos para añadir a un clúster de PMK a través de la CLI (ENG)](https://docs.platform9.com/kubernetes/PMK-CLI/prep-node/)
-
-* [Añadiendo nodos a un clúster de PMK a través de la CLI (ENG)](https://docs.platform9.com/v4.1/kubernetes/pmk-cli-cluster-attach-node)
-
-* [Helm de Bitnami para instalar Ghost en Helm Hub (ENG)](https://hub.helm.sh/charts/bitnami/ghost)
+* [Helm de Bitnami para instalar Ghost en Helm Hub (ENG)](https://artifacthub.io/packages/helm/bitnami/ghost)
 
 * [Comparación entre las diferentes versiones de Platform9 (ENG)](https://platform9.com/pricing/comparison/)
 
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022
