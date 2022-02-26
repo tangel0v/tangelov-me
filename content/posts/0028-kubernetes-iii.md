@@ -75,7 +75,7 @@ Si ahora nos metemos dentro del pod y usamos las credenciales que hemos pasado c
 
 ```bash
 # Nos conectamos al pod del StatefulSet de MySQL
-kubectl exec -ti mysql-0 bash
+kubectl exec -ti mysql-0 -- bash
 
 root@mysql-0:/# mysql -u traccaruser -p
 Enter password: 
@@ -187,7 +187,7 @@ spec:
     spec:
       containers:
       - name: traccar-backend
-        image: traccar/traccar:4.12-debian
+        image: traccar/traccar:4.15-debian
         ports:
           - containerPort: 8082
         volumeMounts:
@@ -266,7 +266,6 @@ Finalmente creamos un [ingress](https://gitlab.com/tangelov/proyectos/-/raw/mast
 
 ```yaml
 ---
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -321,4 +320,4 @@ Un saludo a todos!
 * [Arquitectura de la plataforma Traccar (ENG)](https://www.traccar.org/architecture/)
 
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022
