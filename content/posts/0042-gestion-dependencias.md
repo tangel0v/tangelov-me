@@ -171,8 +171,8 @@ Y con esto el post ha terminado, espero que os haya gustado y sirva a alguien m�
 
 * [Renovate-runner para Gitlab.org (ENG)](https://gitlab.com/renovate-bot/renovate-runner/)
 
-* [Configuración de Renovate en los repositorios _cliente_ (ENG)](https://docs.renovatebot.com/configure-renovate/)
+* [Configuración de Renovate en los repositorios _cliente_ (ENG)](https://docs.renovatebot.com/configuration-options/)
 
 * [Ejemplo de Renovate para Python (ENG)](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/renovate.json)
 
-Revisado a 23-05-2021
+Revisado a 01-03-2022
