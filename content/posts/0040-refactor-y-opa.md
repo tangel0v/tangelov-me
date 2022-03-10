@@ -332,8 +332,8 @@ apply:
   dependencies:
     - conftest
     - plan
-  only:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 ```
 
 Para ver el fichero completo, podemos hacer click [aquí](https://gitlab.com/tangelov/tangelov-infra/-/blob/0d2da549521ca70ed5d5ecff94270840822a2f89/.gitlab-ci.yml).
@@ -436,8 +436,8 @@ apply:
   dependencies:
     - conftest
     - plan
-  only:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 ```
 
 Y ya tendríamos el pipeline completo y optimizado. Los siguientes pasos serán aumentar el número de tests sobre OPA, pero todo eso lo veremos en el siguiente post. ¡Hasta la vista!
@@ -469,4 +469,4 @@ Y ya tendríamos el pipeline completo y optimizado. Los siguientes pasos serán 
 
 * [Integración de Terraform en las Merge Requests (ENG)](https://docs.gitlab.com/ee/user/infrastructure/mr_integration.html)
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022
