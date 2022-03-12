@@ -24,7 +24,7 @@ Considero que existen tres formas diferentes de llevar aplicaciones a la nube:
 
 Para los dos primeros casos, solemos partir de modelos basados en máquinas físicas o virtuales y en el tercero, se suele optar o bien por soluciones de tipo PaaS o por fragmentar dichas aplicaciones en contenedores.
 
-Packer es una grandísima herramienta ([de la que ya he hablado](https://tangelov.me/posts/0018-packer-i.html)) para coger dichas máquinas virtuales o físicas y replicarlas en la nube, algo tremendamente útil en una migración a la nube.
+Packer es una grandísima herramienta ([de la que ya he hablado](https://tangelov.me/posts/packer-i.html)) para coger dichas máquinas virtuales o físicas y replicarlas en la nube, algo tremendamente útil en una migración a la nube.
 
 En este post, vamos a simular una migración hacia la nube, realizando algunas mejoras y explicando los motivos de la misma. Manos a la obra :) .
 
@@ -300,7 +300,7 @@ nginx_group: "www-data"
 tools_folder: "{{ ansible_user_dir }}/tools"
 wordpress_web_directory: "/var/www/html"
 
-wordpress_version: "5.5.4"
+wordpress_version: "5.9.1"
 wpcli_version: "2.4.0"
 
 wordpress_mysql_database: wordpressdb
@@ -324,7 +324,7 @@ cloud_sql_proxy_connection_name: gcp-tangelov-project:europe-west1:instancia-pru
 cloud_sql_proxy_tcp_port: "3306"
 ```
 
-> Estas variables son orientativas. Existen algunas variables como las contraseñas que en cualquier entorno productivo deben ser almacenadas en un Vault o en algún sistema de almacenamiento seguro. Para más información sobre cómo utilizar Ansible Vault, podemos acceder [aquí](https://docs.ansible.com/ansible/2.9/user_guide/vault.html)
+> Estas variables son orientativas. Existen algunas variables como las contraseñas que en cualquier entorno productivo deben ser almacenadas en un Vault o en algún sistema de almacenamiento seguro. Para más información sobre cómo utilizar Ansible Vault, podemos acceder [aquí](https://docs.ansible.com/ansible/latest/user_guide/vault.html)
 
 Una vez hemos configurado Ansible, sólo necesitamos modificar el código de Packer ligeramente para que utilice nuestros scripts y playbooks:
 
@@ -424,4 +424,4 @@ Espero que os guste y ¡nos vemos en el siguiente episodio!
 
 * [Módulo de Terraform de creación de instancias de Amazon RDS (ENG)](https://github.com/terraform-aws-modules/terraform-aws-rds)
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022
