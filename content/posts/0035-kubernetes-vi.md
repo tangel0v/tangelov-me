@@ -234,7 +234,7 @@ Este tipo de escalado permite utilizar por defecto las mediciones de CPU y Memor
 Vamos a crear un HPA utilizando el contenido de este YAML, que guardamos con el nombre de nginx-hpa.yml:
 
 ```yaml
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: nginx
@@ -256,7 +256,7 @@ spec:
 
 Voy a explicar ligeramente su contenido:
 
-* Utiliza la API de autoescalado v2beta2, en lugar de la v2beta1, para soportar métricas personalizadas además de las nativas de Kubernetes (CPU y memoria).
+* Utiliza la API de autoescalado v2 para soportar métricas personalizadas además de las nativas de Kubernetes (CPU y memoria).
 
 * Recibe el consumo de CPU de los pods del Deployment y si éste sobrepasa el 70% de la CPU (en una media de todos los pods), aumentará las copias del Deployment hasta controlarlo por debajo del umbral (hasta un máximo de 10 copias).
 
@@ -272,16 +272,16 @@ minikube addons enable metrics-server
 kubectl apply -f nginx-hpa.yml -n prueba
 
 # Exponemos el servicio
-kubectl expose deployment nginx --type=ClusterIP --name=nginx-service -n prueba
+kubectl expose deployment nginx --type=NodePort --name=nginx-service -n prueba
 
 # Como estoy utilizando Minikube, obtenemos la URL del servicio fuera del clúster
 minikube service list -n prueba
                                              
-|-----------|---------------|-------------|-------------------------|
-| NAMESPACE |     NAME      | TARGET PORT |           URL           |
-|-----------|---------------|-------------|-------------------------|
-| prueba    | nginx-service |          80 | http://172.17.0.3:30841 |
-|-----------|---------------|-------------|-------------------------|
+|-----------|---------------|-------------|-----------------------------|
+| NAMESPACE |     NAME      | TARGET PORT |           URL               |
+|-----------|---------------|-------------|-----------------------------|
+| prueba    | nginx-service |          80 | http://192.168.59.128:32549 |
+|-----------|---------------|-------------|-----------------------------|
 
 # Ahora podremos acceder al pod a través de la URL que minikube nos ha dado
 ```
@@ -298,7 +298,7 @@ NAME    REFERENCE          TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
 nginx   Deployment/nginx   0%/70%    2         10        2          10m
 
 # Si realizamos algo de carga podemos ver como pasa de los umbrales y comienza a escalar
-ab -n 10000 -c 50 http://172.17.0.3:30841
+ab -n 10000 -c 50 http://192.168.59.128:32549/
 
 # Volvemos a ver el estado de nuestro HPA veremos que ha cambiad el umbral
 NAME    REFERENCE          TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
@@ -326,7 +326,7 @@ Y ya se ha terminado el sexto post sobre Kubernetes. Espero que os guste y que s
 
 * [Limit Ranges en Kubernetes (ENG)](https://kubernetes.io/docs/concepts/policy/limit-range/)
 
-* [Understanding Kubernetes Resources (ENG)](https://www.noqcks.io/notes/2018/02/03/understanding-kubernetes-resources/)
+* [Understanding Kubernetes Resources (ENG)](https://blog.093b.org/posts/2018-02-03-kubernetes-resources-limits)
 
 * [Pod priority and preemtion (ENG)](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#pod-priority)
 
@@ -338,4 +338,4 @@ Y ya se ha terminado el sexto post sobre Kubernetes. Espero que os guste y que s
 
 * [Kubernetes HPA with Custom Metrics from Prometheus (ENG)](https://towardsdatascience.com/kubernetes-hpa-with-custom-metrics-from-prometheus-9ffc201991e)
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022

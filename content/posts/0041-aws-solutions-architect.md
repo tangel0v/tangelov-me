@@ -53,4 +53,4 @@ Como en entregas anteriores, voy a dejar aquí mis recomendaciones para preparar
 * [AWS FAQs](https://aws.amazon.com/faqs/?nc1=h_ls): Lista de FAQs de AWS.
 
 
-Revisado a 16/05/2021
+Revisado a 01/03/2022

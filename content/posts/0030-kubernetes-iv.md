@@ -173,7 +173,6 @@ En MicroK8s tenemos que habilitarlo con el comando ```microk8s.enable rbac```.
 microk8s.kubectl api-versions | grep rbac.authorization.k8s.io/v1
 
 rbac.authorization.k8s.io/v1
-rbac.authorization.k8s.io/v1beta1
 ```
 
 ### Roles y scopes
@@ -374,8 +373,8 @@ Espero que os haya gustado y... ¡os veo en el pŕoximo post!
 
 * [Roles por defecto en clústers de Kubernetes (ENG)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles)
 
-* [Referencia de las APIs de Kubernetes (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/)
+* [Referencia de las APIs de Kubernetes (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/)
 
 * [Repositorio de plantillas de Kubernetes](https://gitlab.com/tangelov/proyectos/-/tree/master/templates/kubernetes)
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022

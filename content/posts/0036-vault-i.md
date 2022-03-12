@@ -112,7 +112,7 @@ Una vez tenemos Helm en nuestro PC, necesitamos cumplir los siguientes prerrequi
 
 * El fichero de variables de ejemplo para instalar Vault, que podemos descargar de [aquí](https://gitlab.com/tangelov/proyectos/-/raw/master/templates/helm/helm-vault-values.yaml).
 
-> __NOTA__: No olvideis cambiar la variable GCP-BUCKET por el nombre del bucket que vayais a utilizar en la sección de _config_.
+> __NOTA__: No olvideis cambiar la variable GCP_BUCKET y GCP_PROJECT_ID por el nombre del bucket y el proyecto que vayais a utilizar en la sección de _config_.
 
 Con los prerrequisitos cumplidos, podemos proceder a su instalación.
 
@@ -192,13 +192,15 @@ Initialized            true
 Sealed                 false
 Total Shares           1
 Threshold              1
-Version                1.6.2
+Version                1.9.3
+Storage Type           gcs
 Cluster Name           vault-cluster-xxxxxxxx
 Cluster ID             xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 HA Enabled             true
-HA Cluster             n/a
+HA Cluster             https://vault-0.vault-internal:8201
 HA Mode                standby
-Active Node Address    <none>
+Active Node Address    http://10.244.120.76:8200
+
 ```
 
 Nuestro clúster ya está inicializado y en estado _unsealed_ por lo que ya podemos comenzar a utilizarlo.
@@ -254,4 +256,4 @@ Y hasta aquí va a llegar el post de hoy. En siguientes posts, trataremos la ges
 
 * [Arquitectura a bajo nivel de Hashicorp Vault (ENG)](https://www.vaultproject.io/docs/internals/architecture)
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022

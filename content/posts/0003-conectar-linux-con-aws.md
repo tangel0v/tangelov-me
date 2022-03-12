@@ -124,4 +124,4 @@ Ahora podemos lanzar `aws ec2 describe-instances` para ver todas las instancias 
 
 * [First steps in AWS CLI (ENG)](https://docs.aws.amazon.com/es_es/cli/latest/userguide/cli-chap-getting-started.html)
 
-Revisado a 01/03/2021.
+Revisado a 01/03/2022.

@@ -33,7 +33,7 @@ curl https://sdk.cloud.google.com | bash
 exec -l $SHELL
 ```
 
-También podemos instalarlo a través de sus repositorios oficiales para [Ubuntu/Debian](https://cloud.google.com/sdk/docs/downloads-apt-get) o para distribuciones basadas en [RPM](https://cloud.google.com/sdk/docs/downloads-yum).
+También podemos instalarlo a través de sus repositorios oficiales para [Ubuntu/Debian](https://cloud.google.com/sdk/docs/install#deb) o para distribuciones basadas en [RPM](https://cloud.google.com/sdk/docs/install#rpm).
 
 ### Configuración
 Una vez ya hemos instalado la CLI, debemos iniciarla con
@@ -127,4 +127,4 @@ To update your SDK installation to the latest version [275.0.0], run:
 
 * [Install Google Cloud SDK (ENG)](https://cloud.google.com/sdk/install/)
 
-Revisado a 01/03/2021.
+Revisado a 01/03/2022.

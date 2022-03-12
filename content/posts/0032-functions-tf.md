@@ -195,8 +195,8 @@ apply:
     PLUGIN_DIR: "../.terraform/plugins/linux_amd64"
   dependencies:
     - validate
-  only:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 ```
 
 Este código tiene las siguientes peculiaridades:
@@ -309,21 +309,21 @@ Y ya tendríamos el proceso completo. En el futuro mejoraré el pipeline para qu
 
 * [Repositorio de código de mis funciones en Gitlab](https://gitlab.com/tangelov-functions)
 
-* [Cómo clonar un repositorio de Gitlab a Google Cloud Source Repositories (ENG)](https://cloud.google.com/solutions/mirroring-gitlab-repositories-to-cloud-source-repositories)
+* [Cómo clonar un repositorio de Gitlab a Google Cloud Source Repositories (ENG)](https://cloud.google.com/architecture/mirroring-gitlab-repositories-to-cloud-source-repositories)
 
-* [Cloud Functions en Terraform (ENG)](https://www.terraform.io/docs/providers/google/r/cloudfunctions_function.html)
+* [Cloud Functions en Terraform (ENG)](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloudfunctions_function)
 
 * [Mejorando la sintáxis de las configuraciones de Google Cloud Build (ENG)](https://medium.com/@davidstanke/mastering-google-cloud-build-config-syntax-8c3024607daf)
 
-* [Probando funciones utilizando Cloud Build y Terraform (ENG)](https://cloud.google.com/solutions/system-testing-cloud-functions-using-cloud-build-and-terraform)
+* [Probando funciones utilizando Cloud Build y Terraform (ENG)](https://cloud.google.com/architecture/system-testing-cloud-functions-using-cloud-build-and-terraform)
 
 * [Referencia para construir pipelines con Gitlab CI (ENG)](https://docs.gitlab.com/ee/ci/yaml/)
 
 * [Cómo ejecutar un pipeline desde un Webhook (ENG)](https://docs.gitlab.com/ce/ci/triggers/#triggering-a-pipeline-from-a-webhook)
 
 * Referencias sobre cómo utilizar Terraform con Gitlab CI (ENG): [I](https://medium.com/@timhberry/terraform-pipelines-in-gitlab-415b9d842596
-) y [II](https://about.gitlab.com/blog/2019/11/12/gitops-part-2/)
+) y [II](https://about.gitlab.com/topics/gitops/gitlab-enables-infrastructure-as-code/)
 
-* [Ejecutando Terraform en sistemas automáticos (ENG)](https://learn.hashicorp.com/terraform/development/running-terraform-in-automation)
+* [Ejecutando Terraform en sistemas automáticos (ENG)](https://learn.hashicorp.com/tutorials/terraform/automate-terraform)
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022

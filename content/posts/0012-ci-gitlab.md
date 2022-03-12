@@ -77,7 +77,7 @@ Nuestro fichero consta de diferentes partes:
 
 * _stages_: nos permiten organizar los diferentes jobs que hagamos. Los que tengan el mismo _stage_ se ejecutan a simultáneamente y los que no en orden:
 
-* _ubuntu-build_: contiene todos los pasos que necesitamos para generar nuestra imagen. Como podemos ver, se realizan los mismos pasos que si fuera nuestro PC añadiendo tres pasos que se tiran con el comando docker (generación de la imagen en local, autorización en el registro de Gitlab y envío de dicha imagen. Las variables $CI\_REGISTRY y $CI\_JOB\_TOKEN son una serie de variables internas que Gitlab inyecta en el job para facilitarnos la vida. Podemos obtener más información al respecto [aquí](https://docs.gitlab.com/ee/ci/variables/)
+* _ubuntu-build_: contiene todos los pasos que necesitamos para generar nuestra imagen. Como podemos ver, se realizan los mismos pasos que si fuera nuestro PC añadiendo tres pasos que se tiran con el comando docker (generación de la imagen en local, autorización en el registro de Gitlab y envío de dicha imagen. Las variables $CI\_REGISTRY y $CI\_JOB\_TOKEN son una serie de variables internas que Gitlab inyecta en el job para facilitarnos la vida. Podemos obtener más información al respecto [aquí](https://docs.gitlab.com/ee/ci/variables/).
 
 Ahora hacemos push contra una rama y se lanzará un job:
 
@@ -136,8 +136,8 @@ alpine-build:
   script:
     - docker build -t $CI_REGISTRY/tangelov/tangelov-me:alpine .
     - docker push $CI_REGISTRY/tangelov/tangelov-me:alpine
-  only:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 ```
 
 Esta vez no se ha producido nada de manera automática porque no estamos trabajando en master. Hacemos un merge request y lo aprobamos para que se cumpla:
@@ -151,7 +151,7 @@ Como podemos ver, ahora tenemos un job que se nos crea una imagen de Docker de f
 
 * [Página de Gitlab en la Wikipedia (ENG)](https://en.wikipedia.org/wiki/GitLab)
 
-* [Definición de Integración Continua en la Wikipedia (ENG)](https://en.wikipedia.org/wiki/GitLab)
+* [Definición de Integración Continua en la Wikipedia (ENG)](https://en.wikipedia.org/wiki/Continuous_integration)
 
 * [Introducción a la Integración continua en Gitlab (ENG)](https://about.gitlab.com/stages-devops-lifecycle/continuous-integration/)
 
@@ -160,4 +160,4 @@ Como podemos ver, ahora tenemos un job que se nos crea una imagen de Docker de f
 * [Test all the things in GitLab CI with Docker by example (ENG)](https://about.gitlab.com/2018/02/05/test-all-the-things-gitlab-ci-docker-examples/)
 
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022

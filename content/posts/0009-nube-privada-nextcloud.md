@@ -72,6 +72,6 @@ Tenemos aplicaciones para todo:
 
 * [Comparación de servicios de almacenamiento en la nube (ENG)](https://en.wikipedia.org/wiki/Comparison_of_online_backup_services)
 
-* [Parámetros y tips en Nextcloud 20 y PHP (ENG)](https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html#php-fpm-tips-label)
+* [Parámetros y tips en Nextcloud 23 y PHP (ENG)](https://docs.nextcloud.com/server/23/admin_manual/installation/source_installation.html#php-fpm-tips-label)
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022

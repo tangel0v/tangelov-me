@@ -34,7 +34,7 @@ Con esto, nuestro código ya funcionará en GAE, pero también necesitamos despl
 ## Configuración de Google App Engine (GAE)
 Como ya se ha comentado, Google App Engine es una Plataforma como servicio que permite a desarrolladores, publicar sus páginas web, proporcionando autoescalado, certificados SSL (vía Let's Encrypt), protección ante caídas de servicio... Google ofrece este servicio en dos modalidades diferentes: _standard_ y _flexible_
 
-Como nosotros utilizamos HTML puro, podemos usar el _standard_. Éste se diferencia del flexible por una cantidad más limitada de frameworks que se pueden ejecutar. Actualmente podemos usar Python (2.7, 3.X), Java (8, 11), PHP (5.5, 7.X), NodeJS (10, 12 o 14), Ruby (2.5, 2.6 y 2.7) y Go (1.11 o superiores) aunque Python 3.9, Node.js 14, PHP 7.4 y Go 1.15 se encuentran en beta.
+Como nosotros utilizamos HTML puro, podemos usar el _standard_. Éste se diferencia del flexible por una cantidad más limitada de frameworks que se pueden ejecutar. Actualmente podemos usar Python (2.7, 3.X), Java (8, 11), PHP (5.5, 7.2, 7.3 o 7.4), NodeJS (10, 12, 14 o 16), Ruby (2.5, 2.6 y 2.7) y Go (1.11 o 1.12+).
 
 Antes de realizar el despliegue, necesitamos crear la _"infraestructura"_ en Google Cloud que nos permita hacerlo. En este caso caso concreto la he dividido en dos partes:
 
@@ -126,4 +126,4 @@ Resumiendo:
 
 * [Google Cloud Storage (ENG)](https://cloud.google.com/storage/docs/how-to)
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022

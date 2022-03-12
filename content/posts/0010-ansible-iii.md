@@ -11,7 +11,7 @@ draft: false
 
 Tras una breve pausa derivada del hecho de que me he _casado_ :D, seguimos apuntando cosillas en el blog. En este artículo vamos a crear un pequeño rol que nos permita gestionar nuestros backups como debería ser.
 
-Ya comentamos en el post anterior, todo lo que hacía el [script](https://tangelov.me/posts/ansible-ii.html) y ahora vamos a crear el rol
+Ya comentamos en el post anterior, todo lo que hacía el [script](https://tangelov.me/posts/ansible-ii.html) y ahora vamos a crear el rol.
 
 <!--more-->
 
@@ -23,7 +23,7 @@ Nuestro rol va a realizar principalmente dos acciones: en una va a instalar back
 # tasks file for backupninja
 
 - name: Install backupninja package
-  package:
+  ansible.builtin.package:
     name: backupninja
     state: present
 ```
@@ -32,7 +32,7 @@ Ese conjunto de líneas serían una tarea completa. El formato yaml utilizado po
 
 * _name_: El primer _name_ se corresponde al nombre que tiene la tarea y que se va a mostrar en la terminal cuando ejecutemos el rol.
 
-* _package_: Se corresponde con el nombre del módulo de Ansible que estamos utilizando. En este caso, package es módulo que nos permite instalar paquetes sin importar de que distribución GNU/Linux estemos utilizando. Podemos ver más información [aquí](https://docs.ansible.com/ansible/2.9/modules/package_module.html). Cada módulo recibe una serie de parámetros para funcionar y en este caso le pasamos el nombre del paquete y el estado en el que queremos que esté (_present_ significa que el paquete se instalará en caso de no estarlo).
+* _ansible.builtin.package_: Se corresponde con el nombre del módulo de Ansible que estamos utilizando. En este caso, package es el módulo embebido dentro de Ansible que nos permite instalar paquetes sin importar de que distribución GNU/Linux estemos utilizando. Podemos ver más información [aquí](https://docs.ansible.com/ansible/5/collections/ansible/builtin/package_module.html). Cada módulo recibe una serie de parámetros para funcionar y en este caso le pasamos el nombre del paquete y el estado en el que queremos que esté (_present_ significa que el paquete se instalará en caso de no estarlo).
 
 
 ## Plantillas
@@ -84,12 +84,12 @@ Tras crear la plantilla ahora debemos crear una nueva tarea que despliegue la co
 # tasks file for backupninja
 
 - name: Install backupninja package
-  package:
+  ansible.builtin.package:
     name: backupninja
     state: present
 
 - name: Deploy TAR template
-  template:
+  ansible.builtin.template:
     src: tar.j2
     dest: "/etc/backup.d/10.tar"
     mode: '0600'
@@ -101,7 +101,7 @@ En este caso hemos añadido una nueva tarea que utiliza el módulo _template_ y 
 
 
 ## Variables
-La plantilla que hemos creado antes tiene variables declaradas que no han sido definidas en ningún sitio por lo que si ahora desplegáramos la configuración ésta no sería la correcta. Ansible soporta variables de muchísimas maneras y recomendamos leer su [documentación](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_variables.html). En nuestro caso vamos a definir ciertas variables en el ~/defaults/main.yml:
+La plantilla que hemos creado antes tiene variables declaradas que no han sido definidas en ningún sitio por lo que si ahora desplegáramos la configuración ésta no sería la correcta. Ansible soporta variables de muchísimas maneras y recomendamos leer su [documentación](https://docs.ansible.com/ansible/5/user_guide/playbooks_variables.html). En nuestro caso vamos a definir ciertas variables en el ~/defaults/main.yml:
 
 ```jinja2
 ninja_when: "everyday at 02"
@@ -125,7 +125,7 @@ Ahora ya tenemos una pequeña versión preliminar de una parte del rol y vamos a
   become: true
 
   pre_tasks:
-    - include_vars: "test-backupninja-vars.yml"
+    - ansible.builtin.include_vars: "test-backupninja-vars.yml"
 
   roles:
     - backupninja
@@ -188,13 +188,13 @@ Hasta aquí llegamos con el despleigue del rol de Backupninja. En la próxima en
 
 ## Documentación
 
-* [Estructura de un rol (ENG)](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html)
+* [Estructura de un rol (ENG)](https://docs.ansible.com/ansible/5/user_guide/playbooks_reuse_roles.html)
 
-* [Gitlab de Backupninja (ENG)](https://0xacab.org/riseuplabs/backupninja)
+* [Gitlab de Backupninja (ENG)](https://0xacab.org/liberate/backupninja)
 
-* [Plantillas en Jinja2 (ENG)](https://jinja.palletsprojects.com/en/2.11.x/templates/)
+* [Plantillas en Jinja2 (ENG)](https://jinja.palletsprojects.com/en/3.0.x/templates/)
 
-* [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
+* [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/5/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
 
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022

@@ -4,7 +4,7 @@ slug: contexto-ingeniería
 authors:
   - tangelov
 date: 2022-02-05T09:00:00+02:00
-tags:  ["cloud", opinion"]
+tags:  ["cloud", "opinion"]
 categories: ["personal"]
 draft: false
 ---

@@ -116,52 +116,18 @@ curl https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd6
 chmod +x minikube
 
 # Creamos un clúster de dos nodos con una configuración concreta
-minikube start --nodes 2 --cpus=2 --disk-size='10g' --memory='2g' \
- --extra-config=kubelet.network-plugin=cni \
- --extra-config=kubelet.pod-cidr=10.125.0.0/16 \
- --extra-config=controller-manager.allocate-node-cidrs=true \
- --extra-config=controller-manager.cluster-cidr=10.125.0.0/16
+minikube start --cpus=2 --disk-size='10g' --memory='2g' \
+ --network-plugin=cni \
+ --cni=calico
 ```
 
-> Necesitaremos tener disponibles al menos 2 cores y 4 GB de RAM en la máquina o host en el que ejecutemos dicho comando. También es posible que necesitemos reemplazar el CIDR.
+> Necesitaremos tener disponibles al menos 2 cores y 4 GB de RAM en la máquina o host en el que ejecutemos dicho comando.
 
-Una vez ya tenemos nuestro clúster disponible, necesitamos instalar Calico. El producto consta de una serie de controladores de CRDs (_Custom Resource Definitions_) que tenemos que aplicar. Su instalación es bastante sencilla: tan sólo debemos comprobar que cumplimos los [prerrequisitos](https://docs.projectcalico.org/getting-started/kubernetes/requirements) y utilizar el operador de Tigera.
+Minikube tiene soporte nativo para Calico y podemos instalarlo directamente con el siguiente comando, aunque nos dará una versión un poco más desactualizada.
 
-Para instalar dicho operador, primero ejecutamos el siguiente comando:
+Si queremos probar las últimas funcionalidades, podemos instalar Calico a mano, pero yo me he encontrado con algunos problemas que comentaré al final del post. En cualquier debemos cumplir los prerrequisitos [prerrequisitos](https://projectcalico.docs.tigera.io/getting-started/kubernetes/requirements) del producto.
 
-```bash
-# Instalamos el operador de Calico y algunos custom resource definitions
-kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
-```
-
-Después configuramos el operador para que despliegue Calico en nuestro clúster:
-
-```bash
-# Nos descargamos el fichero de ejemplo
-wget https://docs.projectcalico.org/manifests/custom-resources.yaml
-
-# Editamos el fichero, cambiando el CIDR por el que estemos utilizando
-# Podemos ver nuestro kubeadm CIDR ejecutando el siguiente comando
-cat ~/.minikube/profiles/minikube/config.json
-
-# Tras modificar el fichero con el valor adecuado, lo aplicamos en el clúster
-kubectl apply -f custom-resources.yaml
-```
-
-Ahora debemos esperar a que todos los pods de Calico estén arriba y en estado _Running_:
-
-```bash
-# Miramos cual es el estado de los pods de calico-system. Este namespace es donde el 
-# operador instala Calico.
-kubectl get pods -n calico-system
-
-NAME                                       READY   STATUS    RESTARTS   AGE
-calico-kube-controllers-5687f44fd5-rcbld   1/1     Running   0          13m
-calico-node-nttg5                          1/1     Running   0          13m
-calico-node-wgndw                          1/1     Running   0          13m
-calico-typha-7845ff8755-9d845              1/1     Running   0          11m
-calico-typha-7845ff8755-jsnp7              1/1     Running   0          13m
-```
+Sin embargo, si deseamos probar las últimas funcionalidades yo personalmente recomiendo instalar Cálico a mano. El producto consta de una serie de controladores de CRDs (_Custom Resource Definitions_) que tenemos que aplicar. Su instalación es bastante sencilla: tan sólo debemos comprobar que cumplimos los  y utilizar el operador de Tigera.
 
 ### Definiendo nuestra red
 Una vez que Calico ya está desplegado en nuestro clúster, vamos a definir algunas políticas para organizar la red interna de Kubernetes.
@@ -198,7 +164,7 @@ Si nos metemos en un pod y tiramos un curl contra el _Service_ de _nginx-back_, 
 
 ```bash
 # Entramos en uno de los pods de Nginx Front
-kubectl exec -ti nginx-front-79d94b554f-7vxq7 -n front sh
+kubectl exec -ti nginx-front-79d94b554f-7vxq7 -n front -- sh
 
 # Hacemos un curl a la IP y puerto del service de Back
 curl 10.104.101.8:3306
@@ -225,20 +191,25 @@ spec:
   selector: all()
   types:
   - Ingress
+  - Egress
 ```
 
-Esta política bloqueará todo el tráfico a nivel de clúster, pero si intentamos aplicarla con _kubectl_, recibiremos un error _no matches for kind "GlobalNetworkPolicy" in version "projectcalico.org/v3_.  Este tipo de políticas debemos crearse a través de la propia CLI de Calico, llamada _calicoctl_.
-
-> Aunque podemos instalar estas políticas con alguna trampa (cambiando la APIVersion del objeto a _crd.projectcalico.org/v1_), es algo desaconsejado por Calico puesto que este método se salta las comprobaciones que realiza la CLI y que pueden romper nuestro clúster. Más información [aquí](https://github.com/projectcalico/calico/issues/2918).
+Esta política bloqueará todo el tráfico a nivel de clúster, pero aunque podamos aplicarla con _kubectl_ desde la versión de Calico 3.19, se recomienda gestionarla a través de la propia CLI de Calico.
 
 Por todo ello, vamos a descargar _calicoctl_, darle permisos y conectarlo a nuestro clúster de Minikube:
 
 ```bash
 # Descargamos la CLI con curl
-curl -O -L  https://github.com/projectcalico/calicoctl/releases/download/v3.16.9/calicoctl
+curl -L https://github.com/projectcalico/calico/releases/download/v3.20.0/release-v3.20.0.tgz -o calico.tgz
+
+# Descomprimimos el fichero y lo movemos a la raíz de la carpeta
+tar xvf calico.tgz && cp release-v3.20.0/bin/calicoctl .
 
 # Lo hacemos ejecutable
 chmod +x calicoctl
+
+# Limpiamos lo descargado
+rm -rf release-v3.20.0 calico.tgz
 
 # Definimos el datastore del que va a leer los datos calico
 export DATASTORE_TYPE=kubernetes
@@ -470,4 +441,4 @@ Muchas gracias por leerme y espero que os haya gustado.
 * [Calico for Kubernetes networking: the basics & examples by Flant (ENG)](https://medium.com/flant-com/calico-for-kubernetes-networking-792b41e19d69)
 
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022

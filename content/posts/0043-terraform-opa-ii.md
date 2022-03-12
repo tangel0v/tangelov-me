@@ -377,9 +377,8 @@ Un abrazo y _Happy Terraform_!
 
 * [Ejemplos desarrollados por Scalr de políticas creadas para Terraform (ENG)](https://github.com/Scalr/sample-tf-opa-policies)
 
-* [Formato JSON de un _Terraform plan_ (ENG)](https://www.terraform.io/docs/internals/json-format.html
-)
+* [Formato JSON de un _Terraform plan_ (ENG)](https://www.terraform.io/docs/internals/json-format.html)
 
-* [Pipeline de ejemplo de Terraform con Conftest (ENG)](https://github.com/open-policy-agent/conftest/blob/master/examples/ci/gitlab/terraform.yaml)
+* [Ejemplos de testing en Terraform para usar con Conftest (ENG)](https://github.com/open-policy-agent/conftest/tree/master/examples/hcl2/policy)
 
-Revisado a 13-06-2021
+Revisado a 01-03-2022

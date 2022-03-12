@@ -48,7 +48,7 @@ Yubico es una empresa sueco-estadounidense que desarrolla llaves hardware y que 
 
 > Existen alternativas a la hora de adquirir llaves hardware. Nitrokey es una empresa alemana que tiene productos similares y algunos son incluso hardware y software libre. Si hay algún interesado, [aquí](https://www.nitrokey.com/#comparison) puede acceder a sus productos.
 
-Las Yubikeys tienen integración con [multitud de servicios y herramientas](https://www.yubico.com/setup/compatible-services/) y soportan diferentes formas de autenticación y protocolos. Por ejemplo, la Serie 5 de Yubikey soporta lo siguiente:
+Las Yubikeys tienen integración con [multitud de servicios y herramientas](https://www.yubico.com/es/works-with-yubikey/catalog/?sort=popular) y soportan diferentes formas de autenticación y protocolos. Por ejemplo, la Serie 5 de Yubikey soporta lo siguiente:
 
 * Múltiples protocolos: FIDO2/WebAauthn, U2F, Smart card, OpenPGP y OTP.
 
@@ -220,4 +220,4 @@ Con este paso, ya hemos terminado. Espero que os guste y que no olvideis que la 
 
 * [How to configure Multi-Factor Authentication in Microsoft Azure (ENG)](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks)
 
-Revisado a 01/03/2021
+Revisado a 01/03/2022

@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
         - name: fluentd
-          image: quay.io/fluentd_elasticsearch/fluentd:v3.2.0
+          image: quay.io/fluentd_elasticsearch/fluentd:v3.4.0
       terminationGracePeriodSeconds: 30
 ```
 
@@ -133,6 +133,7 @@ apiVersion: storage.k8s.io/v1
 metadata:
   name: local-storage
   annotations:
+    "storageclass.kubernetes.io/is-default-class": "true"
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
 ---
@@ -225,7 +226,7 @@ Los Ingress son objetos que controlan el acceso desde fuera del clúster a servi
 
 Antes de utilizar un ingress, necesitamos habilitar previamente un Ingress Controller, que es una especie de enrrutador. Aunque el más conocido (y usado por defecto) es el [_NGINX ingress controller_](https://kubernetes.github.io/ingress-nginx/how-it-works/), no es el [único](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) y existen una gran variedad de ellos.
 
-Para utilizarlo en Microk8s, tan sólo tenemos que habilitar el _addon_ _ingress_ con ```bash microk8s.enable ingress```.
+Para utilizarlo en Microk8s, tan sólo tenemos que habilitar el _addon_ _ingress_ con ```sudo microk8s.enable ingress```.
 
 Tras habilitarlo, ahora necesitamos algún servicio que enrrutar. Para ello, vamos a volver a utilizar las plantillas de Nginx del post anterior ([Deployment](https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-deployment.yml) y [Service](https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-service-nodeport.yml) ).
 
@@ -375,7 +376,7 @@ nginx-84cdbdf6dd-8m885                    1/1     Running   0          132m
 nginx-84cdbdf6dd-n5skc                    1/1     Running   0          132m
 
 # Nos introducimos en uno de ellos
-kubectl exec -ti nginx-84cdbdf6dd-8m885 bash
+kubectl exec -ti nginx-84cdbdf6dd-8m885 -- sh
 
 # Comprobamos que las variables están en su sitio:
 root@nginx-84cdbdf6dd-8m885:~# echo $BBDD_USERNAME $BBDD_PASSWORD
@@ -500,7 +501,7 @@ NAME                                      STATUS   VOLUME         CAPACITY   ACC
 persistentvolumeclaim/nginx-pvc-storage   Bound    local-volume   10Gi       RWO            local-storage   76s
 
 # Nos metemos dentro del pod y vemos el contenido del volumen
-kubectl exec -ti nginx-pv-pod bash
+kubectl exec -ti nginx-pv-pod -- bash
 
 root@nginx-pv-pod:/# ls /usr/share/nginx/html/
 adios.html  hola.html
@@ -522,9 +523,9 @@ PD: Si deseamos todos los ficheros YAML utilizados en este post, podemos descarg
 
 * [Página oficial de Fluentd (ENG)](https://www.fluentd.org/)
 
-* [Referencias a la API de Kubernetes 1.19 (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/)
+* [Referencias a la API de Kubernetes 1.23 (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/)
 
-* Conceptos varios de Kubernetes (ENG): [DaemonSets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/), [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) e [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers), [Volúmenes](https://kubernetes.io/docs/concepts/storage/volumes), [Configmaps](https://kubernetes.io/docs/concepts/storage/volumes/#configmap) y [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
+* Conceptos varios de Kubernetes (ENG): [DaemonSets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/), [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) e [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers), [Volúmenes](https://kubernetes.io/docs/concepts/storage/volumes/), [Configmaps](https://kubernetes.io/docs/concepts/storage/volumes/#configmap) y [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 
 * [Stateful vs. Stateless Architecture Overview (ENG)](https://www.bizety.com/2018/08/21/stateful-vs-stateless-architecture-overview/)
 
@@ -536,4 +537,4 @@ PD: Si deseamos todos los ficheros YAML utilizados en este post, podemos descarg
 
 * Conceptos sobre almacenamiento en Kuberntes (ENG): [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/), [Persistent Volumes and Persistent Volume Claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 
-Revisado a 01-03-2021
+Revisado a 01-03-2022
