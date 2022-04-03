@@ -4,7 +4,7 @@ slug: ic-github
 authors:
   - tangelov
 date: 2018-09-20T05:00:00+02:00
-tags:  ["devops", "github, ci"]
+tags:  ["devops", "github", "ci"]
 categories: ["devops"]
 draft: false
 ---
