@@ -49,6 +49,8 @@ Podman es una desarrollo comunitario, con un fuerte apoyo de Red Hat, que permit
 
 Para los casos más sencillos la sustitución de Docker por Podman es tan sólo desinstalar el primero, instalar el segundo y crear un alias que ejecute _podman_ al usar el comando _docker_. Para el resto de la comunidad es para quien escribo este post.
 
+> Esto no es del todo cierto porque Podman utiliza por defecto el formato OCI de imágenes en lugar del de Docker. Si queremos hacer _podman build_ para crear una imagen no debemos olvidar pasarle el formato correcto o nuestro contenedor podría no funcionar como esperabamos: ``` podman build . -t superimagen:latest --format docker```
+
 ### Instalación de Podman
 Tras explicar un poco sus funcionalidades más básicas, vamos a instalar la herramienta.
 
@@ -122,7 +124,6 @@ Tras este último cambio, el comportamiento es el esperado y podemos acceder a T
 
 ### Compatibilidad con Docker
 Este post no pretende mostrar todas las funcionalidades de Podman sino las necesarias para reemplazar a Docker y adaptar su uso a otras herramientas como Docker Compose, que son muy utilizadas por la comunidad.
-
 
 Docker Compose es una herramienta escrita en Python que nos permite definir aplicaciones con uno o más contenedores así como la relación entre ellos, a través de un fichero YAML. Es extremadamente útil al permitir a los desarrolladores crear entornos desechables y repetibles con un sólo comando.
 
@@ -299,7 +300,7 @@ Como ya he comentado, siempre que sea necesario debemos evitar el uso de contene
 * Primero mapeamos el puerto de MySQL al host para que otros contenedores puedan conectarse a él puesto que ya no va a tener una dirección IP propia.
 * También modificamos el fichero XML de configuración para hacer que Traccar use la IP del host en lugar de la resolución por nombre típica de Docker.
 
-El resultado sería el siguiente:
+El fichero de podman-compose sería el siguiente:
 
 ```yaml
 # Fichero para podman-compose
@@ -337,6 +338,8 @@ volumes:
  traccar-db:
  mysql:
 ```
+
+Y el fichero de configuración quedaría así:
 
 ```xml
 <?xml version='1.0' encoding='UTF-8'?>
