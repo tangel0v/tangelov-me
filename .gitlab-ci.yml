@@ -36,7 +36,7 @@ staging-build:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 staging-test:
-  image: python:3.7-alpine
+  image: python:3.10-alpine
   stage: test
   script:
     - pip3 install -r requirements-test.txt
