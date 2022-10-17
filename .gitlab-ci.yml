@@ -47,20 +47,6 @@ staging-test:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
-docker-deploy:
-  image: docker:latest
-  stage: deploy
-  before_script:
-    - docker run --rm -v $PWD:/src klakegg/hugo:$HUGO_VERSION
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  script:
-    - docker build -t $CI_REGISTRY/tangelov/go-tangelov-me:latest .
-    - docker push $CI_REGISTRY/tangelov/go-tangelov-me:latest
-  environment:
-    name: production
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
-
 production-deploy:
   image: docker:latest
   stage: deploy
@@ -73,5 +59,21 @@ production-deploy:
     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud pubsub topics publish $PUBSUB_TOPIC --message="Deploying new version in Production - https://tangelov.me" --project=$PROJECT_ID
   environment:
     name: production
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+
+docker-deploy:
+  image: docker:latest
+  stage: deploy
+  before_script:
+    - docker run --rm -v $PWD:/src klakegg/hugo:$HUGO_VERSION
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build -t $CI_REGISTRY/tangelov/go-tangelov-me:latest .
+    - docker push $CI_REGISTRY/tangelov/go-tangelov-me:latest
+  environment:
+    name: production
+  dependencies:
+    - production-deploy
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
