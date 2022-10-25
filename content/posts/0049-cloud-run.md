@@ -153,11 +153,13 @@ Initializing the backend...
 │ 
 ```
 
-La tercera limitación a salvar ha sido la integración del sistema de secretos, Cloud Run y Atlantis. Al arrancar, Atlantis comprueba que el fichero de configuración del servidor termine en .yaml de forma obligatoria..
 
-Esto choca con las limitaciones de Secret Manager (que no deja utilizar puntos en los nombres de los secretos) y de Cloud Run (que no deja personalizar el nombre de los secretos que montamos como ficheros dentro del servicio).
+La última limitación ha sido la integración del sistema de secretos, Cloud Run y Atlantis. Al arrancar, Atlantis comprueba que la extensión de configuración del servicio termine en .yaml. 
 
-He necesitado añadir un paso en el [script de arranque](https://gitlab.com/canarias2/atlantis/-/raw/main/docker/docker-entrypoint.sh) del contenedor, que copia el contenido del secreto y genera el fichero en el formato esperado.
+Sin embargo, Secret Manager no deja utilizar puntos en los nombres de los secretos y Cloud Run no nos deja personalizar el nombre de los ficheros con el que se montan los secretos dentro del servicio.
+
+
+Para solucionarlo, he necesitado añadir un paso en el [script de arranque](https://gitlab.com/canarias2/atlantis/-/raw/main/docker/docker-entrypoint.sh) del contenedor, que copia el contenido del secreto y genera el fichero en el formato esperado.
 
 Por último, me gustaría añadir una pequeña tabla con el coste aproximado de ejecutar Atlantis al mes en cada uno de los servicios totalmente gestionados dentro de Google Cloud:
 
