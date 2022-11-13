@@ -6,6 +6,8 @@ location: "Madrid, España"
 license: "by-sa"
 email: "yo[at]tangelov.me"
 identity:
+  - name: matrix-org
+    url: https://matrix.to/#/@tangel0v:matrix.org
   - name: liberapay
     url: 'https://liberapay.com/tangelov'
   - name: gitlab
