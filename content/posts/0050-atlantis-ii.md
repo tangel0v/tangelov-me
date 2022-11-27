@@ -9,14 +9,14 @@ categories: ["cloud"]
 draft: false
 ---
 
-Este es el tercer y último post sobre Atlantis que voy a escribir para esta serie. Si los dos primeros explicaban cómo configurar la herranienta y cómo desplegarla sobre Cloud Run, en éste vamos a aplicar algunas buenas prácticas y a mejorar la solución, por lo que asumimos que se han leído los dos anteriores ([I](https://tangelov.me/posts/atlantis-i.html) y [II](https://tangelov.me/posts/cloud-run.html)).
+Este es el tercer y último post sobre Atlantis que voy a escribir para esta serie. Si los dos primeros explicaban cómo configurar la herramienta y cómo desplegarla sobre Cloud Run, en éste vamos a aplicar algunas buenas prácticas y a mejorar la solución, por lo que asumimos que se han leído los dos anteriores ([I](https://tangelov.me/posts/atlantis-i.html) y [II](https://tangelov.me/posts/cloud-run.html)).
 
 El [primer post](https://tangelov.me/posts/atlantis-i.html) de la serie, creaba en el servicio de Atlantis una serie de variables de entorno, que tras convertirse temporalmente en ficheros _[tfvars](https://developer.hashicorp.com/terraform/language/values/variables#variable-definitions-tfvars-files)_, nos permitían inicializar y ejecutar nuestro código.
 
 Esta solución, aunque servía como ejemplo, también tenía muchas limitaciones:
 
-* No escala. Las variables de entorno sólo pueden tener un valor al mismo tiempo. Si nuestra instancia gestiona múltiples proyectos con las mismas variables de entorno, no podría reutilizarlas con seguridad y ademñas, deben de definirse en el servidor, obligando a redesplegar / reiniciar la solución en cada cambio. 
-
+* No escala. Las variables de entorno sólo pueden tener un valor al mismo tiempo. Si nuestra instancia gestiona múltiples proyectos con las mismas variables de entorno, no podría reutilizarlas con seguridad y además, deben de definirse en el servidor, obligando a redesplegar / reiniciar la solución en cada cambio. 
+-
 * Los proyectos _cliente_ deben estar autocontenidos, para evitar en la medida de lo posible dependencias externas ajenas a su control y que impacten en su desarrollo.
 
 * Tal y cómo estaba configurado, tampoco nos proporcionaba garantías ante despliegues más automatizados y por eso vamos a añadir testing.
@@ -29,15 +29,15 @@ La primera parte de este post se va a centrar en solucionar los dos primeros pun
 
 Al interactuar con múltiples sistemas de gestión de llaves de cifrado y soportar de forma nativa la solución de GCP (Cloud KMS), la elección de SOPS es natural.
 
-Antes de utilizar SOPS, necesitamos crear una nueva clave de Cloud KMS. Accedemos a GCP a través de la consola, habilitamos la API de Cloud KMS, creamos un _keyring_ de nombre _"atlantis"_ y una nueva llave, con el mismo nombre:
+Antes de nada necesitamos crear una nueva clave de Cloud KMS para ser utilizada por SOPS. Accedemos a GCP a través de la consola, habilitamos la API de Cloud KMS, creamos un _keyring_ de nombre _"atlantis"_ y una nueva llave, con el mismo nombre:
 
 ![cloud-kms](https://storage.googleapis.com/tangelov-data/images/0050-00.png)
 
 > Si alguien revisa el código adjunto verá que he preferido dejar esta llave fuera de Terraform para evitar que por error pudiera ser borrada en un plan y perdiéramos el acceso a todos los secretos cifrados con ella.
 
-Una vez tenemos la llave creada, necesitamos configurar una serie de permisos en GCP para que pueda ser utilizada por todos los actores involucrados:
+Una vez tenemos la llave ha sido creada, ahora necesitamos configurar una serie de permisos en GCP para que pueda ser utilizada por todos los actores involucrados:
 
-* Los desarrolladores de los repositorios cliente necesitan el rol  _Cloud KMS CryptoKey Encrypter/Decrypter_ puesto que van a crear y mantener los ficheros tfvars cifrados.
+* Los desarrolladores de los repositorios cliente necesitan el rol  _Cloud KMS CryptoKey Encrypter/Decrypter_ puesto que van a crear y mantener los ficheros _tfvars_ cifrados.
 
 * La cuenta de servicio utilizada en GCP por Atlantis tiene que poder descifrar los ficheros, así que le asignamos el rol _Cloud KMS CryptoKey Decrypter_ sobre la clave antes creada.
 
@@ -98,9 +98,9 @@ creation_rules:
   - gcp_kms: projects/proyecto1/locations/region1/keyRings/atlantis/cryptoKeys/atlantis
 ```
 
-Así le decimos a SOPS que debe cifrar los ficheros con la llave _atlantis_ de Cloud KMS en el proyecto1 en la region1. Para crearlos ficheros, tan sólo usamos los comandos ```sops init-tfvars/prd.tfvars.enc``` y ```sops apply-tfvars/prd.tfvars.enc```
+De esta forma le decimos a SOPS que debe cifrar los ficheros con la llave _atlantis_ de Cloud KMS en el proyecto1 en la region1. Para crear los ficheros, tan sólo usamos los comandos ```sops init-tfvars/prd.tfvars.enc``` y ```sops apply-tfvars/prd.tfvars.enc```
 
-Si hubieramos metido la pata y los permisos no fuesen los correctos, recibiríamos un error como el siguiente:
+Si hubiéramos metido la pata y los permisos no fuesen los correctos, recibiríamos un error como el siguiente:
 
 ```bash
 Failed to get the data key required to decrypt the SOPS file.
@@ -113,7 +113,7 @@ Group 0: FAILED
       | (or it may not exist)., forbidden
 ```
 
-El uso de SOPS no impide que nuestros desarrolladores sigan probando su código a mano y podrían simplemente ejecutar los siguientes comandos
+SOPS no impide que nuestros desarrolladores sigan probando su código a mano:
 
 ```bash
 # Desciframos el fichero de init-tfvars y ejecutamos terraform init
@@ -132,7 +132,7 @@ Nuestros desarrolladores ya pueden trabajar con SOPS, pero... ¿Cómo hacemos lo
 
 
 ### Añadiendo SOPS a nuestro contenedor
-Aunque Atlantis permite la ejecución de comandos personalizados dentro de sus workflows, difícilmente va a poder hacerlo si no tiene la herramienta a mano. Por ello antes de cambiar nada en el workflow, tenemos que modificar el Dockerfile de Atlantis para añadirlo al contenedor. Con añadir estas pocas lineas bastaría:
+Aunque Atlantis permite la ejecución de comandos personalizados dentro de sus workflows, difícilmente va a poder hacerlo si no tiene la herramienta a mano. Por ello antes de cambiar nada en el workflow, tenemos que modificar el Dockerfile de Atlantis para añadirlo al contenedor. Con añadir estas pocas líneas bastaría:
 
 ```
 # Download sops from Internet
@@ -180,11 +180,11 @@ Como podemos ver, la ejecución funciona correctamente:
 
 
 ## Testing con Conftest
-Tras asegurar que nuestros secretos pueden ser almacenados de forma segura, ahora vamos a mejorar más la calidad de la solución añadiendo testing. Utilizando Uit Testing podemos garantizar que se cumplan una serie de buenas prácticas dentro de nuestros _planes_ de Terraform. Esta funcionalidad, aunque está en beta, es nativa en Atlantis gracias al uso de _conftest_, una CLI de la que ya he hablado [en posts anteriores](https://tangelov.me/posts/opa.html).
+Tras asegurar que nuestros secretos pueden ser almacenados de forma segura, ahora vamos a mejorar más la calidad de la solución añadiendo testing. Utilizando _Unit Testing_ podemos garantizar que se cumplan una serie de buenas prácticas dentro de nuestros _planes_ de Terraform. Esta funcionalidad, aunque está en beta, es nativa en Atlantis gracias al uso de _conftest_, una CLI de la que ya he hablado [en posts anteriores](https://tangelov.me/posts/opa.html).
 
 Gracias a Conftest, podemos escribir tests en Rego que aseguren un mínimo de calidad y seguridad en nuestra infraestructura. Es algo vital a la hora de evitar problemas, especialmente si queremos implementar CI/CD completo para nuestra infraestructura como código. Actualmente la integración nativa de Atlantis para testing tiene las siguientes características:
 
-* No está habilitada por defecto y hacerlo, requiere modificar laconfiguración general o el arranque del servicio.
+* No está habilitada por defecto y hacerlo, requiere modificar la configuración general o el arranque del servicio.
 
 * Una vez habilitada, se configura dentro del [repo.yaml](https://gitlab.com/canarias2/atlantis/-/raw/main/docker/dummy_repo_config.yaml) en el servidor de Atlantis y solo puede referenciar a carpetas locales, [sin dar soporte a carpetas remotas](https://github.com/runatlantis/atlantis/issues/2454).
 
@@ -194,7 +194,7 @@ Aunque la documentación de la funcionalidad es regular y no explica paso a paso
 enable-policy-checks: "true"
 ```
 
-Así habilitaríamos la funcionalidad en el siguiente reinicio o despliegue. El siguiente paso es definir que políticas se van a aplicar, quien es el encargado de revisarlas si fallan y su ubicación. Nuestro fichero repo.yaml quedaría así:
+Así habilitaríamos la funcionalidad en el siguiente reinicio o despliegue. El siguiente paso es definir qué políticas se van a aplicar, quien es el encargado de revisarlas si fallan y su ubicación. Nuestro fichero repo.yaml quedaría así:
 
 ```yaml
 repos:
@@ -250,7 +250,7 @@ Si ahora ejecutamos nuestro repositorio _dummy_ a través de Atlantis, recibirem
 
 ![atlantis-conftest-error](https://storage.googleapis.com/tangelov-data/images/0050-02.png)
 
-Este error se produce porque no estamos cumpliendo las reglas de etiquetado impuestas en los tests. Ahora podemos o pedir al administrador que nos apruebe el cambio de forma manual, o adaptar nuestro código para que pase los tests.
+ Como no estamos cumpliendo las reglas de etiquetado impuestas en los tests, podemos o pedir al administrador que nos apruebe el cambio de forma manual, o adaptar nuestro código para que pase los tests.
 
 ![atlantis-conftest-val](https://storage.googleapis.com/tangelov-data/images/0050-03.png)
 
@@ -303,15 +303,15 @@ La integración nos permite utilizar el almacenamiento del estado de Terraform e
 
 
 ## Conclusiones finales
-En general he disfrutado mucho con este "mini" proyecto de investigación y he aprendido mucho tanto de Terraform Cloud (ya hablaremos del tema) como de Atlantis. Sin embargo, es fácil ver que ambas soluciones se solapan y que una está recibiendo mucho más cariño que la otra ultimamente.
+En general he disfrutado mucho con este "mini" proyecto de investigación y he aprendido mucho tanto de Terraform Cloud (ya hablaremos del tema) como de Atlantis. Sin embargo, es fácil ver que ambas soluciones se solapan y que una está recibiendo mucho más cariño que la otra últimamente.
 
 Aunque la gestión relacionada con la seguridad (secretos, grupos, almacenamiento del estado, etc.) es mucho mejor en Terraform Cloud, hoy sólo nos vamos a centrar en los puntos fuertes y los flacos de Atlantis.
 
 Como ya hemos comentado anteriormente, Atlantis es una herramienta enfocada al uso de GitOps, pero no me ha permitido hacer todo lo que me hubiera gustado. He sido incapaz de aplicar automáticamente el código tras pasar los tests y hacer que éste se mergeara. Parece que su diseño obliga a pasar por una validación a través de comentarios en Gitlab o Github en cuanto añades tests (y no voy a aplicar automáticamente nada sin testing) y deja el siguiente paso en espera, obligándonos a poner ```atlantis apply -p dummy```. 
 
-Debido a mi experiencia profesional, esto me preocupa porque en entornos grandes y complejos, los pipelines genéricos pueden generar muchos comentarios (ruido) y no tienen porque adaptarse a sus necesidades. Por ejemplo, es habitual que hasta que no se mergee a _main_ el código no sea aplicado en Producción y esto no lo podemos hacer con Atlantis.
+Debido a mi experiencia profesional, esto me preocupa porque en entornos grandes y complejos, los pipelines genéricos pueden generar muchos comentarios (ruido) y no tienen porqué adaptarse a sus necesidades. Por ejemplo, es habitual que hasta que no se mergee a _main_ el código no sea aplicado en Producción y esto no lo podemos hacer con Atlantis.
 
-Aparte de esto, me sigue pareciendo una herramienta muy verśatil y configurable. Podemos añadir cualquier otra CLI (Infracost, Regula o cualquier otra herramienta) al contenedor y personalizar la ejecución al gusto. También podemos gestionar los pipelines de forma centralizada eligiendo qué pueden modificar los usuarios y que no, algo muy útil en determinadas ocasiones y creo que bien configurada puede ser segura y proporcionar workflows de infraestructura consistentes a pequeños equipos de desarrolladores.
+Aparte de esto, me sigue pareciendo una herramienta muy versátil y configurable. Podemos añadir cualquier otra CLI (Infracost, Regula o cualquier otra herramienta) al contenedor y personalizar la ejecución al gusto. También podemos gestionar los pipelines de forma centralizada eligiendo qué pueden modificar los usuarios y que no, algo muy útil en determinadas ocasiones y creo que bien configurada puede ser segura y proporcionar workflows de infraestructura consistentes a pequeños equipos de desarrolladores.
 
 En resumen, una herramienta interesante, consistente, que será muy útil a algunos y que se quedará corta a otros. En cualquier caso, espero que os haya gustado esta serie de posts y nos vemos en la siguiente. Un abrazo a todos.
 
