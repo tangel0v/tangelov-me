@@ -1,5 +1,5 @@
 ---
-title: "Clound Run: orquestando contenedores sin Kubernetes"
+title: "Cloud Run: orquestando contenedores sin Kubernetes"
 slug: cloud-run
 authors:
   - tangelov
@@ -13,7 +13,7 @@ Kubernetes es el orquestador de contenedores más utilizado del mundo. Gracias a
 
 Este ciclo de desarrollo también tiene sus _problemas_. Cada vez es más difícil y complejo mantener un cluster de Kubernetes y esto ha hecho que aparezcan orquestadores alternativos para cubrir los casos de uso más habituales.
 
-Tenemos múltiples opciones. Si queremos ejecutar contenedores en nuestros servidores, podemos optar por _Docker Swarm_ (de Docker Inc.), o _Nomad_ (de Hashicorp.) Si somos usuarios de algún proveedor de nube pública, tenemos otras opciones nativas. El primer orquestador en aparecer de este tipo fue _Google App Engine Flexible_, pero lo que se considera "standard" para este tipo de servicios fue definido por Amazon en _AWS Fargate_.
+Tenemos múltiples opciones. Si queremos ejecutar contenedores en nuestros servidores, podemos optar por _Docker Swarm_ (de Docker Inc.), o _Nomad_ (de Hashicorp.) Si somos usuarios de algún proveedor de nube pública, tenemos otras opciones nativas. El primer orquestador en aparecer de este tipo fue _Google App Engine Flexible_, pero lo que se considera "estándar" para este tipo de servicios fue definido por Amazon en _AWS Fargate_.
 
 Todos estos orquestadores de nube pública tienen algo en común. Buscan ofrecer una plataforma que permita al desarrollador centrarse lo máximo posible en desarrollar su aplicación y reducir al máximo los costes operacionales y el mantenimiento de la infraestructura. Son servicios privativos, muy integrados con otros servicios de la plataforma.
 
@@ -47,7 +47,7 @@ En resumen, la aplicación perfecta para desplegar en Cloud run no debe tener es
 ### Diferencias con la competencia
 Cloud Run es comparado a menudo con otros servicios similares como AWS Fargate o Azure Container Apps, pero tiene algunas diferencias (y similitudes con estos servicios) que debemos conocer antes de empezar a utilizarlo.
 
-Para empezar, Cloud Run puede ejecutarse en dos generaciones distintas de runtime con diferencias importantes entre si.
+Para empezar, Cloud Run puede ejecutarse en dos generaciones distintas de runtime con diferencias importantes entre sí.
 
 La primera generación cuenta con bastantes limitaciones. No proporciona [compatibilidad total](https://cloud.google.com/run/docs/troubleshooting#sandbox) en llamadas al sistema operativo, ni permite usar sistemas de ficheros en red como NFS, SMB, etc. Todo ello puede hacer que nuestra aplicación no funcione correctamente.
 
@@ -103,7 +103,7 @@ Al final, la tercera solución fue elegida por coste y complejidad. Implica asum
 ### Código en Terraform
 Previo a comenzar cualquier despliegue, no debemos olvidar la configuración de nuestro usuario robot en Gitlab, tal y cómo vimos en el post anterior.
 
-Con los deberes hecho, procedemos a desplegar nuestros recursos y dependencias utilizando Terraform y Gitlab CI.
+Con los deberes hechos, procedemos a desplegar nuestros recursos y dependencias utilizando Terraform y Gitlab CI.
 
 ![atlantis-architecture](https://storage.googleapis.com/tangelov-data/images/0049-03.png)
 
@@ -113,7 +113,7 @@ Con los deberes hecho, procedemos a desplegar nuestros recursos y dependencias u
 
 2. El siguiente paso es desplegar la infraestructura para que el servicio pueda funcionar. Necesitamos:
 
-	1. Un repositorio de Artifact Registry donde alamacenar nuestras imagenes Docker. Cloud Run no permite usar imagenes de DockerHub o Github así que vamos a crear [nuestra propia imagen](https://gitlab.com/canarias2/atlantis/-/raw/main/docker/Dockerfile), que además pienso personalizar en el futuro.
+	1. Un repositorio de Artifact Registry donde almacenar nuestras imágenes Docker. Cloud Run no permite usar imágenes de DockerHub o Github así que vamos a crear [nuestra propia imagen](https://gitlab.com/canarias2/atlantis/-/raw/main/docker/Dockerfile), que además pienso personalizar en el futuro.
 
 	2. Dos secretos en Secret Manager: uno para la configuración del servicio y otro para la de los repositorios gestionados por Atlantis.
 
@@ -123,7 +123,7 @@ Con los deberes hecho, procedemos a desplegar nuestros recursos y dependencias u
 
 	Si intentamos desplegar todo de golpe, el servicio de Cloud Run dará un error al no existir ni una configuración válida para Atlantis ni una imagen dentro del repositorio de Artifact Registry.
 
-3. El siguiente paso es __manual__. Ahora creamos una versión nueva dentro de cada secreto con la configuración de [nuestro servicio](https://gitlab.com/canarias2/atlantis/-/raw/main/docker/dummy_atlantis_config.yaml) y de los [repositorios](https://gitlab.com/canarias2/atlantis/-/raw/main/docker/dummy_repo_config.yaml). Para cualquier duda al respecto, recomiendo revisisar el [post previo](https://tangelov.me/posts/atlantis-i.html) a éste.
+3. El siguiente paso es __manual__. Ahora creamos una versión nueva dentro de cada secreto con la configuración de [nuestro servicio](https://gitlab.com/canarias2/atlantis/-/raw/main/docker/dummy_atlantis_config.yaml) y de los [repositorios](https://gitlab.com/canarias2/atlantis/-/raw/main/docker/dummy_repo_config.yaml). Para cualquier duda al respecto, recomiendo revisar el [post previo](https://tangelov.me/posts/atlantis-i.html) a éste.
 
 	La configuración del Atlantis no está directamente integrada en Terraform (de momento) porque quiero pensar mejor cual es la mejor forma de hacerlo.
 
@@ -131,7 +131,7 @@ Con los deberes hecho, procedemos a desplegar nuestros recursos y dependencias u
 
 5. Si ejecutamos nuestro pipeline otra vez, Cloud Run ya se desplegará sin errores.
 
-6. Por último podemos crear un [dominio personalizado](https://cloud.google.com/run/docs/mapping-custom-domains) para Atlantis, pero dependiendo de cómo dicho dominio esté gestionado en GCP, podremos automatizarlo o no. Por ello este paso es totalmente __opcional__ y manual.
+6. Por último podemos crear un [dominio personalizado](https://cloud.google.com/run/docs/mapping-custom-domains) para Atlantis, pero dependiendo de cómo dicho dominio esté gestionado en GCP, sera posible automatizarlo o no. Por ello este paso es totalmente __opcional__ y manual.
 
 Llegados a este punto nuestra aplicación es funcional, sin necesitar llaves de cuentas de servicio puesto que todos los permisos son gestionados de forma nativa. El código completo de la solución está disponible [aquí](https://gitlab.com/canarias2/atlantis).
 
