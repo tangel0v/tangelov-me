@@ -93,8 +93,8 @@ Ya en el siguiente post sobre el tema, empezaremos a crear nuestro rol.
 
 ## Documentación
 
-* [Estructura de un rol (ENG)](https://docs.ansible.com/ansible/5/user_guide/playbooks_reuse_roles.html)
+* [Estructura de un rol (ENG)](https://docs.ansible.com/ansible/7/playbook_guide/playbooks_reuse_roles.html#playbooks-reuse-roles)
 
-* [Gitlab de Backupninja (ENG)](https://0xacab.org/riseuplabs/backupninja)
+* [Gitlab de Backupninja (ENG)](https://0xacab.org/liberate/backupninja)
 
-Revisado a 01/03/2022
+Revisado a 01/01/2023
