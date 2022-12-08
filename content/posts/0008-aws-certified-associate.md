@@ -37,10 +37,10 @@ Al ser una certificación de exigencia media y no ser la [_Professional_](https:
 
 * [Whizlabs (ENG)](https://www.whizlabs.com/): Proporciona exámenes de prueba aparte de los que proporciona Amazon con preguntas tipo y nos ayudará mucho a la hora de hacer el examen.
 
-* [A Cloud Guru (ENG)](https://acloud.guru/): Curso online que nos puede aportar la base necesaria para preparar el examen. Lo más interesante son sus pistas sobre lo que suele entrar de cada servicio y las partes prácticas.
+* [A Cloud Guru (ENG)](https://acloud.guru/): Curso online que nos puede aportar la base necesaria para preparar el examen. Lo más interesante son sus pistas sobre lo que suele entrar de cada servicio y las partes prácticas. Ha sido comprado por Pluralsight hace tiempo.
 
-* [Linux Academy (ENG)](https://linuxacademy.com/): Similar al anterior. Yo personalmente no lo he usado pero se que no tiene mala reputación.
+* [Udemy courses from Stephane Mareek (ENG)](https://www.udemy.com/user/stephane-maarek/): Similar al anterior. Yo personalmente no lo he usado pero se que no tiene mala reputación.
 
 * [AWS FAQs](https://aws.amazon.com/es/faqs/): Lista de FAQs de AWS
 
-Revisado a 01/03/2022
+Revisado a 01/01/2023
