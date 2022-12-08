@@ -43,7 +43,7 @@ Existen multitud de guías sobre cómo instalar Nextcloud así que simplemente v
 
 * [Instalación de Nextcloud en Debian 10](https://chachocool.com/como-instalar-nextcloud-en-debian-10-buster/)
 
-En general, todos ellos se basan en instalar un servidor web (Nginx o Apache), PHP (las últimas versiones aceptan PHP 7.3 o superior) y una base de datos MySQL o MariaDB. Si preferimos utilizar un método automatizado, siempre podemos instalarlo con [este rol](https://github.com/rbicker/ansible-nextcloud) de Ansible.
+En general, todos ellos se basan en instalar un servidor web (Nginx o Apache), PHP (las últimas versiones aceptan PHP 8.0 o superior) y una base de datos MySQL o MariaDB. Si preferimos utilizar un método automatizado, siempre podemos instalarlo con [este rol](https://galaxy.ansible.com/aalaesar/install_nextcloud) de Ansible.
 
 ## Usos y capacidades
 La comunidad ha creado un auténtico ecosistema de extensiones y aplicaciones que hacen de Nextcloud un sistema todoterreno que podemos usar para casi todo.
@@ -52,7 +52,7 @@ Yo uso un pequeño servidor de Nextcloud instalado en una pequeña placa base (u
 
 Tenemos aplicaciones para todo:
 
-* [Collabora Online](https://nextcloud.com/collaboraonline/): Collabora Online es un aplicativo web que nos permite disfrutar de una suite de ofimática completa en la web. Al integrarse con Nextcloud, permite que podamos colaborar entre los distintos miembros del equipo para crear documentos o hojas de cálculo. Para entendernos, es una alternativa a Google Docs o a Office 365.
+* [Collabora Online](https://nextcloud.com/office/): Collabora Online es un aplicativo web que nos permite disfrutar de una suite de ofimática completa en la web. Al integrarse con Nextcloud, permite que podamos colaborar entre los distintos miembros del equipo para crear documentos o hojas de cálculo. Para entendernos, es una alternativa a Google Docs o a Office 365.
 
 * [Mail](https://apps.nextcloud.com/apps/mail): Es una aplicación que nos permite instalar un webmail dentro de Nextcloud y que se conecta a nuestra cuenta de correo para convertir nuestra nube en un punto de entrada no sólo a nuestros ficheros sino también a nuestro correo.
 
@@ -72,6 +72,6 @@ Tenemos aplicaciones para todo:
 
 * [Comparación de servicios de almacenamiento en la nube (ENG)](https://en.wikipedia.org/wiki/Comparison_of_online_backup_services)
 
-* [Parámetros y tips en Nextcloud 23 y PHP (ENG)](https://docs.nextcloud.com/server/23/admin_manual/installation/source_installation.html#php-fpm-tips-label)
+* [Parámetros y tips en Nextcloud 25 y PHP (ENG)](https://docs.nextcloud.com/server/25/admin_manual/installation/source_installation.html#php-fpm-tips-label)
 
-Revisado a 01/03/2022
+Revisado a 01/01/2023
