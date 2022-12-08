@@ -145,8 +145,8 @@ Profundizaremos más adelante sobre el tema: organización interna, gestión de 
 
 * [Ansible (ENG)](https://en.wikipedia.org/wiki/Ansible_(software))
 
-* [Lista de módulos de Ansible (ENG)](https://docs.ansible.com/ansible/5/collections/index_module.html)
+* [Lista de módulos de Ansible (ENG)](https://docs.ansible.com/ansible/7/collections/index_module.html)
 
-* [Inventarios en Ansible (ENG)](https://docs.ansible.com/ansible/5/user_guide/intro_inventory.html)
+* [Inventarios en Ansible (ENG)](https://docs.ansible.com/ansible/7/inventory_guide/intro_inventory.html#intro-inventory)
 
-Revisado a 01/03/2022
+Revisado a 01/03/2023
