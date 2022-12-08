@@ -39,15 +39,27 @@ También podemos instalarlo a través de sus repositorios oficiales para [Ubuntu
 Una vez ya hemos instalado la CLI, debemos iniciarla con
 ```bash
 # Iniciamos el asistente de configuración de Google Cloud SDK
-gcloud init --console-only
+gcloud init --no-browser
+
+Welcome! This command will take you through the configuration of gcloud.
+
+Your current configuration has been set to: [default]
+
+You can skip diagnostics next time by using the following flag:
+  gcloud init --skip-diagnostics
+
+Network diagnostic detects and fixes local network connection issues.
+Checking network connection...done.                                                                   
+Reachability Check passed.
+Network diagnostic passed (1/1 checks passed).
+
+You must log in to continue. Would you like to log in (Y/n)?  Y
+
+You are authorizing gcloud CLI without access to a web browser. Please run the following command on a machine with a web browser and copy its output back here. Make sure the installed gcloud version is 372.0.0 or newer.
 ```
 Nos aparecerá una URL que debemos copiar y pegar en un navegador:
 
 ![Configuracion de Google Cloud](https://storage.googleapis.com/tangelov-data/images/0002-00.png)
-
-Después debemos loguearnos en nuestra cuenta:
-
-![Login con una cuenta de Google](https://storage.googleapis.com/tangelov-data/images/0002-01.png)
 
 Y pegar el código resultante en la terminal.
 
@@ -61,7 +73,11 @@ Nuestra configuración se encuentra en una carpeta dentro de nuestro $HOME llama
 └── gcloud
     ├── access_tokens.db
     ├── active_config
+    ├── application_default_credentials.json
     ├── config_sentinel
+    ├── cache
+        └── xxxxxxxxxxxx@gmail.com
+            └── resource.cache
     ├── configurations
     │   └── config_default
     ├── credentials.db
@@ -70,12 +86,9 @@ Nuestra configuración se encuentra en una carpeta dentro de nuestro $HOME llama
     │   └── xxxxxxxxxxxx@gmail.com
     │       └── adc.json
     └── logs
-        └── 2018.01.15
-            ├── 08.20.41.087858.log
-            ├── 08.22.18.582898.log
-            ├── 09.00.00.155198.log
-            ├── 11.09.17.704774.log
-            └── 11.09.27.810942.log
+        └── 2022.12.04
+            ├── 09.22.59.811541.log
+            └── 09.24.17.024208.log
 ```
 
 ### Configuración extra
@@ -84,42 +97,58 @@ Si necesitamos alguno de los clientes extra que tiene Google Cloud como, por eje
 También podemos ver todos los componentes disponibles con _gcloud components list_ :
 
 ```bash
-Your current Cloud SDK version is: 275.0.0
-The latest available version is: 275.0.0
+Your current Cloud SDK version is: 411.0.0
+The latest available version is: 411.0.0
 
-┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                                  Components                                                 │
-├───────────────┬──────────────────────────────────────────────────────┬──────────────────────────┬───────────┤
-│     Status    │                         Name                         │            ID            │    Size   │
-├───────────────┼──────────────────────────────────────────────────────┼──────────────────────────┼───────────┤
-│ Not Installed │ App Engine Go Extensions                             │ app-engine-go            │  56.6 MiB │
-│ Not Installed │ Cloud Bigtable Command Line Tool                     │ cbt                      │   6.4 MiB │
-│ Not Installed │ Cloud Bigtable Emulator                              │ bigtable                 │   4.3 MiB │
-│ Not Installed │ Cloud Datalab Command Line Tool                      │ datalab                  │   < 1 MiB │
-│ Not Installed │ Cloud Datastore Emulator                             │ cloud-datastore-emulator │  17.7 MiB │
-│ Not Installed │ Cloud Datastore Emulator (Legacy)                    │ gcd-emulator             │  38.1 MiB │
-│ Not Installed │ Cloud Firestore Emulator                             │ cloud-firestore-emulator │  27.5 MiB │
-│ Not Installed │ Cloud Pub/Sub Emulator                               │ pubsub-emulator          │  33.4 MiB │
-│ Not Installed │ Cloud SQL Proxy                                      │ cloud_sql_proxy          │   3.8 MiB │
-│ Not Installed │ Emulator Reverse Proxy                               │ emulator-reverse-proxy   │  14.5 MiB │
-│ Not Installed │ Google Cloud Build Local Builder                     │ cloud-build-local        │   6.0 MiB │
-│ Not Installed │ Google Container Registry's Docker credential helper │ docker-credential-gcr    │   1.8 MiB │
-│ Not Installed │ gcloud Alpha Commands                                │ alpha                    │   < 1 MiB │
-│ Not Installed │ gcloud Beta Commands                                 │ beta                     │   < 1 MiB │
-│ Not Installed │ gcloud app Java Extensions                           │ app-engine-java          │ 108.8 MiB │
-│ Not Installed │ gcloud app PHP Extensions                            │ app-engine-php           │           │
-│ Not Installed │ gcloud app Python Extensions                         │ app-engine-python        │   6.2 MiB │
-│ Not Installed │ gcloud app Python Extensions (Extra Libraries)       │ app-engine-python-extras │  28.5 MiB │
-│ Not Installed │ kubectl                                              │ kubectl                  │   < 1 MiB │
-│ Installed     │ BigQuery Command Line Tool                           │ bq                       │   < 1 MiB │
-│ Installed     │ Cloud SDK Core Libraries                             │ core                     │   9.0 MiB │
-│ Installed     │ Cloud Storage Command Line Tool                      │ gsutil                   │   3.5 MiB │
-└───────────────┴──────────────────────────────────────────────────────┴──────────────────────────┴───────────┘
-To install or remove components at your current SDK version [275.0.0], run:
+┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                 Components                                                 │
+├───────────────┬──────────────────────────────────────────────────────┬──────────────────────────┬──────────┤
+│     Status    │                         Name                         │            ID            │   Size   │
+├───────────────┼──────────────────────────────────────────────────────┼──────────────────────────┼──────────┤
+│ Not Installed │ App Engine Go Extensions                             │ app-engine-go            │  4.2 MiB │
+│ Not Installed │ Appctl                                               │ appctl                   │ 21.0 MiB │
+│ Not Installed │ Artifact Registry Go Module Package Helper           │ package-go-module        │  < 1 MiB │
+│ Not Installed │ Cloud Bigtable Command Line Tool                     │ cbt                      │ 10.4 MiB │
+│ Not Installed │ Cloud Bigtable Emulator                              │ bigtable                 │  6.7 MiB │
+│ Not Installed │ Cloud Datastore Emulator                             │ cloud-datastore-emulator │ 35.1 MiB │
+│ Not Installed │ Cloud Firestore Emulator                             │ cloud-firestore-emulator │ 40.2 MiB │
+│ Not Installed │ Cloud Pub/Sub Emulator                               │ pubsub-emulator          │ 62.4 MiB │
+│ Not Installed │ Cloud Run Proxy                                      │ cloud-run-proxy          │  9.0 MiB │
+│ Not Installed │ Cloud SQL Proxy                                      │ cloud_sql_proxy          │  7.8 MiB │
+│ Not Installed │ Cloud Spanner Emulator                               │ cloud-spanner-emulator   │ 28.7 MiB │
+│ Not Installed │ Cloud Spanner Migration Tool                         │ harbourbridge            │ 18.1 MiB │
+│ Not Installed │ Google Container Registry's Docker credential helper │ docker-credential-gcr    │  1.8 MiB │
+│ Not Installed │ Kustomize                                            │ kustomize                │  4.3 MiB │
+│ Not Installed │ Log Streaming                                        │ log-streaming            │ 13.9 MiB │
+│ Not Installed │ Minikube                                             │ minikube                 │ 31.5 MiB │
+│ Not Installed │ Nomos CLI                                            │ nomos                    │ 25.0 MiB │
+│ Not Installed │ On-Demand Scanning API extraction helper             │ local-extract            │ 13.4 MiB │
+│ Not Installed │ Skaffold                                             │ skaffold                 │ 20.1 MiB │
+│ Not Installed │ Terraform Tools                                      │ terraform-tools          │ 53.3 MiB │
+│ Not Installed │ anthos-auth                                          │ anthos-auth              │ 20.4 MiB │
+│ Not Installed │ config-connector                                     │ config-connector         │ 56.7 MiB │
+│ Not Installed │ gcloud app Java Extensions                           │ app-engine-java          │ 63.9 MiB │
+│ Not Installed │ gcloud app Python Extensions                         │ app-engine-python        │  8.6 MiB │
+│ Not Installed │ gcloud app Python Extensions (Extra Libraries)       │ app-engine-python-extras │ 26.4 MiB │
+│ Not Installed │ gke-gcloud-auth-plugin                               │ gke-gcloud-auth-plugin   │  7.6 MiB │
+│ Not Installed │ kubectl                                              │ kubectl                  │  < 1 MiB │
+│ Not Installed │ kubectl-oidc                                         │ kubectl-oidc             │ 20.4 MiB │
+│ Not Installed │ pkg                                                  │ pkg                      │          │
+│ Installed     │ BigQuery Command Line Tool                           │ bq                       │  1.6 MiB │
+│ Installed     │ Bundled Python 3.9                                   │ bundled-python3-unix     │ 62.2 MiB │
+│ Installed     │ Cloud Datalab Command Line Tool                      │ datalab                  │  < 1 MiB │
+│ Installed     │ Cloud Storage Command Line Tool                      │ gsutil                   │ 15.5 MiB │
+│ Installed     │ Google Cloud CLI Core Libraries                      │ core                     │ 25.8 MiB │
+│ Installed     │ Google Cloud CRC32C Hash Tool                        │ gcloud-crc32c            │  1.2 MiB │
+│ Installed     │ gcloud Alpha Commands                                │ alpha                    │  < 1 MiB │
+│ Installed     │ gcloud Beta Commands                                 │ beta                     │  < 1 MiB │
+│ Installed     │ kpt                                                  │ kpt                      │ 12.3 MiB │
+└───────────────┴──────────────────────────────────────────────────────┴──────────────────────────┴──────────┘
+To install or remove components at your current SDK version [411.0.0], run:
   $ gcloud components install COMPONENT_ID
   $ gcloud components remove COMPONENT_ID
 
-To update your SDK installation to the latest version [275.0.0], run:
+To update your SDK installation to the latest version [411.0.0], run:
   $ gcloud components update
 ```  
 
@@ -127,4 +156,4 @@ To update your SDK installation to the latest version [275.0.0], run:
 
 * [Install Google Cloud SDK (ENG)](https://cloud.google.com/sdk/install/)
 
-Revisado a 01/03/2022.
+Revisado a 01/01/2023.
