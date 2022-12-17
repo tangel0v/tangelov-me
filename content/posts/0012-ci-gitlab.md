@@ -160,4 +160,4 @@ Como podemos ver, ahora tenemos un job que se nos crea una imagen de Docker de f
 * [Test all the things in GitLab CI with Docker by example (ENG)](https://about.gitlab.com/2018/02/05/test-all-the-things-gitlab-ci-docker-examples/)
 
 
-Revisado a 01/03/2022
+Revisado a 01/01/2023

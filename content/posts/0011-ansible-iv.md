@@ -225,12 +225,12 @@ Muchas gracias.
 
 ## Documentación
 
-* [Estructura de un rol (ENG)](https://docs.ansible.com/ansible/5/user_guide/playbooks_reuse_roles.html)
+* [Estructura de un rol (ENG)](https://docs.ansible.com/ansible/7/playbook_guide/playbooks_reuse_roles.html#playbooks-reuse-roles)
 
 * [Gitlab de Backupninja (ENG)](https://0xacab.org/liberate/backupninja)
 
-* [Plantillas en Jinja2 (ENG)](https://jinja.palletsprojects.com/en/3.0.x/templates/)
+* [Plantillas en Jinja2 (ENG)](https://jinja.palletsprojects.com/en/3.1.x/templates/)
 
-* [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/5/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
+* [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/7/playbook_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
 
-Revisado a 01/03/2022
+Revisado a 01/01/2023
