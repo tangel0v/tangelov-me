@@ -1,4 +1,5 @@
-runtime: python311
+runtime: python27
+threadsafe: true
 instance_class: B1
 
 handlers:
