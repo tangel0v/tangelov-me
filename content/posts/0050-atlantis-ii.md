@@ -16,7 +16,7 @@ El [primer post](https://tangelov.me/posts/atlantis-i.html) de la serie, creaba 
 Esta solución, aunque servía como ejemplo, también tenía muchas limitaciones:
 
 * No escala. Las variables de entorno sólo pueden tener un valor al mismo tiempo. Si nuestra instancia gestiona múltiples proyectos con las mismas variables de entorno, no podría reutilizarlas con seguridad y además, deben de definirse en el servidor, obligando a redesplegar / reiniciar la solución en cada cambio. 
--
+
 * Los proyectos _cliente_ deben estar autocontenidos, para evitar en la medida de lo posible dependencias externas ajenas a su control y que impacten en su desarrollo.
 
 * Tal y cómo estaba configurado, tampoco nos proporcionaba garantías ante despliegues más automatizados y por eso vamos a añadir testing.
@@ -262,7 +262,16 @@ Los tests añadidos comprueban si un recurso va a ser borrado, reemplazado o si 
 ## Extra: Terraform Cloud
 Atlantis puede integrarse con Terraform Cloud y lo hace de forma sencilla, tan sólo tenemos que modificar dos cosas:
 
-* El fichero donde indicamos el _remote_ del estado para que apunte a un workspace de Terraform Cloud.
+* El fichero donde indicamos el _remote_ del estteriormente necesitaremos mantenerlo actualizado, gestionar sus dependencias, y más esporádicamente, realizar migraciones entre versiones.
+
+Aunque Docker y los contenedores facilitan mucho esta tarea, incorporan otros puntos de fricción. Si utilizamos Kubernetes necesitamos tener en cuenta que nuestros servicios soporten las APIs correctamente, que estemos en versiones soportadas, que nuestra aplicación sea segura, etc.
+
+En este post voy a explicar cómo he hecho para gestionar el mantenimiento de servicios y cómo estoy optimizando todo el proceso para que el tiempo que tengo que dedicarle sea cómodo para mi. Espero que os guste.
+
+Un poco de contexto
+Fuera del trabajo, mantengo la infraestructura de un par de blogs y un par de servidores que tengo desplegados en casa. Siempre a modo de hobby, pero tratando de ser lo más profesional posible. Para ello, me autoimpuse una serie de normas que intento seguir a rajatabla:
+
+Toda la infraestructura y sus despliegues deben hacerse con código y automatizarse si merece la pena.ado para que apunte a un workspace de Terraform Cloud.
 
 * Crear una variable de entorno con un token para acceder a dicho workspace.
 
