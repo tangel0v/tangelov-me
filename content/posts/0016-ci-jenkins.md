@@ -130,10 +130,10 @@ pipeline {
     stages {
         stage('Install prerrequisites') {
             steps {
-                sh 'mkdir tools & curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-426.0.0-linux-x86_64.tar.gz --output tools/gcloud.tar.gz'
-                sh 'tar xvf tools/gcloud.tar.gz -C tools/'
+                sh 'curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-426.0.0-linux-x86_64.tar.gz --output tools/gcloud.tar.gz'
+                sh 'tar -xvf tools/gcloud.tar.gz -C tools/'
                 
-                sh 'pip3 install "nikola[extras]"==8.2.0 --user'
+                sh 'pip3 install "nikola[extras]"==8.2.3 --user'
             }
         }
         
@@ -157,7 +157,6 @@ pipeline {
         }
     }
 }
-
 ```
 
 ![gcloud-pipeline](https://storage.googleapis.com/tangelov-data/images/0016-09.png)
@@ -186,4 +185,4 @@ Este código replica lo que hemos realiado en el anterior job, pero a través de
 * [La integración continua pasa por pipelines](https://sdos.es/integracion-continua-pasa-por-pipelines/)
 
 
-Revisado a 01/03/2023
+Revisado a 01/04/2023
