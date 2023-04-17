@@ -326,4 +326,4 @@ Y eso es todo por hoy. Me he retrasado un poco con este post por motivos persona
 
 * [Pulumi as Infraestructure as Code software (ENG)](https://medium.com/hara-engineering/pulumi-as-infrastructure-as-code-software-720d62987e9f).
 
-Revisado a 01/03/2022
+Revisado a 01/04/2023

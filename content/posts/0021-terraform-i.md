@@ -111,4 +111,4 @@ Si alguno desea implementar un sistema igual, todo ello está codificado y puede
 
 * [Repositorio del código de la infraestructura de tangelov.me](https://gitlab.com/tangelov/tangelov-infra)
 
-Revisado a 01/03/2022
+Revisado a 01/04/2023

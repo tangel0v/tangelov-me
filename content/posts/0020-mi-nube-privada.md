@@ -85,4 +85,4 @@ Y nada, recomiendo a todo el mundo que le guste el cacharreo que se monte uno, l
 
 * [Instalación de Rclone (ENG)](https://rclone.org/downloads/)
 
-Revisado a 01/03/2022
+Revisado a 01/04/2023
