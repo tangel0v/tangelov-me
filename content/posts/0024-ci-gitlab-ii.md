@@ -38,6 +38,7 @@ Es un proceso que no me ha dado problemas y es rápido, pero también es repetit
 
 ## Automatizando paso a paso
 
+
 ### Subiendo imágenes con hooks de git
 Analizando los pasos del despliegue, vemos rápidamente que son dos partes independientes: una relacionada con la gestión del código en git y otra con la gestión de las imágenes fuera de él. Aunque _técnicamente_ sean independientes, _realmente_ no deberían serlo y las fotos deberían subirse a la nube automáticamente.
 
@@ -315,4 +316,4 @@ Un saludo a todo el mundo y gracias.
 * [Gitlab: Automatically testing your Python project (ENG)](https://cylab.be/blog/18/gitlab-automatically-testing-your-python-project)
 
 
-Revisado a 01/03/2022
+Revisado a 01/04/2023

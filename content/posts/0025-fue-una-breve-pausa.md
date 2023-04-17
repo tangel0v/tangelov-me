@@ -76,4 +76,4 @@ Así que nada, a partir de ahora (más liberado) volvemos a la rutina y espero p
 
 * [GCP FAQs (ENG)](https://cloud.google.com/certification/faqs/#0): Lista de FAQs de GCP
 
-Revisado a 01/03/2022
+Revisado a 01/04/2023

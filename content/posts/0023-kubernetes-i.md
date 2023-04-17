@@ -98,6 +98,8 @@ En cambio, cada _worker_ tiene otros servicios:
 
 Aunque éstos no son todos los elementos y se han tratado muy por encima, sí son los elementos básicos que tenemos que conocer para empezar a utilizar K8s. Prometo que los próximos posts al respecto van a ser mucho más prácticos.
 
+> A 2023, la comunidad está desarrollando un sistema que no requiere del uso de kubelet en los nodos, pero es experimental y está fuera del contenido de este post.
+
 
 ### MicroK8s
 Kubernetes está formado por una gran cantidad de elementos que funcionan conjuntamente para proporcionar la funcionalidad que se espera. Montar un clúster de 0 es algo que haremos en posts futuros, pero en este caso vamos a utilizar MicroK8s para acelerar las cosas y hacer un par de ejemplos prácticos.
@@ -115,13 +117,13 @@ sudo apt install snapd
 # https://docs.snapcraft.io/installing-snapd/6735
 
 # Second, we use snap to install Microk8s
-sudo snap install microk8s --classic --channel=1.23/stable
+sudo snap install microk8s --classic --channel=1.27/stable
 ```
 
 Si todo va bien, haciendo ```sudo snap info microk8s``` veremos en la última línea algo parecido a esto:
 
 ```bash
-microk8s (1.23/stable) v1.23.3 from Canonical✓ installed
+microk8s (1.27/stable) v1.27.0 from Canonical✓ installed
 ```
 
 Al ser un sistema basado en un sólo nodo, podemos ver que los servicios de los nodos maestro y
@@ -318,4 +320,4 @@ Y poco más por hoy, más Kubernetes en próximos posts :D
 
 * Los YAML de ejemplo son accesibles desde [aquí](https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-deployment.yml) y [aquí](https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-service-nodeport.yml).
 
-Revisado a 01-03-2022
+Revisado a 01-04-2023
