@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
         - name: fluentd
-          image: quay.io/fluentd_elasticsearch/fluentd:v3.4.0
+          image: quay.io/fluentd_elasticsearch/fluentd:v4.3
       terminationGracePeriodSeconds: 30
 ```
 
@@ -287,7 +287,7 @@ Si queremos borrar lo antes creado, ejecutamos los siguientes comandos:
 
 ```bash
 # Borramos los elementos antes creados
-kubectl delete ingress basic-nginx-ingress
+kubectl delete ingress ingress
 kubectl delete svc nginx
 kubectl delete deployment nginx
 ```
@@ -523,7 +523,7 @@ PD: Si deseamos todos los ficheros YAML utilizados en este post, podemos descarg
 
 * [Página oficial de Fluentd (ENG)](https://www.fluentd.org/)
 
-* [Referencias a la API de Kubernetes 1.23 (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/)
+* [Referencias a la API de Kubernetes 1.27 (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/)
 
 * Conceptos varios de Kubernetes (ENG): [DaemonSets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/), [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) e [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers), [Volúmenes](https://kubernetes.io/docs/concepts/storage/volumes/), [Configmaps](https://kubernetes.io/docs/concepts/storage/volumes/#configmap) y [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 
@@ -537,4 +537,4 @@ PD: Si deseamos todos los ficheros YAML utilizados en este post, podemos descarg
 
 * Conceptos sobre almacenamiento en Kuberntes (ENG): [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/), [Persistent Volumes and Persistent Volume Claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 
-Revisado a 01-03-2022
+Revisado a 01-03-2023
