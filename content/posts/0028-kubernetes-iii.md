@@ -320,4 +320,4 @@ Un saludo a todos!
 * [Arquitectura de la plataforma Traccar (ENG)](https://www.traccar.org/architecture/)
 
 
-Revisado a 01-03-2022
+Revisado a 01-03-2023
