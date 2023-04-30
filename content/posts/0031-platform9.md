@@ -342,4 +342,4 @@ Y nada... este ha sido todo el análisis, espero que a alguien le sea de utilida
 * [Comparación entre las diferentes versiones de Platform9 (ENG)](https://platform9.com/pricing/comparison/)
 
 
-Revisado a 01-03-2022
+Revisado a 01-03-2023
