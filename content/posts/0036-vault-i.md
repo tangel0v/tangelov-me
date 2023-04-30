@@ -121,7 +121,7 @@ Con los prerrequisitos cumplidos, podemos proceder a su instalación.
 kubectl create namespace vault
 
 # Creamos el secreto con la llave de GCP para que Vault la utilice.
-kubectl create secret generic gcs-key --from-file=key.json=vault.json -n vault
+kubectl create secret generic gcs-key --from-file=key.json -n vault
 
 # Añadimos el repositorio oficial de Helm de Hashicorp
 helm repo add hashicorp https://helm.releases.hashicorp.com && helm repo update
@@ -192,7 +192,7 @@ Initialized            true
 Sealed                 false
 Total Shares           1
 Threshold              1
-Version                1.9.3
+Version                1.13.1
 Storage Type           gcs
 Cluster Name           vault-cluster-xxxxxxxx
 Cluster ID             xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
@@ -256,4 +256,4 @@ Y hasta aquí va a llegar el post de hoy. En siguientes posts, trataremos la ges
 
 * [Arquitectura a bajo nivel de Hashicorp Vault (ENG)](https://www.vaultproject.io/docs/internals/architecture)
 
-Revisado a 01-03-2022
+Revisado a 01-03-2023
