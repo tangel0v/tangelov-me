@@ -36,13 +36,13 @@ Los principales plugins CNI son los siguientes:
 
 * __Flannel__: desarrollado por CoreOS, es posiblemente sea el ejemplo más maduro de todos ellos y utiliza el _etcd_ de nuestro clúster para almacenar la información de red. Flannel crea una red de capa tres que se extiende a lo largo de todos los nodos del clúster. Cada nodo recibe una fracción de dicha red para asignar IPs y los contenedores pueden comunicarse entre ellos sin problemas. Flannel no soporta por defecto _Network Policies_.
 
-* __Calico__: Calico es otra de las opciones más utilizadas a la hora de implantar un modelo de CNI en Kubernetes. Desarrollado por [_Project Calico_](https://www.projectcalico.org/), funciona a través de una red de capa tres que enrruta los paquetes entre cada uno de los hosts del clúster de Kubernetes mediante el protocolo BGP. Calico es muy conocido por sus potentes _Network Policies_, pero hablaremos de ello más adelante.
+* __Calico__: Calico es otra de las opciones más utilizadas a la hora de implantar un modelo de CNI en Kubernetes. Desarrollado por [_Project Calico_](https://www.tigera.io/project-calico/), funciona a través de una red de capa tres que enrruta los paquetes entre cada uno de los hosts del clúster de Kubernetes mediante el protocolo BGP. Calico es muy conocido por sus potentes _Network Policies_, pero hablaremos de ello más adelante.
 
 * __Canal__: Es una mezcla de ambos: combina el modelo de networking simple de Flannel con la potencia de las políticas de red de Calico. Su origen está basado en un proyecto que ha sido descontinuado pero que se sigue utilizando puesto que los objetivos del proyecto se consiguieron al combinar Flannel y Calico, sin necesidad de tener un CNI nuevo al uso.
 
 * __Cilium__: Es un proyecto de código abierto para proporcionar sistemas de enrrutado en capas 3/4 y sistemas de balanceo en capas 4/7 que se integra nativamente con sistemas de orquestación de contenedores como Mesos o Kubernetes. Podemos leer más de él en la [página del proyecto](https://github.com/cilium/cilium).
 
-No vamos a profundizar más, pero si queremos saber más sobre cómo funciona el networking en Kubernetes, recomiendo la lectura del [siguiente ebook](https://info.rancher.com/kubernetes-networking-deep-dive) gratuito de Rancher. Es muy interesante.
+No vamos a profundizar más, pero si queremos saber más sobre cómo funciona el networking en Kubernetes, recomiendo la lectura del ebook gratuito publicado por Rancher, _Kubernetes Networking Deep Dive_. Es muy interesante.
 
 
 ## Network Policies
@@ -92,7 +92,7 @@ El desarrollo de Calico se basa en un modelo de seguridad de red llamado _Zero T
 
 * Cualquier endpoint de una red segura puede ser comprometido y utilizado para atacar el resto de la red.
 
-Si tenemos interés, podemos leer más sobre su modelo en la [documentación oficial](https://docs.projectcalico.org/security/adopt-zero-trust) de Calico.
+Si tenemos interés, podemos leer más sobre su modelo en la [documentación oficial](https://docs.tigera.io/calico/latest/network-policy/adopt-zero-trust) de Calico.
 
 Con los tres puntos anteriores como base, las Network Policies de Calico permiten una mayor variedad de configuraciones:
 
@@ -125,7 +125,7 @@ minikube start --cpus=2 --disk-size='10g' --memory='2g' \
 
 Minikube tiene soporte nativo para Calico y podemos instalarlo directamente con el siguiente comando, aunque nos dará una versión un poco más desactualizada.
 
-Si queremos probar las últimas funcionalidades, podemos instalar Calico a mano, pero yo me he encontrado con algunos problemas que comentaré al final del post. En cualquier debemos cumplir los prerrequisitos [prerrequisitos](https://projectcalico.docs.tigera.io/getting-started/kubernetes/requirements) del producto.
+Si queremos probar las últimas funcionalidades, podemos instalar Calico a mano, pero yo me he encontrado con algunos problemas que comentaré al final del post. En cualquier debemos cumplir los prerrequisitos [prerrequisitos](https://docs.tigera.io/calico/latest/getting-started/kubernetes/requirements) del producto.
 
 Sin embargo, si deseamos probar las últimas funcionalidades yo personalmente recomiendo instalar Cálico a mano. El producto consta de una serie de controladores de CRDs (_Custom Resource Definitions_) que tenemos que aplicar. Su instalación es bastante sencilla: tan sólo debemos comprobar que cumplimos los  y utilizar el operador de Tigera.
 
@@ -142,7 +142,7 @@ La anterior imagen muestra lo que queremos conseguir. A la izquierda tenemos la 
 
 * Se habilitará la comunicación entre algunos puertos de los namespaces, indicando el origen y el destino para que la aplicación sea funcional.
 
-Vamos a preparar el entorno con la siguiente lista de comandos. Crearán los namespaces, desplegarán dos Nginx escuchando en distintos puertos para simular nuestros front y back y asociarán varios servicios a cada uno de ellos.
+Vamos a preparar el entorno con la siguiente lista de comandos. Crearán los namespaces, desplegarán [dos Nginx](https://gitlab.com/tangelov/proyectos/-/tree/master/templates/kubernetes/calico-tests) escuchando en distintos puertos para simular nuestros front y back y asociarán varios servicios a cada uno de ellos.
 
 ```bash
 # Creamos el namespace front
@@ -200,16 +200,10 @@ Por todo ello, vamos a descargar _calicoctl_, darle permisos y conectarlo a nues
 
 ```bash
 # Descargamos la CLI con curl
-curl -L https://github.com/projectcalico/calico/releases/download/v3.20.0/release-v3.20.0.tgz -o calico.tgz
-
-# Descomprimimos el fichero y lo movemos a la raíz de la carpeta
-tar xvf calico.tgz && cp release-v3.20.0/bin/calicoctl .
+curl -L https://github.com/projectcalico/calico/releases/download/v3.25.1/calicoctl-linux-amd64 -o calicoctl
 
 # Lo hacemos ejecutable
 chmod +x calicoctl
-
-# Limpiamos lo descargado
-rm -rf release-v3.20.0 calico.tgz
 
 # Definimos el datastore del que va a leer los datos calico
 export DATASTORE_TYPE=kubernetes
@@ -416,9 +410,9 @@ Muchas gracias por leerme y espero que os haya gustado.
 
 * [Networking en Kubernetes (ENG)](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
 
-* [Container Network Interfaces según Rancher (ENG)](https://rancher.com/docs/rancher/v2.x/en/faq/networking/cni-providers/)
+* [Container Network Interfaces según Rancher (ENG)](https://ranchermanager.docs.rancher.com/faq/container-network-interface-providers)
 
-* [Comparing Kubernetes Networking Providers](https://rancher.com/blog/2019/2019-03-21-comparing-kubernetes-cni-providers-flannel-calico-canal-and-weave/)
+* [Comparing Kubernetes Networking Providers](https://www.suse.com/c/rancher_blog/comparing-kubernetes-cni-providers-flannel-calico-canal-and-weave/)
 
 * [Definición de Network Policies en Kubernetes (ENG)](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
@@ -426,19 +420,17 @@ Muchas gracias por leerme y espero que os haya gustado.
 
 * [Cómo instalar un cluster multinodo con Minikube (ENG)](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/)
 
-* [Quickstart para Calico en Kubernetes (ENG)](https://docs.projectcalico.org/getting-started/kubernetes/quickstart)
+* [Quickstart para Calico en Kubernetes (ENG)](https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart)
 
 * [Calico for Kubernetes networking: the basics & examples (ENG)](https://medium.com/flant-com/calico-for-kubernetes-networking-792b41e19d69)
 
-* [Características propias de las Network Policies de Calico (ENG)](https://docs.projectcalico.org/security/calico-network-policy)
+* [Características propias de las Network Policies de Calico (ENG)](https://docs.tigera.io/calico/latest/network-policy/get-started/calico-policy/calico-network-policy)
 
 * [Github de Tigera para el Operador de Calico (ENG)](https://github.com/tigera/operator)
 
-* [Uso y configuración de calicoctl en clústers de Kubernetes (ENG)](https://docs.projectcalico.org/getting-started/clis/calicoctl/configure/kdd)
+* [Uso y configuración de calicoctl en clústers de Kubernetes (ENG)](https://docs.tigera.io/calico/latest/operations/calicoctl/install)
 
 * [Laboratorio de Encodeflush sobre Global Network Policies (ENG)](https://github.com/encodeflush/calico-globalnetworkpolicy)
 
-* [Calico for Kubernetes networking: the basics & examples by Flant (ENG)](https://medium.com/flant-com/calico-for-kubernetes-networking-792b41e19d69)
 
-
-Revisado a 01-03-2022
+Revisado a 01-03-2023
