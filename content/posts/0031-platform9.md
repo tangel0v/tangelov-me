@@ -31,7 +31,7 @@ Platform 9 es una compañía californiana, fundada en 2013, que nos ofrece exact
 
 A día de hoy ofrecen dos servicios principales:
 
-* __PMO__ o _Platform9 Managed OpenStack_ que es Openstack gestionado por ellos.
+* __PMO__ o _Platform9 Managed OpenStack_ que es Openstack gestionado por ellos (Este servicio no está disponible en 2023 y ha sido reemplazado por KubeVirt).
 
 * __PMK__ o _Platform9 Managed Kubernetes_ que es su Kubernetes operado. Este servicio es el que vamos a probar y utilizar hoy.
 
@@ -329,17 +329,15 @@ Y nada... este ha sido todo el análisis, espero que a alguien le sea de utilida
 
 * [Github de Platform9 (ENG)](https://github.com/platform9)
 
-* Servicios gestionados por Platform9 (ENG): [Managed Kubernetes](https://platform9.com/managed-kubernetes/) y [Managed OpenStack](https://platform9.com/managed-openstack/)
+* Servicios gestionados por Platform9 (ENG): [Managed Kubernetes](https://platform9.com/managed-kubernetes/) y [Kubevirt](https://platform9.com/managed-kubevirt/)
 
-* [¿Qué es BareOS? (ENG)](https://platform9.com/docs/v5.4/kubernetes/bareos-what-is-bareos)
+* [¿Qué es BareOS? (ENG)](https://platform9.com/docs/v5.7/kubernetes/bareos-what-is-bareos)
 
-* [Tenants y regiones en Platform9 (ENG)](https://platform9.com/docs/kubernetes/multi-tenancy)
+* [Tenants y regiones en Platform9 (ENG)](https://platform9.com/docs/kubernetes/tenant-user-administration-regions-tenants)
 
-* [Creación de clústers de PMK (ENG) en Platform9](https://platform9.com/docs/v5.4/kubernetes/create-single-master-multi-node-cluster)
+* [Creación de clústers de PMK (ENG) en Platform9](https://platform9.com/docs/v5.7/kubernetes/create-single-master-multi-node-cluster)
 
 * [Helm de Bitnami para instalar Ghost en Helm Hub (ENG)](https://artifacthub.io/packages/helm/bitnami/ghost)
-
-* [Comparación entre las diferentes versiones de Platform9 (ENG)](https://platform9.com/pricing/comparison/)
 
 
 Revisado a 01-03-2023
