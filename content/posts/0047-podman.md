@@ -397,4 +397,4 @@ Poco más que añadir, os animo a que probéis Podman y que vuestra experiencia 
 
 * [Podman Desktop (ENG)](https://iongion.github.io/podman-desktop-companion/)
 
-Revisado a 03-04-2022
+Revisado a 01-05-2023

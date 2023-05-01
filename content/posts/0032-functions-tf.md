@@ -326,4 +326,4 @@ Y ya tendríamos el proceso completo. En el futuro mejoraré el pipeline para qu
 
 * [Ejecutando Terraform en sistemas automáticos (ENG)](https://learn.hashicorp.com/tutorials/terraform/automate-terraform)
 
-Revisado a 01-03-2022
+Revisado a 01-05-2023

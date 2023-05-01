@@ -224,7 +224,7 @@ Después de corregir el sistema de tests, vamos a centrarnos en el fichero que g
 docker run --rm -v $PWD:/site -w /site registry.gitlab.com/paddy-hack/nikola:8.1.1 nikola build
 
 # Línea que reemplaza la anterior para generar el código estático con Hugo
-docker run --rm -v $PWD:/src klakegg/hugo:0.90.0-debian
+docker run --rm -v $PWD:/src klakegg/hugo:0.107.0-debian
 ```
 
 En este momento el blog ya es plenamente funcional, pero aún falta arreglar el sistema de mirroring con Github y la generación de contenedores públicos a través de Travis CI:
@@ -235,8 +235,8 @@ En este momento el blog ya es plenamente funcional, pero aún falta arreglar el 
 
 ```yaml
 install:
-  - curl -LO https://github.com/gohugoio/hugo/releases/download/v0.90.0/hugo_0.90.0_Linux-64bit.deb
-  - sudo dpkg -i hugo_0.90.0_Linux-64bit.deb
+  - curl -LO https://github.com/gohugoio/hugo/releases/download/v0.107.0/hugo_0.107.0_linux-amd64.deb
+  - sudo dpkg -i hugo_0.107.0_linux-amd64.deb
 
 script:
   - hugo
@@ -273,4 +273,4 @@ Y nada, espero que os haya gustado y os espero en el próximo posts. ¡Muchas gr
 
 * El nuevo código de la web está disponible [aquí](https://gitlab.com/tangelov/go-tangelov.me).
 
-Revisado a 03-01-2022
+Revisado a 01-05-2023

@@ -189,4 +189,4 @@ Y nada, con esto terminamos. Espero que os haya gustado y ¡nos vemos en el sigu
 * [Código del proyecto en Gitlab (ENG)](https://gitlab.com/canarias2/atlantis)
 
 
-Revisado a 25-10-2022
+Revisado a 01-05-2023

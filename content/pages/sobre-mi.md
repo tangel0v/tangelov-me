@@ -19,6 +19,10 @@ Mi especialidad actualmente es la arquitectura de sistemas en nubes públicas (A
 
 * DO407 - Automation with Ansible
 
+* Hashicorp Certified: Terraform Associate (002)
+
+* Hashicorp Certified: Vault Associate (002)
+
 Si deseas contactar conmigo, puedes hacerlo a través mi email: _yo [EN] tangelov.me_
 
 Gracias por el interés.

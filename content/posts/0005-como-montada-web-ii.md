@@ -57,9 +57,7 @@ gcloud app create --region=europe-west
 Con esto ya tendríamos la estructura previa, ahora vamos a generar el fichero app.yaml que necesita App Engine para gestionarlo y a agregar una ligera explicación:
 
 ```yaml
-runtime: python27
-api_version: 1
-threadsafe: true
+runtime: python39
 instance_class: B1
 
 handlers:
@@ -122,8 +120,8 @@ Resumiendo:
 
 * Google App Engine: [Standard](https://cloud.google.com/appengine/docs/standard/) y [Flexible](https://cloud.google.com/appengine/docs/flexible/)
 
-* [Primeros pasos con Google App Engine](https://cloud.google.com/appengine/docs/standard/python/quickstart)
+* [Primeros pasos con Google App Engine](https://cloud.google.com/appengine/docs/standard/python3/building-app)
 
 * [Google Cloud Storage (ENG)](https://cloud.google.com/storage/docs/how-to)
 
-Revisado a 01/03/2022
+Revisado a 01/05/2023

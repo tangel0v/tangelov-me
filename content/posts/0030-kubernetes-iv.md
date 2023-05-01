@@ -45,31 +45,32 @@ kube-system       Active    1d
 Ya podríamos desplegar objetos en él. Algunos de ellos, como los _Persistent Volumes_ o las _Storage Class_ son comunes al clúster, pero otros como los _Deployment_ o los _Persistent Volume Claim_ si lo son. Para ver que objetos son comunes al clúster y no se encuentran _"namespaceados"_ (¡Toma palabro!), podemos ejecutar el siguiente comando ```kubectl api-resources```. Así podemos ver los tipos de objeto que podemos crear y si se definen a nivel de namespace o no.
 
 ```bash
-NAME                              SHORTNAMES   APIGROUP                       NAMESPACED   KIND
-bindings                                                                      true         Binding
-componentstatuses                 cs                                          false        ComponentStatus
-configmaps                        cm                                          true         ConfigMap
-endpoints                         ep                                          true         Endpoints
-events                            ev                                          true         Event
-limitranges                       limits                                      true         LimitRange
-namespaces                        ns                                          false        Namespace
-nodes                             no                                          false        Node
-persistentvolumeclaims            pvc                                         true         PersistentVolumeClaim
-persistentvolumes                 pv                                          false        PersistentVolume
-pods                              po                                          true         Pod
-podtemplates                                                                  true         PodTemplate
-replicationcontrollers            rc                                          true         ReplicationController
-resourcequotas                    quota                                       true         ResourceQuota
-secrets                                                                       true         Secret
-serviceaccounts                   sa                                          true         ServiceAccount
-services                          svc                                         true         Service
-mutatingwebhookconfigurations                  admissionregistration.k8s.io   false        MutatingWebhookConfiguration
-validatingwebhookconfigurations                admissionregistration.k8s.io   false        ValidatingWebhookConfiguration
-customresourcedefinitions         crd,crds     apiextensions.k8s.io           false        CustomResourceDefinition
-apiservices                                    apiregistration.k8s.io         false        APIService
-controllerrevisions                            apps                           true         ControllerRevision
-daemonsets                        ds           apps                           true         DaemonSet
-deployments                       deploy       apps                           true         Deployment
+NAME                              SHORTNAMES   APIVERSION                             NAMESPACED   KIND
+bindings                                       v1                                     true         Binding
+componentstatuses                 cs           v1                                     false        ComponentStatus
+configmaps                        cm           v1                                     true         ConfigMap
+endpoints                         ep           v1                                     true         Endpoints
+events                            ev           v1                                     true         Event
+limitranges                       limits       v1                                     true         LimitRange
+namespaces                        ns           v1                                     false        Namespace
+nodes                             no           v1                                     false        Node
+persistentvolumeclaims            pvc          v1                                     true         PersistentVolumeClaim
+persistentvolumes                 pv           v1                                     false        PersistentVolume
+pods                              po           v1                                     true         Pod
+podtemplates                                   v1                                     true         PodTemplate
+replicationcontrollers            rc           v1                                     true         ReplicationController
+resourcequotas                    quota        v1                                     true         ResourceQuota
+secrets                                        v1                                     true         Secret
+serviceaccounts                   sa           v1                                     true         ServiceAccount
+services                          svc          v1                                     true         Service
+mutatingwebhookconfigurations                  admissionregistration.k8s.io/v1        false        MutatingWebhookConfiguration
+validatingwebhookconfigurations                admissionregistration.k8s.io/v1        false        ValidatingWebhookConfiguration
+customresourcedefinitions         crd,crds     apiextensions.k8s.io/v1                false        CustomResourceDefinition
+apiservices                                    apiregistration.k8s.io/v1              false        APIService
+controllerrevisions                            apps/v1                                true         ControllerRevision
+daemonsets                        ds           apps/v1                                true         DaemonSet
+deployments                       deploy       apps/v1                                true         Deployment
+replicasets                       rs           apps/v1                                true         ReplicaSet
 [...]
 ```
 
@@ -373,8 +374,8 @@ Espero que os haya gustado y... ¡os veo en el pŕoximo post!
 
 * [Roles por defecto en clústers de Kubernetes (ENG)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles)
 
-* [Referencia de las APIs de Kubernetes (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/)
+* [Referencia de las APIs de Kubernetes (ENG)](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/)
 
 * [Repositorio de plantillas de Kubernetes](https://gitlab.com/tangelov/proyectos/-/tree/master/templates/kubernetes)
 
-Revisado a 01-03-2022
+Revisado a 01-05-2023
