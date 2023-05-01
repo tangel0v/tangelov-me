@@ -97,4 +97,4 @@ Ya en el siguiente post sobre el tema, empezaremos a crear nuestro rol.
 
 * [Gitlab de Backupninja (ENG)](https://0xacab.org/liberate/backupninja)
 
-Revisado a 01/01/2023
+Revisado a 01/05/2023

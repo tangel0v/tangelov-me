@@ -246,4 +246,4 @@ Un saludo y espero que os haya resultado interesante.
 
 * [Documentación oficial de Testinfra (ENG)](https://testinfra.readthedocs.io/en/latest/)
 
-Revisado a 01/01/2023
+Revisado a 01/05/2023

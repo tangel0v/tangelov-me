@@ -233,4 +233,4 @@ Muchas gracias.
 
 * [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/7/playbook_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable)
 
-Revisado a 01/01/2023
+Revisado a 01/05/2023

@@ -96,4 +96,4 @@ Es necesario realizar una serie de cambios y configuraciones para adoptar el có
 
 * [Google Cloud Storage](https://cloud.google.com/storage/)
 
-Revisado a 01-01-2023
+Revisado a 01-05-2023

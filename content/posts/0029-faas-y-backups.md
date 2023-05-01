@@ -280,4 +280,4 @@ Espero que os haya gustado el post y... ¡nos vemos en el siguiente!
 
 * [Documentación de Apprise (ENG)](https://github.com/caronc/apprise/wiki/Notify_matrix)
 
-Revisado a 01-03-2023
+Revisado a 01-05-2023

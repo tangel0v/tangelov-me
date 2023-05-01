@@ -197,4 +197,4 @@ Hasta aquí llegamos con el despleigue del rol de Backupninja. En la próxima en
 * [Orden de preferencia de variables en Ansible (ENG)](https://docs.ansible.com/ansible/7/playbook_guide/playbooks_variables.html#ansible-variable-precedence)
 
 
-Revisado a 01/01/2023
+Revisado a 01/05/2023

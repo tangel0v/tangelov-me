@@ -185,4 +185,4 @@ Este código replica lo que hemos realiado en el anterior job, pero a través de
 * [La integración continua pasa por pipelines](https://sdos.es/integracion-continua-pasa-por-pipelines/)
 
 
-Revisado a 01/04/2023
+Revisado a 01/05/2023

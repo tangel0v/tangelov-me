@@ -149,4 +149,4 @@ Profundizaremos más adelante sobre el tema: organización interna, gestión de 
 
 * [Inventarios en Ansible (ENG)](https://docs.ansible.com/ansible/7/inventory_guide/intro_inventory.html#intro-inventory)
 
-Revisado a 01/01/2023
+Revisado a 01/05/2023

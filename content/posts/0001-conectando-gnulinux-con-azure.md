@@ -125,4 +125,4 @@ rm -rf azcopy_linux_*
 * [Transfer data with AzCopy on Linux (ENG)](https://docs.microsoft.com/en-gb/azure/storage/common/storage-use-azcopy-v10)
 * [Installation .NET Core on Linux (ENG)](https://docs.microsoft.com/es-es/dotnet/core/install/linux-package-manager-ubuntu-1904)
 
-Revisado a 01/01/2023.
+Revisado a 01/05/2023.

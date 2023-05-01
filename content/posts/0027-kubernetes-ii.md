@@ -537,4 +537,4 @@ PD: Si deseamos todos los ficheros YAML utilizados en este post, podemos descarg
 
 * Conceptos sobre almacenamiento en Kuberntes (ENG): [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/), [Persistent Volumes and Persistent Volume Claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 
-Revisado a 01-03-2023
+Revisado a 01-05-2023

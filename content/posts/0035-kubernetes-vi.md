@@ -338,4 +338,4 @@ Y ya se ha terminado el sexto post sobre Kubernetes. Espero que os guste y que s
 
 * [Kubernetes HPA with Custom Metrics from Prometheus (ENG)](https://towardsdatascience.com/kubernetes-hpa-with-custom-metrics-from-prometheus-9ffc201991e)
 
-Revisado a 01-03-2023
+Revisado a 01-05-2023

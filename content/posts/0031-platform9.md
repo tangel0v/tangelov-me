@@ -340,4 +340,4 @@ Y nada... este ha sido todo el análisis, espero que a alguien le sea de utilida
 * [Helm de Bitnami para instalar Ghost en Helm Hub (ENG)](https://artifacthub.io/packages/helm/bitnami/ghost)
 
 
-Revisado a 01-03-2023
+Revisado a 01-05-2023

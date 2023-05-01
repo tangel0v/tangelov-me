@@ -50,4 +50,4 @@ Mis recomendaciones para el examen son las siguientes:
 
 * [GCP FAQs (ENG)](https://cloud.google.com/certification/faqs/#0): Lista de FAQs de GCP
 
-Revisado a 01/03/2022
+Revisado a 01/05/2022

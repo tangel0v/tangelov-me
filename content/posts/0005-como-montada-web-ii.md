@@ -124,4 +124,4 @@ Resumiendo:
 
 * [Google Cloud Storage (ENG)](https://cloud.google.com/storage/docs/how-to)
 
-Revisado a 01/01/2023
+Revisado a 01/05/2023

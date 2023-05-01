@@ -74,4 +74,4 @@ Tenemos aplicaciones para todo:
 
 * [Parámetros y tips en Nextcloud 25 y PHP (ENG)](https://docs.nextcloud.com/server/25/admin_manual/installation/source_installation.html#php-fpm-tips-label)
 
-Revisado a 01/01/2023
+Revisado a 01/05/2023

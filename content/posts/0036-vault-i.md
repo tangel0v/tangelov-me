@@ -256,4 +256,4 @@ Y hasta aquí va a llegar el post de hoy. En siguientes posts, trataremos la ges
 
 * [Arquitectura a bajo nivel de Hashicorp Vault (ENG)](https://www.vaultproject.io/docs/internals/architecture)
 
-Revisado a 01-03-2023
+Revisado a 01-05-2023

@@ -220,4 +220,4 @@ Con este paso, ya hemos terminado. Espero que os guste y que no olvideis que la 
 
 * [How to configure Multi-Factor Authentication in Microsoft Azure (ENG)](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks)
 
-Revisado a 01/03/2023
+Revisado a 01/05/2023

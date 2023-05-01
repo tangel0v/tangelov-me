@@ -320,4 +320,4 @@ Y poco más por hoy, más Kubernetes en próximos posts :D
 
 * Los YAML de ejemplo son accesibles desde [aquí](https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-deployment.yml) y [aquí](https://gitlab.com/tangelov/proyectos/raw/master/templates/kubernetes/basic-nginx-service-nodeport.yml).
 
-Revisado a 01-04-2023
+Revisado a 01-05-2023

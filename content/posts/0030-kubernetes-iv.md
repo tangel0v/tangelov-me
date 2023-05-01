@@ -378,4 +378,4 @@ Espero que os haya gustado y... ¡os veo en el pŕoximo post!
 
 * [Repositorio de plantillas de Kubernetes](https://gitlab.com/tangelov/proyectos/-/tree/master/templates/kubernetes)
 
-Revisado a 01-03-2023
+Revisado a 01-05-2023
