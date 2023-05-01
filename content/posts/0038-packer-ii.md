@@ -143,7 +143,7 @@ Este código actual no funcionaría sin realizar algunos pasos previos. Packer n
 
 * Crear una cuenta de servicio en el proyecto de GCP donde vayamos a crear la imagen, con los permisos _Compute Instance Admin (v1)_ y _Service Account User_. Para crear la cuenta y descargarnos su llave en formato JSON, podemos seguir la [documentación oficial](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
 
-* Añadir una llave SSH a los metadatos del proyecto donde vayamos a crear la imagen. De esta forma, Packer podrá conectarse y realizar todas sus tareas sin problemas. Aunque podríamos utilizar bastiones como punto de salto o algún otro sistema de autenticación, vamos a usar SSH plano para una mayor simplicidad. Para añadir la clave también podemos seguir el procedimiento estándar recogido en la [documentación oficial](https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys).
+* Añadir una llave SSH a los metadatos del proyecto donde vayamos a crear la imagen. De esta forma, Packer podrá conectarse y realizar todas sus tareas sin problemas. Aunque podríamos utilizar bastiones como punto de salto o algún otro sistema de autenticación, vamos a usar SSH plano para una mayor simplicidad. Para añadir la clave también podemos seguir el procedimiento estándar recogido en la [documentación oficial](https://cloud.google.com/compute/docs/instances/access-overview#ssh-access).
 
 Tras realizar estos pasos, ya tan sólo tenemos que definir el valor de las variables que hemos definido antes de la siguiente forma:
 
@@ -424,4 +424,4 @@ Espero que os guste y ¡nos vemos en el siguiente episodio!
 
 * [Módulo de Terraform de creación de instancias de Amazon RDS (ENG)](https://github.com/terraform-aws-modules/terraform-aws-rds)
 
-Revisado a 01-03-2022
+Revisado a 01-05-2023
