@@ -239,4 +239,4 @@ Con esto termina mi primer post sobre Atlantis y nos vemos en el siguiente.
 
 * [Security in Atlantis (ENG)](https://www.runatlantis.io/docs/security.html)
 
-Revisado a 16-10-2022
+Revisado a 01-05-2023
