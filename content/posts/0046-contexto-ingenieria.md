@@ -111,7 +111,7 @@ Un saludo y hasta la próxima.
 
 * [AirBNB's Great Migration: From Monolith to Service-Oriented (ENG)](https://www.infoq.com/presentations/airbnb-soa-migration/)
 
-* [Service-Oriented Architecture: Scaling the Uber Engineering Codebase as We Grow (ENG)](https://eng.uber.com/service-oriented-architecture/)
+* [Service-Oriented Architecture: Scaling the Uber Engineering Codebase as We Grow (ENG)](https://www.uber.com/en-US/blog/service-oriented-architecture/)
 
 * [Why and How Netflix, Amazon, and Uber Migrated to Microservices: Learn from Their Experiences (ENG)](https://www.hys-enterprise.com/blog/why-and-how-netflix-amazon-and-uber-migrated-to-microservices-learn-from-their-experience/)
 
@@ -125,4 +125,4 @@ Un saludo y hasta la próxima.
 
 * [How WhatsApp scaled to 1 billion users with only 50 engineers (ENG)](https://www.quastor.org/p/how-whatsapp-scaled-to-1-billion)
 
-Revisado a 05/02/2022
+Revisado a 01/05/2023
