@@ -315,7 +315,7 @@ Para evitar costes no previstos si estamos utilizando los tier gratuitos debemos
 
 * [¿Qué es Packer? (ENG)](https://www.packer.io/intro/index.html)
 
-* [Configuración de Azure en Packer](https://www.packer.io/docs/builders/azure.html)
+* [Configuración de Azure en Packer (ENG)](https://www.packer.io/docs/builders/azure.html)
 
 * [Configuración de GCP en Packer (ENG)](https://www.packer.io/docs/builders/googlecompute.html)
 
@@ -323,4 +323,4 @@ Para evitar costes no previstos si estamos utilizando los tier gratuitos debemos
 
 * [Página principal de OSBoxes (ENG)](https://www.osboxes.org/)
 
-Revisado a 01/03/2022
+Revisado a 01/05/2023

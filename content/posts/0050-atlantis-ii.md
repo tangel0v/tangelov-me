@@ -339,4 +339,4 @@ En resumen, una herramienta interesante, consistente, que será muy útil a algu
 * [Repositorio Dummy de Terraform para usar con Atlantis y Terraform Cloud](https://gitlab.com/canarias2/archetype/-/tree/feature/terraform-cloud)
 
 
-Revisado a 12-11-2022
+Revisado a 01-05-2023

@@ -145,4 +145,4 @@ Y listo :D
 
 * [Introducción a la Integración continua en Gitlab (ENG)](https://about.gitlab.com/product/continuous-integration/)
 
-Revisado a 01/03/2022
+Revisado a 01/05/2023

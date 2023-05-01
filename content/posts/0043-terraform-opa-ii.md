@@ -187,7 +187,7 @@ Son conceptos un poco abstractos, así que voy a utilizar a modo de ejemplo este
 ## Creando nuestras propias políticas
 Una vez ya conocemos por encima el funcionamiento de Rego, podemos empezar a escribir nuestras propias políticas. Una de las funcionalidades de Terraform es convertir el _output_ de ```terraform plan``` en un fichero JSON sobre el cual podemos aplicar diferentes políticas de OPA.
 
-La estructura del fichero JSON resultante puede ser consultada [aquí](https://www.terraform.io/docs/internals/json-format.html) y tiene algunas partes muy interesantes:
+La estructura del fichero JSON resultante puede ser consultada [aquí](https://developer.hashicorp.com/terraform/internals/json-format) y tiene algunas partes muy interesantes:
 * Posee una lista de todos los elementos controlados por Terraform y si van a ser actualizados, creados o borrados en dicho plan.
 * Registra los valores y estructura de las variables y outputs definidos en Terraform.
 * Registra los módulos y providers utilizados en Terraform, así cómo su versión.
@@ -377,8 +377,8 @@ Un abrazo y _Happy Terraform_!
 
 * [Ejemplos desarrollados por Scalr de políticas creadas para Terraform (ENG)](https://github.com/Scalr/sample-tf-opa-policies)
 
-* [Formato JSON de un _Terraform plan_ (ENG)](https://www.terraform.io/docs/internals/json-format.html)
+* [Formato JSON de un _Terraform plan_ (ENG)](https://developer.hashicorp.com/terraform/internals/json-format)
 
 * [Ejemplos de testing en Terraform para usar con Conftest (ENG)](https://github.com/open-policy-agent/conftest/tree/master/examples/hcl2/policy)
 
-Revisado a 01-03-2022
+Revisado a 01-05-2023

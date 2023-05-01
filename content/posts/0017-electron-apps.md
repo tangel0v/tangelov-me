@@ -81,4 +81,4 @@ Saludos y esperemos que os sean útiles.
 * [Página web oficial de Marktext (ENG)](https://github.com/marktext/marktext)
 
 
-Revisado a 01/03/2022
+Revisado a 01/05/2023
