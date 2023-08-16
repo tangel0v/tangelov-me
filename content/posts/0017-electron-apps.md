@@ -9,14 +9,9 @@ categories: ["devops"]
 draft: false
 ---
 
-Hace años, era realmente difícil encontrar aplicaciones que funcionaran para los principales s
-istemas operativos, quedándose Linux frecuentemente al margen. Sin embargo, de unos años para
-aquí, con el crecimiento de la nube y de las aplicaciones web esto parece estar cambiando. Val
-ve con su cliente _Steam_ o Microsoft con su IDE _Visual Studio Code_ son dos ejemplos de esta
- tendencia.
+Hace años, era realmente difícil encontrar aplicaciones que funcionaran para los principales sistemas operativos, quedándose Linux frecuentemente al margen. Sin embargo, de unos años para aquí, con el crecimiento de la nube y de las aplicaciones web esto parece estar cambiando. Valve con su cliente _Steam_ o Microsoft con su IDE _Visual Studio Code_ son dos ejemplos de esta tendencia.
 
-El auge de tecnologías web ha permitido que aparezcan frameworks que facilitan la creación de
-aplicaciones de escritorio multiplataforma. El más conocido de todos ellos es [Electron](https://en.wikipedia.org/wiki/Electron_(software_framework)).
+El auge de tecnologías web ha permitido que aparezcan frameworks que facilitan la creación de aplicaciones de escritorio multiplataforma. El más conocido de todos ellos es [Electron](https://en.wikipedia.org/wiki/Electron_(software_framework)).
 
 <!--more-->
 
@@ -81,4 +76,4 @@ Saludos y esperemos que os sean útiles.
 * [Página web oficial de Marktext (ENG)](https://github.com/marktext/marktext)
 
 
-Revisado a 01/03/2022
+Revisado a 01/05/2023

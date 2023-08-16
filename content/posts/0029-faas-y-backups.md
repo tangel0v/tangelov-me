@@ -264,7 +264,7 @@ Y ya está :D . Con ésto ya tendríamos el sistema funcionando. He borrado un p
 
 Espero que os haya gustado el post y... ¡nos vemos en el siguiente!
 
-> __NOTA DEL AUTOR__: A mediados de 2021, me dejó de funcionar la función del envío de mensajes a Matrix por alguna limitación oculta dentro de Cloud Functions y el uso de funciones asíncronas. En otros proveedores de nube el código sigue siendo totalmente válido.
+> __NOTA DEL AUTOR__: A mediados de 2021, me dejó de funcionar la función del envío de mensajes a Matrix por alguna limitación oculta dentro de Cloud Functions y el uso de funciones asíncronas. En otros proveedores de nube el código sigue siendo totalmente válido. Para solucionarlo, tuve que reemplazar Matrix Nio por [Apprise](https://github.com/caronc/apprise), pero su funcionamiento es similar sólo que soportando muchísimos más proveedores de mensajería.
 
 ## Documentación
 
@@ -278,4 +278,6 @@ Espero que os haya gustado el post y... ¡nos vemos en el siguiente!
 
 * [Documentación de Matrix Nio (ENG)](https://matrix-nio.readthedocs.io/en/latest/nio.html#asyncclient)
 
-Revisado a 01-03-2022
+* [Documentación de Apprise (ENG)](https://github.com/caronc/apprise/wiki/Notify_matrix)
+
+Revisado a 01-05-2023

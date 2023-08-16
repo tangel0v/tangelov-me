@@ -445,15 +445,15 @@ Y ya tendríamos el pipeline completo y optimizado. Los siguientes pasos serán 
 
 ## Documentación
 
-* [Mover recursos entre diferentes estados en Terraform (ENG)](https://www.terraform.io/docs/cli/commands/state/mv.html)
+* [Mover recursos entre diferentes estados en Terraform (ENG)](https://developer.hashicorp.com/terraform/cli/commands/state/mv)
 
-* [Subir a un remote un remote state local en Terraform (ENG)](https://www.terraform.io/docs/cli/commands/state/push.html)
+* [Subir a un remote un remote state local en Terraform (ENG)](https://developer.hashicorp.com/terraform/cli/commands/state/push)
 
-* [Comportamiento de los recursos en Terraform (ENG)](https://www.terraform.io/docs/language/resources/behavior.html)
+* [Comportamiento de los recursos en Terraform (ENG)](https://developer.hashicorp.com/terraform/language/resources/behavior)
 
-* [Gestión del ciclo de vida de los recursos en Terraform (ENG)](https://www.terraform.io/docs/language/meta-arguments/lifecycle.html)
+* [Gestión del ciclo de vida de los recursos en Terraform (ENG)](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
 
-* [Representación en JSON de diferentes outputs de Terraform (ENG)](https://www.terraform.io/docs/internals/json-format.html)
+* [Representación en JSON de diferentes outputs de Terraform (ENG)](https://developer.hashicorp.com/terraform/internals/json-format)
 
 * [Página oficial de Open Policy Agent (ENG)](https://www.openpolicyagent.org/docs/latest)
 
@@ -463,10 +463,8 @@ Y ya tendríamos el pipeline completo y optimizado. Los siguientes pasos serán 
 
 * [Página oficial de conftest en Github (ENG)](https://github.com/open-policy-agent/conftest)
 
-* [Pipeline de ejemplo de Terraform con Conftest (ENG)](https://github.com/open-policy-agent/conftest/blob/master/examples/ci/gitlab/terraform.yaml)
-
 * [Referencia de _Artifacts_ en los YAML de Gitlab CI (ENG)](https://docs.gitlab.com/ee/ci/yaml/README.html#artifacts)
 
-* [Integración de Terraform en las Merge Requests (ENG)](https://docs.gitlab.com/ee/user/infrastructure/mr_integration.html)
+* [Integración de Terraform en las Merge Requests (ENG)](https://docs.gitlab.com/ee/user/infrastructure/iac/mr_integration.html)
 
-Revisado a 01-03-2022
+Revisado a 01-05-2023

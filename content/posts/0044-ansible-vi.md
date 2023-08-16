@@ -279,4 +279,4 @@ Y esto sería todo, espero que este breve post sirva a otros para poder mantener
 
 * [Documentación oficial de Testinfra (ENG)](https://testinfra.readthedocs.io/en/latest/)
 
-Revisado a 01/03/2022
+Revisado a 01/03/2023

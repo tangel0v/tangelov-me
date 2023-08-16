@@ -25,7 +25,7 @@ Llamamos _GitOps_ a una serie de prácticas que nos permiten gestionar nuestra i
 GitOps traslada los mecanismos utilizados para gestionar el código de las aplicaciones a la infraestructura. De esta forma, podemos modificar nuestra infraestructura en función de los cambios y acciones realizados en nuestro repositorio. Por ejemplo, podríamos abrir un _Pull Request_ y que una herramienta nos estimara que recursos van a ser añadidos, que modificaciones va a sufrir nuestra infra y el coste que va a tener en nuestra factura.
 
 Usar GitOps tiene algunos puntos fuertes:
-* Proporciona una gran trazabilidad en los cambios. Los flujos de trabajo definidos permiten ver que cambios se han ido haciendo sobre la infraestructura y quien los ha realizado o autorizado.
+* Proporciona una gran trazabilidad en los cambios. Los flujos de trabajo definidos permiten ver que cambios se han ido haciendo sobre la infraestructura y quién los ha realizado o autorizado.
 * Permite la revisión del código de la infraestructura a través de pares, ayudando a detectar errores entre miembros del equipo antes de que éstos sean aplicados.
 * Proporciona un marco / lenguaje común entre desarrolladores de aplicaciones y _desarrolladores de infraestructura_ que puede ayudar a reducir la fricción entre Dev y Ops.
 
@@ -64,7 +64,7 @@ El __cliente__ es cualquier repositorio de Git que vaya a integrarse con el serv
 Tras este pequeño resumen, ahora voy a mostrar paso a paso cómo integrar un repositorio de Gitlab dentro de Atlantis.
 
 #### Creación del usuario robot
-Nuestro primer paso es [crear un nuevo usuario](https://docs.gitlab.com/ee/user/profile/account/create_accounts.html#create-users-on-sign-in-page) en Gitlab para Atlantis. Mi recomendación es crear uno dedicado para el bot para evitar que los comentarios dejados por Atlantis salgan con otro nombre y dificulte la trazabilidad del sistema.
+Nuestro primer paso es [crear un nuevo usuario](https://docs.gitlab.com/ee/user/profile/account/create_accounts.html#create-users-on-sign-in-page) en Gitlab para Atlantis. Mi recomendación es crear uno dedicado para el bot para evitar que los comentarios dejados por Atlantis salgan con otro nombre y complique la trazabilidad del sistema.
 
 Una vez creado el usuario, necesitamos un token que permita a Atlantis conectarse al proveedor de Gitlab a través de la API. Para ello nos vamos a _Preferences_ y de ahí a _Access Tokens_. Una vez allí, creamos un token con permisos de _api_ y lo guardamos para usarlo posteriormente:
 
@@ -127,7 +127,7 @@ podman run \
   server --config=/usr/local/bin/config.yaml --repo-config=/usr/local/bin/repo.yaml
 ```
 
-Y deberíamos poder acceder al servicio utilizando http://localhost:8080 tras introducir un usuario y una contraseña:
+Ya deberíamos poder acceder al servicio utilizando http://localhost:8080 tras introducir un usuario y una contraseña:
 
 ![atlantis-service](https://storage.googleapis.com/tangelov-data/images/0048-03.png)
 
@@ -177,7 +177,7 @@ allowed_regexp_prefixes:
 
 Atlantis nos permite aplicar una gran cantidad de [configuraciones]((https://www.runatlantis.io/docs/repo-level-atlantis-yaml.html#do-i-need-an-atlantis-yaml-file)) diferentes, así que voy a explicar un poco lo que he definido para este ejemplo:
 * Primero pongo ciertas limitaciones a Atlantis: no permito que los MR sean mergeados automáticamente ni que se hagan ejecuciones paralelas. También definimos una versión por defecto de Terraform para este proyecto.
-* Después creo un proyecto, llamado _dummy_, e indico donde está su código, que requisitos necesita para mergearse a la rama principal y el workflow que va a utilizar (en este caso, _standard_).
+* Después creo un proyecto, llamado _dummy_, e indico dónde está su código, que requisitos necesita para mergearse a la rama principal y el workflow que va a utilizar (en este caso, _standard_).
 * Por último definimos los distintos workflows que podemos usar para este repositorio. Este es bastante sencillo y tan sólo coge el contenido de las variables de entorno PRD\_INIT\_VARS y PRD\_APPLY\_VARS, los convierte en ficheros y ejecuta ```terraform init``` y ```terraform plan``` con algunos parámetros extra.
 * También limitamos que solo se ejecute en ramas cuyo nombre empiece por _feature/_ o _fix_.
 
@@ -239,4 +239,4 @@ Con esto termina mi primer post sobre Atlantis y nos vemos en el siguiente.
 
 * [Security in Atlantis (ENG)](https://www.runatlantis.io/docs/security.html)
 
-Revisado a 16-10-2022
+Revisado a 01-05-2023

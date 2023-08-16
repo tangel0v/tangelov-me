@@ -165,7 +165,7 @@ Y con esto el post ha terminado, espero que os haya gustado y sirva a alguien m√
 
 * [Modelo de responsabilidad compartida en Amazon Web Services](https://aws.amazon.com/es/compliance/shared-responsibility-model/)
 
-* [P√°gina oficial de Renovate Bot (ENG)](https://www.whitesourcesoftware.com/free-developer-tools/renovate)
+* [P√°gina oficial de Renovate Bot (ENG)](https://www.mend.io/renovate/)
 
 * [Github de Renovate Bot (ENG)](https://github.com/renovatebot/renovate)
 
@@ -175,4 +175,4 @@ Y con esto el post ha terminado, espero que os haya gustado y sirva a alguien m√
 
 * [Ejemplo de Renovate para Python (ENG)](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/renovate.json)
 
-Revisado a 01-03-2022
+Revisado a 01-05-2023

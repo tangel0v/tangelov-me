@@ -15,6 +15,8 @@ Esto hace que en ocasiones, tenga invertir todo el tiempo del que dispongo para 
 
 Debido a las ansias de conocimiento y a un cambio de posición laboral, he dedicado unos tres meses (unas 120 horas en total) en prepararme una certificación nueva y por fin puedo decir que soy un _Solutions Architect_ de nivel Professional en Amazon Web Services. Gracias a poder reaprovechar parte del conocimiento que poseía de GCP, he podido realizar algunos _atajos_, pero igualmente la preparación del examen ha requerido mucho tiempo de estudio debido a la inmensa cantidad de servicios de los que dispone AWS.
 
+> __Nota del autor__: pese a que en el momento de escribir el post, recomendé A Cloud Guru, ahora mismo (en 2023) la mejor plataforma para estudiar AWS es Cantrill, cuyo link dejaré en la documentación del post.
+
 <!--more-->
 
 Como en entregas anteriores, voy a dejar aquí mis recomendaciones para prepararse para la prueba:
@@ -44,6 +46,8 @@ Como en entregas anteriores, voy a dejar aquí mis recomendaciones para preparar
 
 * [Udemy (ENG)](https://www.udemy.com/course/aws-solutions-architect-professional/): Udemy es una plataforma que posee gran cantidad de cursos formativos y por lo que vi por la red, la gente recomendaba este curso (aunque yo no lo he comprado).
 
+* [Cantrill.io (ENG)](https://learn.cantrill.io/): La plataforma que más me gusta en la actualidad. Muy actualizado y enfocado en lo más importante y necesario para pasar el examen.
+
 * [A Cloud Guru (ENG)](https://acloudguru.com/course/aws-certified-solutions-architect-professional): Es el curso que yo he utilizado como base para preparar mis apuntes y creo que proporciona una buena base.
 
 * [Arquitecturas de referencia de AWS (ENG)](https://aws.amazon.com/es/architecture/reference-architecture-diagrams/?whitepapers-main.sort-by=item.additionalFields.sortDate&whitepapers-main.sort-order=desc&awsf.whitepapers-tech-category=*all&awsf.whitepapers-industries=*all): Amazon publica una serie de arquitecturas de referencia para implementar que podemos utilizar como base en nuestro día a día. Aunque son muchísimos, si recomiendo echarle un ojo por encima a los relacionados con la parte de metodología.
@@ -53,4 +57,4 @@ Como en entregas anteriores, voy a dejar aquí mis recomendaciones para preparar
 * [AWS FAQs](https://aws.amazon.com/faqs/?nc1=h_ls): Lista de FAQs de AWS.
 
 
-Revisado a 01/03/2022
+Revisado a 01/05/2023
