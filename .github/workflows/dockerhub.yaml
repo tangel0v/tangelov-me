@@ -1,0 +1,36 @@
+name: Tangelov GH Actions To DockerHub
+on: 
+  push:
+    branches:
+      - 'post/github-actions-i-bis'
+
+jobs:
+  Create-Docker-Image:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Setup Hugo in Github Actions
+        uses: peaceiris/actions-hugo@v2
+      - name: Render Hugo content
+        run: hugo
+
+      - name: Docker Login in Github Actions
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Docker Build in Github Actions
+        run:  docker build -t $DOCKER_USER/tangelov-me:latest .
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+
+      - name: Docker Push in Github Actions
+        run: docker push $DOCKER_USER/tangelov-me:latest
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+
+      - run: echo "This job's status is ${{ job.status }}."
