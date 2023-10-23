@@ -10,12 +10,19 @@ jobs:
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+          submodules: true  # Gathering themes
+          fetch-depth: 0
 
       - name: Setup Hugo in Github Actions
         uses: peaceiris/actions-hugo@v2
-      - name: Render Hugo content
-        run: hugo
+        run: hugo --minify
+
+      - name: Save output for next steps
+        uses: actions/cache@v2
+        with:
+          path: public
+          key: public
 
       - name: Docker Login using Github Action
         uses: docker/login-action@v3
@@ -25,6 +32,7 @@ jobs:
 
       - name: Docker Build and Push using Github Action
         uses: docker/build-push-action@v5
+        run: ls -lah
         with:
           push: true
           tags: ${{ secrets.DOCKER_USER }}/tangelov-me:latest
