@@ -35,5 +35,6 @@ jobs:
       - name: Docker Build and Push using Github Action
         uses: docker/build-push-action@v5
         with:
+          context: .
           push: true
           tags: ${{ secrets.DOCKER_USER }}/tangelov-me:latest
