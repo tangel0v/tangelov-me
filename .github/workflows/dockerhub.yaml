@@ -11,8 +11,6 @@ jobs:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
       - name: Check out repository code
         uses: actions/checkout@v4
-          submodules: true  # Gathering themes
-          fetch-depth: 0
 
       - name: Setup Hugo in Github Actions
         uses: peaceiris/actions-hugo@v2
