@@ -14,6 +14,8 @@ jobs:
 
       - name: Setup Hugo in Github Actions
         uses: peaceiris/actions-hugo@v2
+
+      - name: Build Hugo static content
         run: hugo --minify
 
       - name: Save output for next steps
@@ -28,9 +30,11 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Testing
+        run: ls -lahR
+
       - name: Docker Build and Push using Github Action
         uses: docker/build-push-action@v5
-        run: ls -lah
         with:
           push: true
           tags: ${{ secrets.DOCKER_USER }}/tangelov-me:latest
