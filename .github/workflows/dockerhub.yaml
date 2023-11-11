@@ -39,4 +39,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ["${{ secrets.DOCKER_USER }}/tangelov-me:${{ steps.vars.outputs.short_sha }}", "${{ secrets.DOCKER_USER }}/tangelov-me:latest"]
+          tags: ${{ secrets.DOCKER_USER }}/tangelov-me:${{ steps.vars.outputs.short_sha }}, ${{ secrets.DOCKER_USER }}/tangelov-me:latest
