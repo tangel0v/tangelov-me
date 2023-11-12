@@ -2,6 +2,7 @@
 gcp-images/
 
 # Hugo folders to avoid
+.hugo_build.lock
 /public/
 /resources/_gen/
 hugo_stats.json
