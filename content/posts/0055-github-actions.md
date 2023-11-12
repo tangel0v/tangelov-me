@@ -9,7 +9,7 @@ categories: ["devops"]
 draft: false
 ---
 
-La mayoría de plataformas como Github o Gitlab (también llamadas forjas de código, aunque a mi no me gusta mucho como suena), no han parado de implementar nuevas funcionalidades, tratando de convencer al público en ser la mejor herramienta para la creación de nuevas aplicaciones.
+La mayoría de plataformas como Github o Gitlab (también llamadas "forjas de código", aunque a mí no me gusta mucho como suena), no han parado de implementar nuevas funcionalidades, tratando de convencer al público de ser la mejor herramienta para la creación de nuevas aplicaciones.
 
 Hace años, casi todos los proyectos Open Source alojados en Github, utilizaban Travis CI para ejecutar sus pipelines de CICD. Sin embargo, a finales de 2020, dicha plataforma  [cambió sus condiciones](https://blog.travis-ci.com/2020-11-02-travis-ci-new-billing) y muchos de sus usuarios tuvieron que buscar otra alternativa.
 
@@ -30,11 +30,11 @@ Los pipelines definidas en Github Actions reciben el nombre de _workflows_ y pod
 
 Aunque es una plataforma de pago, su tier gratuito es muy generoso y si queremos probarlo, tenemos hasta 2000 minutos de ejecuciones mensuales sin coste alguno.
 
-Para usar Actions, lo primero que necesitamos es una cuenta y un repositorio en Github. Aunque existen [formas de utilizarlas en otras plataformas](https://tomasvotruba.com/blog/how-can-we-use-github-actions-in-gitlab/), yo mantengo un mirroring entre Github y Gitlab para mi blog y puedo usar los servicios de Github de forma indistintiva.
+Para usar Actions, lo primero que necesitamos es una cuenta y un repositorio en Github. Aunque existen [formas de utilizarlas en otras plataformas](https://tomasvotruba.com/blog/how-can-we-use-github-actions-in-gitlab/), yo mantengo un mirroring entre Github y Gitlab para mi blog y puedo usar los servicios de Github de forma indistinta.
 
 ![blog-integrations-2022](https://storage.googleapis.com/tangelov-data/images/0037-00.png)
 
-Este diagrama describe el estado actual de las integraciones de mi blog. Cuando realizo un cambio sobre mi repositorio en Gitlab, éste se replica automáticamente hacia Github y se ejecutan una serie de operaciones en Gitlab CI que testean el código, crean un contenedor y despliegan el contenido del repositorio en su destino.
+Este diagrama describe el estado actual de las integraciones de mi blog: cuando realizo un cambio sobre mi repositorio en Gitlab, éste se replica automáticamente hacia Github y se ejecutan una serie de operaciones en Gitlab CI que testean el código, crean un contenedor y despliegan el contenido del repositorio en su destino.
 
 Gracias al _mirroring_ con Github, anteriormente había un pipeline que se ejecutaba en Travis CI y creaba una imagen pública para después subirla a DockerHub. Sin embargo, esta parte no funciona desde que Travis CI cambió sus condiciones de uso.
 
@@ -127,8 +127,8 @@ jobs:
 ```
 
 Para crear el pipeline, vamos a utilizar distintas _Actions_ mantenidas por la comunidad:
-* Primero descargamos el código utilizando la acción _actions/checkout_ en su versión 4.
-* Después utilizamos la acción _actions-hugo_ del usuario _peaceiris_ en su versión 2 y ejecutamos el comando ```hugo --minify``` para generar el código HTML.
+* Primero, descargamos el código utilizando la acción _actions/checkout_ en su versión 4.
+* Después, utilizamos la acción _actions-hugo_ del usuario _peaceiris_ en su versión 2 y ejecutamos el comando ```hugo --minify``` para generar el código HTML.
 * Por último, guardamos la carpeta _public_ dentro de la caché para que otros pasos posteriores puedan utilizarla.
 
 En este punto ya podríamos crear la imagen del contenedor y subirla a DockerHub, pero antes, necesitamos hacer que Github pueda acceder a DockerHub. Para ello, necesitamos generar un token de acceso y almacenarlo en Github Actions.
