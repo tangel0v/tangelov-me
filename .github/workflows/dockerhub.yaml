@@ -12,6 +12,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set short git commit SHA
+        id: sha
         run: |
           calculatedSha=$(git rev-parse --short ${{ github.sha }})
           echo "::set-output name=short_sha::$calculatedSha"
@@ -39,4 +40,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USER }}/tangelov-me:latest
+          tags: | 
+            ${{ secrets.DOCKER_USER }}/tangelov-me:latest
+            ${{ secrets.DOCKER_USER }}/tangelov-me:${{ steps.sha.outputs.short_sha }}
