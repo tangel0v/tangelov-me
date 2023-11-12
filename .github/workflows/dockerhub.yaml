@@ -2,7 +2,8 @@ name: Tangelov GH Actions To DockerHub
 on: 
   push:
     branches:
-      - 'post/github-actions-i-bis'
+      - 'main'
+      - 'master'
 
 jobs:
   docker-and-push:
