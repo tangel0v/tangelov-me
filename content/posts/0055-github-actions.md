@@ -9,31 +9,34 @@ categories: ["devops"]
 draft: false
 ---
 
-La mayoría de plataformas como Github o Gitlab (también llamadas forjas de código, aunque a mi no me gusta mucho como suena), no han parado de implementar nuevas funcionalidades, tratando de convencer al público de que son la mejor herramienta para la creación de nuevas aplicaciones.
+La mayoría de plataformas como Github o Gitlab (también llamadas forjas de código, aunque a mi no me gusta mucho como suena), no han parado de implementar nuevas funcionalidades, tratando de convencer al público en ser la mejor herramienta para la creación de nuevas aplicaciones.
 
 Hace años, casi todos los proyectos Open Source alojados en Github, utilizaban Travis CI para ejecutar sus pipelines de CICD. Sin embargo, a finales de 2020, dicha plataforma  [cambió sus condiciones](https://blog.travis-ci.com/2020-11-02-travis-ci-new-billing) y muchos de sus usuarios tuvieron que buscar otra alternativa.
 
-La simbiosis entre plataformas no era oficial y tras un tiempo, Github presentó su propia solución: _Github Actions_. En este post, busco actualizar una [antigua entrada](https://tangelov.me/posts/ic-github.html) que escribí sobre Travis CI y replicar las funcionalidades de dicho pipeline pero sobre Actions. Pero primero, un poco de historia.
+La simbiosis entre Travis y Github no era oficial y tras un tiempo, esta última presentó su propia solución: _Github Actions_. En este post, busco actualizar una [antigua entrada](https://tangelov.me/posts/ic-github.html) que escribí sobre Travis CI y replicar las funcionalidades de dicho pipeline pero sobre Actions. Pero antes, un poco de historia.
 
 <!--more-->
 
 ## Github y Microsoft
-Uno de los bombazos del 2018 fue la compra de Github por Microsoft por aproximadamente 7000 millones de dólares. Dicha compra rivalizaba con alguno de los productos que ellos ya comercializaban (Team Foundations Server o Azure DevOps) y parte de la comunidad pensaba que alguno de ellos terminaría siendo abandonado. Sin embargo, la evolución de ambos ha sido constante y podemos utilizar cualquiera de ellos para crear pipelines complejas, según nuestras necesidades.
+Uno de los bombazos del 2018 fue la compra de Github por Microsoft por aproximadamente una cantidad de 7000 millones de dólares. Dicha compra competía con alguno de los productos que ellos ya comercializaban (Team Foundations Server o Azure DevOps) y parte de la comunidad pensó que alguno de ellos terminaría siendo abandonado. 
+
+Sin embargo, estos temores eran infundados y ambas herramientas han estado en constante evolución, pudiendo utilizar cualquiera de ellas para crear pipelines de gran complejidad, según nuestras necesidades.
+
 
 ## Github Actions
 Github Actions es una plataforma que permite la ejecución de tareas cuando ocurren ciertos eventos sobre nuestro código. Algunos eventos pueden ser "realizar un commit sobre determinadas ramas" o "fusionar distintas ramas de código", etc.
 
-Los pipelines que definimos en Github Actions reciben el nombre de _workflows_ y podemos crear todos los que queramos según nuestras necesidades.
+Los pipelines definidas en Github Actions reciben el nombre de _workflows_ y podemos crear todos los que queramos según nuestras necesidades.
 
-Utilizar Github Actions requiere contratar algún plan de uso, pero si queremos probarlo, su tier gratuito es muy generoso y nos cubre hasta 2000 minutos de ejecuciones cada mes sin coste alguno.
+Aunque es una plataforma de pago, su tier gratuito es muy generoso y si queremos probarlo, tenemos hasta 2000 minutos de ejecuciones mensuales sin coste alguno.
 
-Si queremos utilizar esta plataforma de pipelines, lo primero que necesitamos es una cuenta y un repositorio en Github. Aunque existen [formas de utilizarlas en otras plataformas](https://tomasvotruba.com/blog/how-can-we-use-github-actions-in-gitlab/), yo mantengo un mirroring entre Github y Gitlab para mi blog y puedo usar los servicios de Github si lo necesito.
+Para usar Actions, lo primero que necesitamos es una cuenta y un repositorio en Github. Aunque existen [formas de utilizarlas en otras plataformas](https://tomasvotruba.com/blog/how-can-we-use-github-actions-in-gitlab/), yo mantengo un mirroring entre Github y Gitlab para mi blog y puedo usar los servicios de Github de forma indistintiva.
 
 ![blog-integrations-2022](https://storage.googleapis.com/tangelov-data/images/0037-00.png)
 
-Este diagrama describe el estado actual de las integraciones de mi blog. Cuando realizo un cambio sobre mi repositorio de Gitlab, éste se replica automáticamente hacia Github y se ejecutan una serie de operaciones en Gitlab CI que testean el código, crean un contenedor y despliegan el contenido del repositorio en su destino.
+Este diagrama describe el estado actual de las integraciones de mi blog. Cuando realizo un cambio sobre mi repositorio en Gitlab, éste se replica automáticamente hacia Github y se ejecutan una serie de operaciones en Gitlab CI que testean el código, crean un contenedor y despliegan el contenido del repositorio en su destino.
 
-Gracias al _mirroring_ con Github, anteriormente había un pipeline que se ejecutaba en Travis CI y creaba una imagen pública para después subirla a DockerHub. Sin embargo, esta parte no funciona desde que Travis CI cambió sus condiciones de uso y que vamos a solucionar ahora mismo.
+Gracias al _mirroring_ con Github, anteriormente había un pipeline que se ejecutaba en Travis CI y creaba una imagen pública para después subirla a DockerHub. Sin embargo, esta parte no funciona desde que Travis CI cambió sus condiciones de uso.
 
 Tras esta introducción, ya podemos ponernos manos a la obra.
 
@@ -41,8 +44,7 @@ Tras esta introducción, ya podemos ponernos manos a la obra.
 ### Primeros pasos
 Github Actions no pretende reinventar la rueda, y al igual que otras plataformas de CICD, se basa en ficheros YAML, con una estructura donde definimos qué acciones queremos ejecutar y cuando hacerlo. En este caso, tan sólo necesitamos crear una carpeta de nombre _.github/workloads_ en la raíz de nuestro repositorio y dentro de ella, uno o más ficheros con extensión _.yaml_.
 
-Cada fichero .yaml creado genera un workflow distinto y su estructura puede complicarse bastante, así que antes de crear el nuestro, voy a explicarla un poco basándome en el ejemplo que Github proporciona en el siguiente [link](https://docs.github.com/en/actions/quickstart):
-
+Cada fichero .yaml creado genera un workflow distinto y su estructura puede complicarse bastante, así que antes de crear el nuestro, voy a explicarla un poco su sintaxis, basándome en el ejemplo que Github proporciona en el siguiente [link](https://docs.github.com/en/actions/quickstart):
 
 ```yaml
 name: GitHub Actions Demo
@@ -70,27 +72,27 @@ En general podemos decir que cada workflow se compone de tres _objetos_:
 * __on__ se corresponde con el _cuando_ se va a ejecutar nuestro workflow. Aquí definimos los eventos que van a disparar su ejecución.
 * __jobs__ son la lista de pasos que nuestro workflow va a ejecutar cada vez.
 
-En este caso, estamos creando un workflow de nombre _Github Actions Demo_, que se ejecuta cada vez que hagamos un _push_ al repositorio y que ejecuta un job llamado _Explore-Github_Actions_.
+En este ejemplo, estamos creando un workflow de nombre _Github Actions Demo_, que se ejecuta cada vez que hagamos un _push_ al repositorio y que ejecuta un job llamado _Explore-Github_Actions_.
 
-A su vez, cada job tiene una serie de palabras clave con su propia nomenclatura y estructura:
+A su vez, cada job tiene una serie de palabras clave con su propia sintaxis y estructura:
 * __runs-on__ define la imagen donde queremos que nuestro workflow se ejecute. Puede ser un ejecutor público o privado en función de nuestras necesidades. En este caso está utilizando el ejecutor público llamado _ubuntu-latest_.
-* __steps__ define uno a uno y de forma secuencial, los procesos que nuestro workflow va a ejecutar.
+* __steps__ define uno a uno los procesos que nuestro workflow va a ejecutar.
 
 Este workflow realiza lo siguiente:
-* Primero imprime una serie de líneas por la pantalla utilizando como plantilla algunas de las variables que Github toma del contexto del repositorio como el tipo de evento, el nombre del repositorio o la rama del mismo, etc. __Run__ nos permite ejecutar comandos sueltos como si de una terminal se tratase.
+* Primero imprime una serie de líneas por pantalla utilizando como valor algunas de las variables del contexto del repositorio como el tipo de evento, el nombre del repositorio o la rama del mismo, etc. __Run__ nos permite ejecutar comandos sueltos como si de una terminal se tratase.
 * En segundo lugar reutiliza la Github Action de nombre _actions/checkout_ en su versión 4 (en breve hablaremos de esto) para copiar la versión del código definida en __on__ gracias a la directiva __uses__.
-* Por último, nos lista los ficheros que hay en esta revisión del código y si todo es correcto, nos indica que la ejecución del código ha funcionado.
+* Por último, lista los ficheros que hay en esta revisión del código y si todo es correcto, nos indica que la ejecución del código ha funcionado.
 
 ### Definiendo los diferentes steps
-Una de las ventajas de utilizar Github Actions es la inmensa comunidad que hay detrás y lo fácil que es reutilizar acciones que otros usuarios hayan hecho. Esto hace que portar la funcionalidad de mi pipeline en Travis CI sea muy sencillo y no tenga que mantener prácticamente código propio.
+Una de las ventajas de utilizar Github Actions es la inmensa comunidad que hay detrás y lo fácil que es reutilizar acciones de terceros. Esto hace que portar la funcionalidad de mi pipeline en Travis CI sea muy sencillo, sin casi mantener código propio.
 
 ![github-actions-diagram](https://storage.googleapis.com/tangelov-data/images/0055-00.png)
 
-El proceso de generación de la imagen del contenedor sólo consta de dos pasos:
-* En el primero, utilizamos Hugo para generar el HTML definitivo.
+Generar la imagen del contenedor sólo consta de dos pasos:
+* En el primero, utilizamos Hugo para generar el HTML final.
 * En el segundo, utilizamos dicho código HTML y el Dockerfile almacenado en el repositorio para crear la imagen, etiquetarla y subirla a DockerHub.
 
-El primer paso es definir el workflow y cuando se va a ejecutar. En mi caso, quiero que se ejecute cuando se realiza un push o un merge a _master_ o _main_ y que su nombre sea "Tangelov GH Actions To DockerHub".
+El primer paso es definir el workflow y cuando se va a ejecutar. En mi caso, quiero que sólo se ejecute al realizar un push o un merge a _master_ o _main_ y que su nombre sea "Tangelov GH Actions To DockerHub".
 
 ```yaml
 name: Tangelov GH Actions To DockerHub
@@ -139,7 +141,7 @@ Una vez tenemos nuestro token, ahora necesitamos crear dos variables en Github: 
 
 ![docker-creds-github](https://storage.googleapis.com/tangelov-data/images/0055-02.png)
 
-Ahora ya podemos proceder a crear el código de los siguientes pasos:
+Ahora ya podemos añadir el código de los siguientes pasos:
 
 ```yaml
       - name: Docker Login using Github Action
@@ -157,15 +159,15 @@ Ahora ya podemos proceder a crear el código de los siguientes pasos:
 
 ```
 
-Cuando reutilizamos una _Action_, ésta puede ser configurada a través de variables. En este caso estamos utilizando _docker/login-action_ y le estamos indicando que tiene que obtener el valor de dichas variables del almacén de secretos de Github, buscando las variables _DOCKER\_USER_ y _DOCKER\_PASSWORD_ que acabamos de definir. Este "contexto" se le pasa a través de la directiva __with__.
+Cuando reutilizamos una _Action_, ésta puede ser configurada a través de variables. En este caso estamos utilizando _docker/login-action_ y le estamos indicando que tiene que obtener el usuario y contraseña de DockerHub de los secretos llamados _DOCKER\_USER_ y _DOCKER\_PASSWORD_ que acabamos de crear. Este "contexto" se le pasa al job a través de la directiva __with__.
 
 El resto de pasos nos permiten construir, etiquetar y guardar nuestra imagen en DockerHub.
 
-Llegados a este punto, ya tendríamos un pipeline completo y funcional, pero... ¿Y si le añadimos alguna funcionalidad extra?
+Llegados a este punto, nuestro pipeline ya está completo y funcional, pero... ¿Por qué no añadirle alguna funcionalidad extra?
 
 Tener trazabilidad en nuestro código es importante. Nos permite saber que paquetes o aplicaciones han sido construidas a partir de una versión del código concreta y en base a nuestros tests o resultados, dar marcha atrás si encontramos algún bug o error. Aunque en este caso no es muy útil puesto que el "código" es sólo HTML, espero que este ejemplo sirva como ejemplo para otros.
 
-A nuestro pipeline, vamos a añadirle el uso del identificador SHA de nuestro commit para etiquetar cada una de las imágenes Docker que hemos creado:
+A nuestro pipeline, vamos a añadirle el uso del identificador SHA de nuestro commit (que es único) para etiquetar cada una de las imágenes Docker que hemos creado:
 
 ```yaml
       - name: Set short git commit SHA
@@ -241,11 +243,13 @@ Et voilá:
 
 ![dockerhub-final](https://storage.googleapis.com/tangelov-data/images/0055-04.png)
 
+Como podemos ver, el identificador está compartido entre el código de nuestro repositorio y la imagen almacenada en DockerHub.
+
 
 ## Conclusión
 Github Actions es una plataforma de CICD completa, que no tiene nada que envidiarle a su competencia, que además se beneficia de una inmensa comunidad y popularidad y que facilita la reutilización de código. En puntos donde puede quedarse un poco coja, la comunidad ha tomado el testigo ampliando sus funcionalidades hasta el infinito.
 
-Tiene integraciones nativas con gran cantidad de proveedores de nube y el único motivo que tengo para no recomendarla serían sus [incidencias técnicas](https://www.githubstatus.com/history), pero espero que su cadencia se vaya reduciendo a medida que el producto esté más pulido.
+Tiene integraciones nativas con gran cantidad de proveedores de nube y el único pero que tengo de ella serían sus [incidencias técnicas](https://www.githubstatus.com/history), pero espero que su cadencia se vaya reduciendo a medida que el producto esté más pulido.
 
 Así que me despido y espero que este post os sea útil, ¡Happy Coding!
 
