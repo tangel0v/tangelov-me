@@ -3,7 +3,7 @@ title: "Integración continua con Github II: Github Actions"
 slug: ic-github-ii
 authors:
   - tangelov
-date: 2023-12-10T08:00:00+02:00
+date: 2023-11-12T08:00:00+02:00
 tags:  ["devops", "github", "ci"]
 categories: ["devops"]
 draft: false
@@ -39,11 +39,10 @@ Tras esta introducción, ya podemos ponernos manos a la obra.
 
 
 ### Primeros pasos
-Una vez que nuestro repositorio ya está creado, necesitamos crear una carpeta de nombre _.github/workloads_ y en ella uno o más ficheros con extensión _.yaml_ para comenzar a utilizar Github Actions.
+Github Actions no pretende reinventar la rueda, y al igual que otras plataformas de CICD, se basa en ficheros YAML, con una estructura donde definimos que acciones queremos ejecutar y cuando hacerlo. En este caso, tan sólo necesitamos crear una carpeta de nombre _.github/workloads_ en la raíz de nuestro repositorio y dentro de ella, uno o más ficheros con extensión _.yaml_.
 
-La estructura del fichero YAML merece alguna explicación y para ello vamos a utilizar el ejemplo que nos proporciona Github en el siguiente [link](https://docs.github.com/en/actions/quickstart):
+Cada fichero .yaml creado genera un workflow distinto y su estructura puede complicarse bastante, así que antes de crear el nuestro, voy a explicarla un poco basándome en el ejemplo que Github proporciona en el siguiente [link](https://docs.github.com/en/actions/quickstart):
 
-Cada fichero .yaml que creamos se corresponde con un workflow distinto y tienen la siguiente estructura:
 
 ```yaml
 name: GitHub Actions Demo
@@ -66,24 +65,32 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
 ```
 
-Vamos a explicar un poco la estructura del YAML:
-* __name__ se corresponde con el nombre que nuestro Workflow va a tener en la interfaz de Github.
-* __on__ te permite definir ante que eventos se ejecutará nuestra pipeline. También podemos ejecutarlo de forma manual si queremos.
-* __jobs__ te permite definir cada uno de los pasos que vamos a ejecutar en nuestro pipeline y tiene una estructura propia.
+En general podemos decir que cada workflow se compone de tres _objetos_:
+* __name__ es el nombre que nuestro workflow va a tener y a mostrar dentro de la interfaz de Github Actions.
+* __on__ se corresponde con el _cuando_ se va a ejecutar nuestro workflow. Aquí definimos los eventos que van a disparar su ejecución.
+* __jobs__ son la lista de pasos que nuestro workflow va a ejecutar cada vez.
 
-Cada job tiene a su vez su propia estructura:
-* __runs-on__ define donde queremos que se ejecute ya sea un ejecutor compartido o uno privado, dependiendo de nuestas necesidades.
-* __uses__ define el origen de otro workflow reutilizable (luego hablaremos de esto).
-* __with__ define variables que vamos a utilizar en workflows reusables.
-* __steps__ define los pasos que tiene cada job y que comando se va a ejecutar en dicho paso.
+En este caso, estamos creando un workflow de nombre _Github Actions Demo_, que se ejecuta cada vez que hagamos un _push_ al repositorio y que ejecuta un job llamado _Explore-Github_Actions_.
 
+A su vez, cada job tiene una serie de palabras clave con su propia nomenclatura y estructura:
+* __runs-on__ define la imagen donde queremos que nuestro workflow se ejecute. Puede ser un ejecutor público o privado en función de nuestas necesidades. En este caso está utilizando el ejecutor público llamado _ubuntu-latest_.
+* __steps__ define uno a uno y de forma secuencial, los procesos nuestro workflow va a ejecutar.
+
+Este workflow es muy sencillo:
+* Primero imprime una serie de lineas por la pantalla utilizando como plantilla algunos de las variables que Github toma del contexto del repositorio como el tipo de evento, el nombre del repositorio o la rama del mismo, etc. __Run__ nos permite ejecutar comandos sueltos como si de una terminal se tratase.
+* En segundo lugar reutiliza la Github Action de nombre _actions/checkout_ en su versión 4 (en breve hablaremos de esto) para copiar la versión del código definida en __on__ gracias a la directiva __uses__.
+* Por último, nos lista los ficheros que hay en esta revisión del código y si todo es correcto, nos indica que la ejecución del código ha funcionado.
 
 ### Definiendo los diferentes steps
-El proceso que tenemos que crear en Github Actions consta de dos pasos:
-* En un primer paso, tenemos que utilizar Hugo para generar el HTML final que contendrá el contenedor.
-* En el siguiente paso, utilizaremos un fichero Dockerfile para generar el contenedor y subirlo a DockerHub.
+Una de las ventajas de utilizar Github Actions es la inmensa comunidad que hay detrás y lo fácil que es reutilizar acciones que otros usuarios hayan hecho. Esto hace que portar la funcionalidad de mi pipeline en Travis CI sea muy sencillo y no tenga que mantener prácticamente código propio.
 
-Primero tenemos que definir el nombre de nuestro Workflow y sobre qué eventos se va a ejecutar. En este caso, solo quiero que se cree un contenedor cuando se mergee una rama a _master_:
+![github-actions-diagram](https://storage.googleapis.com/tangelov-data/images/0055-00.png)
+
+El proceso de generación de la imagen del contenedor sólo consta de dos pasos:
+* En el primero, utilizamos Hugo para generar el HTML definitivo.
+* En el segundo, utilizamos dicho código HTML y el Dockerfile almacenado en el repositorio para crear la imagen, etiquetarla y subirla a DockerHub.
+
+El primer paso es definir el workflow y cuando se va a ejecutar. En mi caso, quiero que se ejecute cuando se realiza un push o un merge a _master_ o _main_ y que su nombre sea "Tangelov GH Actions To DockerHub".
 
 ```yaml
 name: Tangelov GH Actions To DockerHub
@@ -91,12 +98,10 @@ on:
   push:
     branches:
       - 'master'
+      - 'main'
 ```
 
-En segundo lugar, tenemos que definir los pasos que necesitamos para generar el HTML que utilizamos en el contenedor:
-1. Reutilizamos la action _checkout_ para coger la última versión disponible del código en dicha rama.
-2. Después reutilizamos la action _actions-hubo_ de peaceiris para generar el código.
-3. Por último, salvamos el output del proceso para poder utilizarlo en pasos futuros.
+Ahora podemos proceder a definir los distintos pasos de nuestro workflow:
 
 ```yaml
 jobs:
@@ -119,18 +124,22 @@ jobs:
           key: public
 ```
 
-El último paso va a crear el contenedor, lo va a etiquetar correctamente y lo va a subir a Dockerhub. Para ello, primero necesitamos crear un token y guardar su contenido en Github Actions.
+Para crear el código, vamos a utilizar distintas _Actions_ mantenidas por la comunidad:
+* Primero nos descargamos el código utilizando la acción _actions/checkout_ en su versión 4.
+* Después utilizamos la acción _actions-hugo_ del usuario _peaceiris_ en su versión 2 y ejecutamos el comando ```hugo --minify``` para generar el código HTML.
+* Por último, guardamos la carpeta _public_ dentro de la caché para que otros pasos posteriores puedan utilizarla.
 
-Para crear el token, nos vamos a nuestra cuenta y hacemos click aquí:
+En este punto ya podríamos crear la imagen del contenedor y subirla a DockerHub, pero antes, necesitamos hacer que Github pueda acceder a DockerHub. Para ello, necesitamos generar un token de acceso y almacenarlo en Github Actions.
 
-![create-docker-token](https://storage.googleapis.com/tangelov-data/images/0055-00.png)
+Crear el token es sencillo y tan sólo tenemos que ir a nuestra cuenta y hacer click aquí:
 
-Una vez tenemos nuestro token, vamos a crear dos variables, una llamada _DOCKER\_USER_ y otra _DOCKER\_PASSWORD_ con el token creado en el paso anterior.
+![create-docker-token](https://storage.googleapis.com/tangelov-data/images/0055-01.png)
 
+Una vez tenemos nuestro token, ahora necesitamos crear dos variables en Github, una llamada _DOCKER\_USER_ y otra _DOCKER\_PASSWORD_ con el token creado en el paso anterior.
 
-![docker-creds-github](https://storage.googleapis.com/tangelov-data/images/0055-01.png)
+![docker-creds-github](https://storage.googleapis.com/tangelov-data/images/0055-02.png)
 
-Por último, tenemos que crear el paso que nos genere el contenedor y nos lo suba a Dockerhub. Para este paso vamos a utilizar los steps creados y mantenidos por Docker directamente:
+Ahora ya podemos proceder a crear el código de los siguientes pasos:
 
 ```yaml
       - name: Docker Login using Github Action
@@ -138,13 +147,6 @@ Por último, tenemos que crear el paso que nos genere el contenedor y nos lo sub
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Docker Build and SHA Push using Github Action
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKER_USER }}/tangelov-me:latest
 
       - name: Docker Build and Push using Github Action
         uses: docker/build-push-action@v5
@@ -155,6 +157,98 @@ Por último, tenemos que crear el paso que nos genere el contenedor y nos lo sub
 
 ```
 
+Cuando reutilizamos una _Action_, ésta puede ser configurada a través de variables. En este caso estamos utilizando _docker/login-action_ y le estamos indicando que tiene que obtener el valor de dichas variables del almacen de secretos de Github, buscando las variables _DOCKER\_USER_ y _DOCKER\_PASSWORD_ que acabamos de definir. Este "contexto" se le pasa a través de la directiva __with__.
+
+El resto de pasos nos permiten construir, etiquetar y almacenar nuestra imagen en DockerHub.
+
+Llegados a este punto, ya tendríamos un pipeline completo y funcional, pero... ¿Y si le añadimos alguna funcionalidad extra?
+
+Tener trazabilidad en nuestro código es importante. Nos permite saber que paquetes o aplicaciones han sido construidas a partir de una versión del código concreta y en base a nuestros tests o resultados, dar marcha atrás si encontramos algún bug o error. Aunque en este caso no es muy útil puesto que el "código" es sólo HTML, espero que este ejemplo sirva como ejemplo para otros.
+
+A nuestro pipeline, vamos a añadirle el uso del identificador SHA de nuestro commit para etiquetar cada una de las imágenes Docker que hemos creado:
+
+```yaml
+      - name: Set short git commit SHA
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+
+      - name: Docker Build and Push using Github Action
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: | 
+            ${{ secrets.DOCKER_USER }}/tangelov-me:latest
+            ${{ secrets.DOCKER_USER }}/tangelov-me:${{ env.COMMIT_SHORT_SHA }}
+```
+
+Por defecto, Github no nos proporciona el SHA "corto" de Git, así que vamos a generarlo usando comandos de git y a generar una nueva variable de entorno llamada _COMMIT\_SHORT\_SHA_. Después, lo añadimos como tag en el paso de construir y enviar el contenedor a DockerHub.
+
+El resultado final sería el siguiente:
+
+```yaml
+name: Tangelov GH Actions To DockerHub
+on: 
+  push:
+    branches:
+      - 'main'
+      - 'master'
+
+jobs:
+  docker-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set short git commit SHA
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+
+      - name: Setup Hugo in Github Actions
+        uses: peaceiris/actions-hugo@v2
+
+      - name: Build Hugo static content
+        run: hugo --minify
+
+      - name: Save output for next steps
+        uses: actions/cache@v2
+        with:
+          path: public
+          key: public
+
+      - name: Docker Login using Github Action
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Docker Build and Push using Github Action
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: | 
+            ${{ secrets.DOCKER_USER }}/tangelov-me:latest
+            ${{ secrets.DOCKER_USER }}/tangelov-me:${{ env.COMMIT_SHORT_SHA }}
+```
+
+Et voilá:
+
+![docker-github-action](https://storage.googleapis.com/tangelov-data/images/0055-03.png)
+
+![dockerhub-final](https://storage.googleapis.com/tangelov-data/images/0055-04.png)
+
+
+## Conclusión
+Github Actions es una plataforma de CICD completa, que no tiene nada que envidiarle a su competencia, que además se beneficia de una inmensa comunidad y popularidad y que facilita la reutilización de código. En puntos donde puede quedarse un poco coja, la comunidad ha tomado el testigo ampliando sus funcionalidades hasta el infinito.
+
+Tiene integraciones nativas con gran cantidad de proveedores de nube y el único motivo que tengo para no recomendarla serían sus [incidencias técnicas](https://www.githubstatus.com/history), pero espero que su cadencia se vaya reduciendo a medida que el producto esté más pulido.
+
+Así que me despido y espero que este post os sea útil, ¡Happy Coding!
+
 
 ## Documentación
 
@@ -164,7 +258,11 @@ Por último, tenemos que crear el paso que nos genere el contenedor y nos lo sub
 
 * [GitHub Actions quickstart (ENG)](https://docs.github.com/en/actions/quickstart)
 
-* [Github Workflow Syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
+* [Github Workflow Syntax (ENG)](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
+
+* [Create short SHA for tagging Docker images (ENG)](https://dev.to/hectorleiva/github-actions-and-creating-a-short-sha-hash-8b7)
+
+* [Act, execute Github Actions locally (ENG)](https://github.com/nektos/act)
 
 
-Revisado a 11-11-2022
+Revisado a 12-11-2022
