@@ -18,7 +18,7 @@ develop-build:
   environment:
     name: development
   rules:
-    - if: '$CI_COMMIT_BRANCH != "master" && $CI_PIPELINE_SOURCE != "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH != "main" && $CI_PIPELINE_SOURCE != "merge_request_event"'
 
 staging-build:
   image: docker:latest
@@ -60,7 +60,7 @@ production-deploy:
   environment:
     name: production
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
 
 docker-deploy:
   image: docker:latest
@@ -76,4 +76,4 @@ docker-deploy:
   dependencies:
     - production-deploy
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
