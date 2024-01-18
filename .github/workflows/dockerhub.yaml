@@ -24,7 +24,7 @@ jobs:
         run: hugo --minify
 
       - name: Save output for next steps
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: public
           key: public
