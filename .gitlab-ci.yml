@@ -14,7 +14,7 @@ develop-build:
     - ls -l .
   script:
     - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
-    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --verbosity=debug --quiet --project=$DEV_PROJECT_ID
+    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --verbosity=debug --quiet --project=$DEV_PROJECT_ID --no-cache
   environment:
     name: development
   rules:
@@ -27,7 +27,7 @@ staging-build:
     - docker run --rm -v $PWD:/src floryn90/hugo:$HUGO_VERSION
   script:
     - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
-    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=$TMP_ROUTE --no-promote --quiet --project=$PROJECT_ID
+    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=$TMP_ROUTE --no-promote --quiet --project=$PROJECT_ID --no-cache
     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud pubsub topics publish $PUBSUB_TOPIC --message="Deploying new version in ${TMP_ROUTE}-dot-${PROJECT_ID}.appspot.com" --project=$PROJECT_ID
   environment:
     name: staging
@@ -55,7 +55,7 @@ production-deploy:
   script:
     - docker run --name gcloud-config -v /builds/tangelov/go-tangelov-me.tmp/:/tmp google/cloud-sdk:alpine gcloud auth activate-service-account --key-file='/tmp/GCP_KEY'
     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app versions delete $TMP_ROUTE --quiet --project=$PROJECT_ID
-    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --no-promote --quiet --project=$PROJECT_ID
+    - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud app deploy /root --version=master --no-promote --quiet --project=$PROJECT_ID --no-cache
     - docker run --rm --volumes-from gcloud-config -v $PWD/public:/root google/cloud-sdk:alpine gcloud pubsub topics publish $PUBSUB_TOPIC --message="Deploying new version in Production - https://tangelov.me" --project=$PROJECT_ID
   environment:
     name: production
