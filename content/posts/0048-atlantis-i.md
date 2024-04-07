@@ -175,7 +175,7 @@ allowed_regexp_prefixes:
 - fix/
 ```
 
-Atlantis nos permite aplicar una gran cantidad de [configuraciones]((https://www.runatlantis.io/docs/repo-level-atlantis-yaml.html#do-i-need-an-atlantis-yaml-file)) diferentes, así que voy a explicar un poco lo que he definido para este ejemplo:
+Atlantis nos permite aplicar una gran cantidad de [configuraciones](https://www.runatlantis.io/docs/repo-level-atlantis-yaml.html#do-i-need-an-atlantis-yaml-file) diferentes, así que voy a explicar un poco lo que he definido para este ejemplo:
 * Primero pongo ciertas limitaciones a Atlantis: no permito que los MR sean mergeados automáticamente ni que se hagan ejecuciones paralelas. También definimos una versión por defecto de Terraform para este proyecto.
 * Después creo un proyecto, llamado _dummy_, e indico dónde está su código, que requisitos necesita para mergearse a la rama principal y el workflow que va a utilizar (en este caso, _standard_).
 * Por último definimos los distintos workflows que podemos usar para este repositorio. Este es bastante sencillo y tan sólo coge el contenido de las variables de entorno PRD\_INIT\_VARS y PRD\_APPLY\_VARS, los convierte en ficheros y ejecuta ```terraform init``` y ```terraform plan``` con algunos parámetros extra.
