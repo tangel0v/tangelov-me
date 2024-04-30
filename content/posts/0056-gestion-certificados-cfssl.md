@@ -71,10 +71,8 @@ Cuando utilizamos una CA privada, nadie sabe quienes somos, ni si somos de confi
 
 > Esto es algo conocido para cualquier lector que viva en España, puesto que parte de la administración pública utiliza certificados emitidos por la Fábrica Nacional de Moneda y Timbre y su certificado raíz no era reconocido como válido hasta hace poco, obligándonos a verificarlo de forma manual.
 
-
 Ahora vamos a ver el proceso para crear de forma manual una entidad certificadora privada y un certificado utilizando _openssl_ (suele estar instalado por defecto en la mayoría de distribuciones Linux). El proceso es el siguiente:
 
-![ca-certificate-process](https://storage.googleapis.com/tangelov-data/images/0056-02.png)
 
 Primero tenemos que generar una llave privada para nuestra CA. Para hacerlo tan sólo tenemos que indicarle el tamaño en bits de la clave y después, crear el certificado raíz de nuestra CA:
 
