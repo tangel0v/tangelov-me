@@ -191,8 +191,6 @@ def messages_to_matrix(pubsub_message, context):
         asyncio.get_event_loop().run_until_complete(send_message(message))
 ```
 
-<br />
-
 * La segunda función, es una función asíncrona que recoge el mensaje que le ha pasado la primera función y lo envía a una sala de Matrix. Utiliza Matrix Nio, una librería que permite crear clientes de Matrix en Python y que ofrece más garantías que el SDK oficial.
 
 ```python37
