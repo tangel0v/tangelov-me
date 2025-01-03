@@ -44,7 +44,7 @@
       </figure>
     {{ end }}
   {{ end }}
-  {{- if .Site.DisqusShortname -}}
+  {{- if .Site.Config.Services.Disqus.Shortname -}}
   <hr>
   <h2>Comments</h2>
   {{ template "_internal/disqus.html" . }}
