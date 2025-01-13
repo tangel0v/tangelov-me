@@ -9,8 +9,6 @@ categories: ["devops"]
 draft: false
 ---
 
-<!--more-->
-
 ## Introducción
 Hace 30 años, la informática era más pausada de lo que lo es en la actualidad. Si queríamos introducir una nueva herramienta, al igual que ahora, se realizaba una prueba de concepto a pequeña escala para probar sus funcionalidades antes de pasar a su uso generalizado.
 
@@ -20,6 +18,7 @@ A día de hoy, Docker es el estándar _de facto_ a la hora de distribuir aplicac
 
 En este post, vamos a utilizar dicha herramienta para construir y desplegar una pequeña aplicación (este blog) en varios entornos (En Docker y directamente en la nube en un servicio de Cloud Run), esperemos que os guste.
 
+<!--more-->
 
 ## Skaffold
 Para crear una imagen y ejecutar nuestra aplicación en contenedores, tradicionalmente necesitaríamos un Dockerfile: un fichero que contiene las instrucciones para descargar las dependencias de nuestra aplicación, añadir nuestro código y un sistema para ejecutarlo. Dependiendo de nuestras necesidades, este proceso puede realizarse en local o en remoto, de forma automática o manual y con multitud de opciones para realizar el proceso.
