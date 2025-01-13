@@ -16,12 +16,12 @@ Eran pruebas lentas y muy intensivas en recursos: cada herramienta requería de 
 
 A día de hoy, Docker es el estándar _de facto_ a la hora de distribuir aplicaciones, pero para desplegarlas existen múltiples herramientas (Jenkins, ArgoCD, etc), que convierten el proceso en algo muy heterogéneo. Tratando de simplificar aún más el proceso es cómo descubrí __Skaffold__.
 
-En este post, vamos a utilizar dicha herramienta para construir y desplegar una pequeña aplicación (este blog) en varios entornos (En Docker y directamente en la nube en un servicio de Cloud Run), esperemos que os guste.
+En este post vamos a utilizar dicha herramienta para construir y desplegar una pequeña aplicación (este blog) en varios entornos (en Docker y directamente en la nube en un servicio de Cloud Run). Espero que os guste.
 
 <!--more-->
 
 ## Skaffold
-Para crear una imagen y ejecutar nuestra aplicación en contenedores, tradicionalmente necesitaríamos un Dockerfile: un fichero que contiene las instrucciones para descargar las dependencias de nuestra aplicación, añadir nuestro código y un sistema para ejecutarlo. Dependiendo de nuestras necesidades, este proceso puede realizarse en local o en remoto, de forma automática o manual y con multitud de opciones para realizar el proceso.
+Para crear una imagen y ejecutar nuestra aplicación en contenedores, tradicionalmente necesitaríamos un Dockerfil (un fichero que contiene las instrucciones para descargar las dependencias de nuestra aplicación), añadir nuestro código y un sistema para ejecutarlo. Dependiendo de nuestras necesidades, este proceso puede realizarse en local o en remoto, de forma automática o manual y con multitud de opciones para realizar el proceso.
 
 Nuestra imagen tiene que almacenarse en un repositorio para que pueda ser distribuida entre nuestros servidores de una forma óptima, añadiendo aún más herramientas al proceso.
 
@@ -69,7 +69,7 @@ build:
     useBuildkit: false
 ```
 
-Este fichero le indica a Skaffold que debe de crear una imagen en local utilizando Docker o algún servicio compatible con el mismo. Debido a que yo estoy utilizando Podman (podéis ver más información [aquí](https://tangelov.me/posts/containers-without-docker.html)) y necesitamos realizar un par de pasos extra (crear un repositorio donde poder almacenar la imagen creada y definir una variable de entorno)
+Este fichero le indica a Skaffold que debe de crear una imagen en local utilizando Docker o algún servicio compatible con el mismo. Debido a que yo estoy utilizando Podman (podéis ver más información [aquí](https://tangelov.me/posts/containers-without-docker.html)) necesitamos realizar un par de pasos extra (crear un repositorio donde poder almacenar la imagen creada y definir una variable de entorno).
 
 ```bash
 # Nos descargamos la imagen necesaria para guardar imagenes de DockerHub y lo ejecutamos para que escuche en el puerto 5000
@@ -216,7 +216,7 @@ Press Ctrl+C to exit
 
 Como podemos ver, Skaffold primero ha comprobado que la imagen no existiese previamente y después lo ha desplegado de forma exitosa :)
 
-Una vez hemos verificado el despliegue sobre Docker, vamos a continuar con Kubernetes. Para ello, primero vamos a crear un cluster en local. La forma más fácil de hacerlo es utilizando _Minikube_: simplemente lo descargamos, ejecutamos `minikube start` y ya podemos empezar a interactuar con el él.
+Una vez hemos verificado el despliegue sobre Docker, vamos a continuar con Kubernetes. Para ello, primero vamos a crear un cluster en local y la forma más fácil de hacerlo es utilizando _Minikube_: simplemente lo descargamos, ejecutamos `minikube start` y ya podemos empezar a interactuar con él.
 
 Al desplegar sobre Kubernetes, necesitamos crear la definición de los servicios que va a desplegar, un _manifest_ que permita a nuestra aplicación gestionarse y ser expuesta fuera del clúster. Para ello creamos un fichero llamado _k8s.yaml_ y pegamos el siguiente contenido:
 
@@ -554,7 +554,9 @@ Para comprobar que todo vaya bien, sólo tenemos que deshabilitar la autenticaci
 
 ![tangelov-cloud-run-ii](https://storage.googleapis.com/tangelov-data/images/0058-04.png)
 
-Y eso es todo. Un abrazo y nos vemos en el siguiente post.
+¡Eso es todo! 
+
+Un abrazo y nos vemos en el siguiente post.
 
 ## Documentación
 
