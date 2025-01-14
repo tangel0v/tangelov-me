@@ -21,7 +21,7 @@ En este post vamos a utilizar dicha herramienta para construir y desplegar una p
 <!--more-->
 
 ## Skaffold
-Para crear una imagen y ejecutar nuestra aplicación en contenedores, tradicionalmente necesitaríamos un Dockerfil (un fichero que contiene las instrucciones para descargar las dependencias de nuestra aplicación), añadir nuestro código y un sistema para ejecutarlo. Dependiendo de nuestras necesidades, este proceso puede realizarse en local o en remoto, de forma automática o manual y con multitud de opciones para realizar el proceso.
+Para crear una imagen y ejecutar nuestra aplicación en contenedores, tradicionalmente necesitaríamos un Dockerfile (un fichero que contiene las instrucciones para descargar las dependencias de nuestra aplicación), añadir nuestro código y un sistema para ejecutarlo. Dependiendo de nuestras necesidades, este proceso puede realizarse en local o en remoto, de forma automática o manual y con multitud de opciones para realizar el proceso.
 
 Nuestra imagen tiene que almacenarse en un repositorio para que pueda ser distribuida entre nuestros servidores de una forma óptima, añadiendo aún más herramientas al proceso.
 
